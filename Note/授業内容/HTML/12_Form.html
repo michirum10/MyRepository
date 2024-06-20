@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォーム</title>
+</head>
+
+<body>
+
+    <!--post actionに書き込む <form action="./12_Form.html?name123=木内和也" method="post"> -->
+    <!-- getで送りたい時hidden <input type="hidden" name="name123" value="木内和也"> -->
+    
+    <!-- どこに問い合わせの情報を渡すのか -->
+    <form action="./12_Form.html" method="get">
+        <!-- getはurlに情報が出る。？以降。情報を共有したい時に使う。postは出ない -->
+        <!-- dl.dt.ddで見た目 -->
+        <dl>
+            <dt><!-- forはinputとセット。ID同じにするとリンクする。テキストをクリックすると入力boxがアクティブになる-->
+                <label for="name">氏名</label>
+            </dt>
+            <dd><!-- idはこの部分だけを指定したい時に使う -->
+                <!-- requiredで入力必須に -->
+                <input type="text" name="name" id="name" required>
+            </dd>
+            <dt>
+                <label for="age">年齢</label>
+            </dt>
+            <dd>
+                <!-- 数字入力はnumber。e(指数、ゼロがいくつ隠れているかを表す)とマイナスも入力できる -->
+                <input type="number" name="age" id="age">
+            </dd>
+            <dt>
+                <label for="gender">性別</label>
+            </dt>
+            <dd>
+                <!-- 選ぶものが決まってるときはセレクト -->
+                <!-- multipleは複数選択 -->
+                <select name="gender" id="gender">
+
+                    <!-- 数字に置き換える -->
+                    <option value="-1"></option>
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                    <option value="0">不明</option>
+                </select>
+            </dd>
+            <dt>
+                <label for="area1">担当エリア1</label>
+            </dt>
+            <dd>
+                <select name="area1" id="area1">担当エリア1
+                    <!-- コントロルキー押しながら複数選択 -->
+                    <option value="-1"></option>
+                    <option value="1">A</option>
+                    <option value="2">B</option>
+                    <option value="3">C</option>
+                    <option value="4">D</option>
+                </select>
+            </dd>
+            <dt>
+                <label for="area2">担当エリア2</label>
+            </dt>
+            <dd><!-- IDをエリア2にしない -->
+                <label for="area2-1">A</label><input type="checkbox" name="area2" id="area2-1" value="1">
+            </dd>
+            <dd>
+                <label for="area2-2">B</label><input type="checkbox" name="area2" id="area2-2" value="2">
+            </dd>
+            <dd>
+                <label for="area2-3">C</label><input type="checkbox" name="area2" id="area2-3" value="3">
+            </dd>
+            <dd>
+                <label for="area2-4">D</label><input type="checkbox" name="area2" id="area2-4" value="4">
+            </dd>
+            </dd>
+            <dt>
+                <label for="area2">担当エリア3</label>
+            </dt>
+            <dd>
+                <!-- ラジオボタンタイプ一緒に設定すると認識されて一つのみ選べる -->
+                <label for="area2-1">A</label><input type="radio" name="area3" id="area3-1" value="1">
+            </dd>
+            <dd>
+                <label for="area2-2">B</label><input type="radio" name="area3" id="area3-2" value="2">
+            </dd>
+            <dd>
+                <label for="area2-3">C</label><input type="radio" name="area3" id="area3-3" value="3">
+            </dd>
+            <dd>
+                <label for="area2-4">D</label><input type="radio" name="area3" id="area3-4" value="4">
+            </dd>
+            <dt>
+                <label for="note">備考</label>
+            </dt>
+            <dd>
+                <textarea name="note" id="note"></textarea>
+            </dd>
+        </dl>
+        <!-- 送信押して画面クリアされたらOK -->
+        <button type="submit">送信</button>
+    </form>
+</body>
+
+</html>

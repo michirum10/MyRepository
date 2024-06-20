@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSSについて- styleタグ</title>
+    <style>
+        /* セレクター(タグを指定する方法) */
+        /* タグ名指定 */
+        body {
+            background-color: aquamarine;
+        }
+
+        article {
+            background-color: aqua;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        /* タグ名+ID指定　あまりやらない */
+        /* ＃はID */
+        section#S1 {
+            background-color: chartreuse;
+            margin: 10px;
+        }
+
+        /* ID指定 */
+        /* IDはページ内に一つしか存在できない */
+        #S2 {
+            background-color: azure;
+            margin: 10px;
+        }
+
+        /* タグ名+クラス指定 */
+        /* .はクラス */
+        h1.H1 {
+            background-color: antiquewhite;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            padding-left: 10px;
+            font-size: 24pt;
+        }
+
+        /* クラス指定 */
+        /* タグ名がないのでタグに依存しない */
+        .P1 {
+            margin: 0px;
+            padding: 10px;
+            padding-left: 20px;
+        }
+
+        /* IDはページ内に一つしか存在できない */
+        /* Classはページ内に複数存在でき、タグに対しても複数指定できる */
+        .B1 {
+            font-weight: bolder;
+        }
+
+        /* ctrl+スペースで候補一覧 */
+    </style>
+</head>
+
+<body>
+    <article>
+        <section id="S1">
+            <h1 class="H1">
+                CSSタグについて</h1>
+            <p class="P1">各HTMLのタグにstyle属性をつけて直接タグに設定する</p>
+        </section>
+        <section id="S2">
+            <h1 class="H1">
+                CSS反映方法について</h1>
+            <!-- Classの複数指定 -->
+            <p class="P1 B1">各HTMLのタグにstyle属性をつけて直接タグに設定する</p>
+        </section>
+    </article>
+</body>
+
+</html>

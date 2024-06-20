@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "MyRepository",
+			"path": "../../MyRepository"
+		}
+	],
+	"settings": {
+		"markdown.marp.themes": [
+			"HDTV.css"
+		]
+	}
+}

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>プログラミング概論.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="531-%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E6%A6%82%E8%AB%96">5/31　プログラミング概論</h1>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-39.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-40.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-41.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-42.png" alt="alt text"></p>
+<ul>
+<li>目標を大きくしすぎない</li>
+<li>少しずつ足していく</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-43.png" alt="alt text"></p>
+<ul>
+<li><a href="https://prog-8.com/dashboard">Progate</a></li>
+<li>インフラ系にはコマンドライン、ギットおすすめ。</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-44.png" alt="alt text"></p>
+<ul>
+<li><a href="https://www.codingame.com/start/">codingame</a></li>
+<li><a href="https://kredo.jp/media/programming-game-easy/">プログラミングを学べるゲーム10選！</a></li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-45.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-46.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-47.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-48.png" alt="alt text"></p>
+<ul>
+<li>ポートフォリオ</li>
+<li>読みやすいコーディング</li>
+<li>インデントでととのえる</li>
+<li>コメント書く</li>
+<li>Shift+Alt+F で整える(ドキュメントのフォーマット)</li>
+<li>vercelで公開 flaskならサーバー無しでアプリ稼働</li>
+<li>インフラ系は分かりにくいので資格を取る</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-49.png" alt="alt text"></p>
+<ul>
+<li>できるようになるまで個人差</li>
+<li>最初は分からなくてもだんだん繋がってくる</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-50.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-51.png" alt="alt text"></p>
+<ul>
+<li>分かるようになってきたら</li>
+<li>過去に習った内容を読み返す</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-52.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-53.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-54.png" alt="alt text"></p>
+<ul>
+<li>PDCAサイクルを回す</li>
+<li>OODA Observe（観察）、Orient（方向づけ）、Decide（意思決定）、Act（行動）の頭文字を取った略称で、「ウーダ」と読む。</li>
+<li>どちらが優れてるとかはなく、活躍の方向が違う</li>
+<li><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-60.png" alt="alt text"></li>
+<li><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-55.png" alt="alt text"></li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-58.png" alt="alt text"></p>
+<ul>
+<li>相手に納得してもらえるように</li>
+<li>理由や根拠を明確に</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-59.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-61.png" alt="alt text"></p>
+<ul>
+<li>他責、自責　傾向を見極める質問を面接で確認される？</li>
+<li>面接官のよく分からない質問は裏を読む</li>
+<li>失敗談聞かれる。リカバリ方法</li>
+<li><a href="https://weekly-net.co.jp/blog/hashimoto/3502/">【他責型を見抜く質問】</a></li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-62.png" alt="alt text"></p>
+<ul>
+<li>スイカゲームをいきなり作るのは難しい</li>
+<li>まずは押したらモノが出てくるところから</li>
+<li>次はモノが落ちるようにする等</li>
+<li>細切れにして考える</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-63.png" alt="alt text"></p>
+<ul>
+<li>ノートを取る</li>
+</ul>
+<p><img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-64.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-65.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-66.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-67.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-68.png" alt="alt text">
+<img src="file:///h:/その他のパソコン/マイ コンピュータ/MainWorkspace/HITschool/Note/授業内容/memo/image-69.png" alt="alt text"></p>
+<h2 id="link%E9%9B%86">link集</h2>
+<ul>
+<li><a href="https://wa3.i-3-i.info/">「分かりそう」で「分からない」でも「分かった」気になれるIT用語辞典</a>　正確ではないけど何となく分かる、IT用語の意味を「ざっくりと」理解するためのIT用語辞典</li>
+<li><a href="https://e-words.jp/">IT用語辞典 e-Words</a>　IT用語のオンライン辞典</li>
+<li><a href="https://ja.stackoverflow.com/">スタック・オーバーフロー</a>　質問サイト。優しい人多い</li>
+<li><a href="https://teratail.com/">teratail【テラテイル】｜ITエンジニア特化型Q&amp;Aサイト</a>　質問の仕方気をつける。面倒な人多い</li>
+<li><a href="https://qiita.com/">Qiita</a>　ブログサイト。エンジニアに関する知識を記録・共有するためのサービス</li>
+<li><a href="https://paiza.jp/">ITエンジニア向け転職・就活・学習サービス【paiza】</a>　転職サイト。未経験向けの求人あり</li>
+<li><a href="https://paiza.jp/works">paizaLearning</a>　paizaのスキルチェック。企業にアピールできる。</li>
+<li>問題集を先にやって問題形式に慣れる</li>
+<li><a href="https://paiza.io/ja">ブラウザ上でコードを書いてすぐに実行！！ - paiza.IO</a>　オンライン実行環境。オンラインですぐにプログラミングが始められる</li>
+<li><a href="https://paiza.cloud/ja/">クラウド開発環境 PaizaCloudクラウドIDE</a>　クラウド開発環境。ブラウザだけでLinuxサーバを操作できる。</li>
+<li><a href="https://dotinstall.com/">ドットインストール - 3分動画でマスターできるプログラミング学習サービス</a>　学習サービス。動画多い。</li>
+<li><a href="https://topcoder.com/">Topcoder: Your work, completed by our talent</a>　スキルチェック。英語。</li>
+<li><a href="https://prog-8.com/dashboard">Progate</a>　学習サービス。実践的。</li>
+<li>インフラ系にはコマンドライン、ギットおすすめ。</li>
+<li><a href="https://www.codingame.com/start/">codingame</a>　ゲームでプログラミングを学べる。無料。英語</li>
+<li><a href="https://kredo.jp/media/programming-game-easy/">プログラミングを学べるゲーム10選！</a></li>
+<li><a href="https://www.sejuku.net/blog/119223">【2024年最新】プログラミングゲーム28選！無料・子供向け・大人向けを一挙紹介</a></li>
+</ul>
+<h3 id="memo">memo</h3>
+<ul>
+<li>質問する時、ソースコードそのまま貼り付けない。情報漏洩</li>
+<li>ハロワの求人あまり良くない</li>
+<li>無料で掲載できる、求人出すとお金もらえることも</li>
+<li>出してるだけの企業多い。受かりにくい。</li>
+<li>求人サイトはお金払って掲載してるので、就職率高い</li>
+<li>AWS　資格　授業で6～7割　あると良い</li>
+</ul>
+<h2 id="javascript">JavaScript</h2>
+<ul>
+<li>JavaScriptメモ帳でもうごく</li>
+<li>CSSと同じような感じ。JSファイルに書いてリンク</li>
+</ul>
+<h3 id="64">6/4</h3>
+<ul>
+<li><a href="https://tsukisame.wafflecell.com/itjbad/index.php/structure/">IT業界の構造：多重下請け構造～形態やお金の流れはどんな具合？</a></li>
+</ul>
+
+</body>
+</html>

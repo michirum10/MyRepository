@@ -1,0 +1,55 @@
+body {
+    background-color: lavenderblush;
+    /* 画像を背景に貼り付け */
+    background-image: url(img/image.jpg);
+}
+
+span.asan01 {
+    color: red;
+}
+span.bsan01 {
+    color: blue;
+}
+h1 {
+    padding: 10px;
+    font-size: 1.5em;
+    color: #fff;
+    background: #fd8c8c;
+    border-radius: 10px;
+}
+.space{
+    min-height: 500px;
+}
+.space {
+    height: 500px;
+    overflow-y: auto;
+    background: #ffffffd4;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 98%;
+    margin: 0 auto;
+    text-align: left;
+}
+.mb-3 {
+    margin-top: 20px;
+}
+.btn {
+    width: 32%;
+    height: 50px;
+    margin-left: 1%;
+}
+.btn_design{
+    display: flex;
+}
+label.form-label {
+    background: #ffffff82;
+    width: 100%;
+    border-radius: 6px;
+    padding: 4px;
+}
+/*順番を逆にする*/
+div#output {
+    display: flex;
+    flex-direction: column-reverse;
+}

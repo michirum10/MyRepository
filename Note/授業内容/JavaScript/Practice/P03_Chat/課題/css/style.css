@@ -1,0 +1,42 @@
+/* header{
+    
+} */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+#output {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+#input-area {
+    display: flex;
+    flex-direction: column;
+}
+
+#input {
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+.ASAN {
+    background-color: rgb(255 220 230);
+    color: red;
+}
+
+.BSAN {
+    background-color: rgb(199, 244, 255);
+    color: blue;
+}

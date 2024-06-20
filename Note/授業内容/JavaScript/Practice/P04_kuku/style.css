@@ -1,0 +1,46 @@
+/* 九九表(output4)のみスタイリング */
+
+/* output4全体に反映 */
+#output4 {
+    /* 隣接するセルのボーダーを一つにまとめる */
+    border-collapse: collapse;
+    /* テーブルの幅 */
+    width: 50%;
+    /* テーブルを水平中央に配置 */
+    margin: auto;
+    /* 背景色を白に */
+    background-color: #ffffff;
+    /* テーブルに影をつける */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* td　テーブルデータ。セルの中身。 */
+/* th　テーブルヘッダ。見出し。 */
+#output4 td, #output4 th {
+    /* <td>と<th>に薄いグレーの1ピクセルの実線のボーダーを付ける */
+    border: 1px solid #dddddd;
+    /* テキストを中央揃え */
+    text-align: center;
+    /* 8ピクセルの内側余白を設定 */
+    padding: 8px;
+}
+
+/* :nth-child(even)は偶数の要素の時 */
+#output4 tr:nth-child(even) {
+    /* 偶数行の背景色を薄いグレーに設定して視認性を上げる */
+    background-color: #f2f2f2;
+}
+
+/* th　テーブルヘッダ。見出し。 */
+#output4 th {
+    /* <th>の背景色を緑に設定 */
+    background-color: #4CAF50;
+    /* ヘッダーセルのテキスト色を白に設定 */
+    color: white;
+}
+
+/* td　テーブルデータ。セルの中身。 */
+#output4 td {
+    /* <td>内のテキストサイズを18ピクセルに設定 */
+    font-size: 18px;
+}

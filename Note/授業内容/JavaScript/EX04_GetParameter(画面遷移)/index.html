@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画面遷移</title>
+</head>
+<body>
+    <!-- リンクを押したらnext.htmlへ遷移 -->
+    <a href="next.html">next</a>
+    
+    <!-- "?msg=かきくけこ"でmsgに表示 -->
+    <a href="next.html?msg=かきくけこ">next(かきくけこ送信)</a>
+    <!-- 配列を取り出すときは、変数=の後に配列数字をいれる[0][1][index]など -->
+
+    <!-- 送信するためのフォーム -->
+     <form action="next.html" method="get">
+     <input type="text" name="msg">
+     <button type="submit">送信</button>
+    </form>
+</body>
+</html>
+<!-- nex.htmlへ遷移するだけなので、このページにはJSのリンクは必要ない -->
+
+<!-- よく使う -->
+<!-- get データベースの中身を取り込む -->
+<!-- post データベースの中身を書き換える -->
+<!-- 表示したい番号 -->

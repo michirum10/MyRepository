@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャットもどき</title>
+    <!-- css埋め込み 意外と忘れる-->
+    <link rel="stylesheet" href="./浦さんのstyle.css">
+</head>
+
+<body>
+    <header>
+        <h1>チャットもどき</h1>
+    </header>
+    <main>
+        <!-- 投稿表示領域の設定 -->
+        <div id="msg"></div>
+    </main>
+    <footer>
+        <div>
+            <!-- 入力フォーム -->
+            <input type="text" id="comment">
+        </div>
+        <div class="button-container">
+            <!-- ボタンを用意 onclickで引数を設定 -->
+            <input type="button" value="Aさん" onclick="chat('A')">
+            <input type="button" value="Bさん" onclick="chat('B')">
+            <!-- リセット用の関数をわける -->
+            <input type="button" value="リセット" onclick="resetFields()">
+        </div>
+    </footer>
+    <!-- JavaScript埋め込み 意外と忘れる -->
+    <script src="./浦さんのmain.js"></script>
+</body>
+
+</html>

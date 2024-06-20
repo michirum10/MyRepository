@@ -1,0 +1,43 @@
+/* @theme HDTV */
+
+@import 'uncover';
+
+section
+{
+  width: 1920px;
+  height: 1080px;
+  justify-content: start;
+  padding: 150px 100px;
+  font-size: 70px;
+  justify-content: center;
+}
+
+strong{
+  color: red;
+}
+
+img {
+  width: 1300px;
+  height: auto;
+}
+
+h1 {
+  font-size: 150px;
+}
+
+header,
+footer {
+  position: absolute;
+  left: 50px;
+  right: 50px;
+  height: 60px;
+  font-size: 50px;
+}
+
+header {
+  top: 50px;
+}
+
+footer {
+  bottom: 50px;
+}

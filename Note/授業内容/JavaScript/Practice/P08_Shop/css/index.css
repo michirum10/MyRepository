@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+/* ヘッダーのスタイル */
+header {
+    background-color: #fddbdb; /* ヘッダーの背景色を淡いピンクに設定 */
+    padding: 20px 0; /* 上下に20pxのパディングを設定 */
+    text-align: center; /* テキストを中央に揃える */
+    border-bottom: 1px solid #ccc; /* 下部に薄い灰色のボーダーを設定 */
+}
+/* h1 {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #343a40;
+    color: white;
+    margin: 0;
+} */
+
+#output {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    width: calc(33.333% - 40px); /* 3列配置 */
+}
+
+.item img {
+    max-width: 100%;
+    max-height: 150px; /* 画像の高さを固定 */
+    object-fit: cover; /* 画像を枠にフィットさせる */
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.item div {
+    margin-bottom: 10px;
+}
+
+.item button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.item button:hover {
+    opacity: 0.9;
+}
+
+.item button:active {
+    transform: scale(0.98);
+}
+
+#buy {
+    display: block;
+    margin: 20px auto;
+    padding: 15px;
+    width: 200px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#buy:hover {
+    opacity: 0.9;
+}
+
+#buy:active {
+    transform: scale(0.98);
+}
+
+/* メディアクエリ */
+/* レスポンシブ */
+@media (max-width: 1024px) {
+    .item {
+        width: calc(50% - 40px); /* 2列配置 */
+    }
+}
+
+@media (max-width: 600px) {
+    .item {
+        width: calc(100% - 40px); /* 1列配置 */
+    }
+}

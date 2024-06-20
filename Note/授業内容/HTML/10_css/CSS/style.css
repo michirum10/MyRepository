@@ -1,0 +1,48 @@
+/* セレクター(タグを指定する方法)) */
+/* タグ名指定 */
+body {
+    background-color: aquamarine;
+}
+
+article {
+    background-color: aqua;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* タグ名＋ID指定 */
+section#S1 {
+    background-color: chartreuse;
+    margin: 10px;
+}
+
+/* ID指定 */
+
+#S2 {
+    background-color: azure;
+    margin: 10px;
+}
+
+/* タグ名＋Class指定 */
+/* 本当はわかりやすい名前をつける パーツの名前とか*/
+h1.H1 {
+    background-color: antiquewhite;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 10px;
+    font-size: 24pt;
+}
+
+/* Class指定 */
+/* タグ名が無いのでタグに依存しない */
+.P1 {
+    margin: 0px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+/* IDはページ内に一つしか存在できない。 */
+/* Classはページ内に複数存在でき、タグに対しても複数指定できる。 */
+.B1 {
+    font-weight: bolder;
+}

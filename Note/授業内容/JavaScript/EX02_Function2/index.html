@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ボタンの分岐</title>
+</head>
+<body>
+    <!-- ボタンは全部同じ関数を呼ぶ -->
+    <!-- ()の中、実引数 -->
+    <!-- 実際の値が入る -->
+    <!-- ボタンの内容がわかる。見やすくなる(可読性を上げる) -->
+
+    <input type="button" value="btn1" onclick="btn(PLUS)">
+    <input type="button" value="btn2" onclick="btn(MINUS)">
+    <input type="button" value="reset" onclick="btn(RESET)">
+    <div id="output"></div>
+    <script src="./main.js"></script>
+
+</body>
+</html>

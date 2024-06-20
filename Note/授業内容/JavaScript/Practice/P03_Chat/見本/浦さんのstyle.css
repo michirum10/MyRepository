@@ -1,0 +1,59 @@
+html {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+/* Aさんの文字色・背景色を変更 */
+/* Aさん出力部分に入力部分の内容が出力される(赤色) */
+.coma {
+    color: red;
+    background-color: pink;
+}
+
+/* Bさんの文字色・背景色を変更 */
+/* Bさん出力部分に入力部分の内容が出力される(青色)  */
+.comb {
+    color: blue;
+    background-color: azure;
+}
+
+/* ここらへんてきとう */
+
+header {
+    /* 中央揃え */
+    text-align: center;
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    /* 背景色　お好みで */
+    /* background-color: #2cc5ac; */
+}
+
+main {
+    /* 左揃え */
+    text-align: left;
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    /* 背景色　お好みで */
+    /* background-color: #8ef6e4; */
+}
+
+footer {
+    position: sticky;
+    top: 100%;
+    /* 中央揃え */
+    text-align: center;
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    /* 背景色　お好みで */
+    /* background-color: #2cc5ac; */
+}

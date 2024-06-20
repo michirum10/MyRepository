@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャットもどき</title>
+
+    <!-- css埋め込み -->
+    <!-- ファイルの場所を確認する -->
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body>
+    <!-- headerに見出し'チャットもどき' -->
+    <header>
+        <h1>チャットもどき</h1>
+    </header>
+
+    <!-- ここに出力 -->
+    <div id="output"></div>
+
+    <!-- ここに入力 -->
+    <div>
+        <!-- 入力フォーム -->
+        <!-- placeholderはメッセージが空のときに表示されるヒントテキスト -->
+        <input type="text" id="input" placeholder="ここに入力してください">
+    </div>
+    <div>
+        <!-- ボタン -->
+        <!-- JSのFunction sendと連動 -->
+        <!-- onclickはクリックされたら動作するという意味 -->
+        <!-- ()の中は実引数 -->
+        <!-- valueはボタンの表示テキスト（ラベル）を設定 -->
+        <input type="button" value="Aさん" onclick="send('A')">
+        <input type="button" value="Bさん" onclick="send('B')">
+        <!-- リセットの関数分ける。()の中はいらない -->
+        <input type="button" value="リセット" onclick="reset()">
+    </div>
+
+    <!-- JS埋め込み -->
+    <!-- ファイルの場所を確認する -->
+    <script src="../js/main.js"></script>
+
+</body>
+
+</html>

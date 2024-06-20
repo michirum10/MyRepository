@@ -1,0 +1,148 @@
+/* ヘッダーのスタイル */
+header {
+    /* padding内側の余白 */
+    padding: 10px;
+    /* margin外側の余白 */
+    margin: 10px;
+    /* background-color背景色 */
+    background-color: antiquewhite;
+}
+html {
+    scroll-behavior: smooth;
+}
+.pagetop {
+    height: 50px;
+    width: 50px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    background: #fff;
+    border: solid 2px #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.pagetop__arrow {
+    height: 10px;
+    width: 10px;
+    border-top: 3px solid #000;
+    border-right: 3px solid #000;
+    transform: translateY(20%) rotate(-45deg);
+}
+a#title{
+    text-decoration: none; 
+    color: brown;
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+}
+nav{
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    background-color:brown
+}
+nav#link-list > ul{
+    display: flex;
+}
+nav a{
+    text-decoration: none;
+    color: #000;
+}
+div#main-container{
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    background-color:brown;
+    /*　中のブロックのサイズの自動調整 */
+    display: flex;
+}
+
+/* メインのスタイル */
+main {
+    /* ブロックを浮かせて右に寄せる */
+    /* float: right; */
+    /* 内余白 */
+    /* padding: 10px; */
+    /* 外余白 */
+    margin: 10px auto;
+    /* 上下10px、左右auto */
+    /* スペースで区切ることで各辺の指定ができる。 */
+
+    /* 横幅 */
+    width: 100%;
+    height: 100%;
+
+    /* 背景色 */
+    background-color: antiquewhite;
+}
+
+article {
+    background-color:w;
+}
+
+section {
+    background-color: white;
+}
+
+aside {
+    /* ブロックを浮かせて左に寄せる */
+    /* float: left; */
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    width: 200px;
+    background-color:indianred
+    /* 非表示 */
+    /* スマホ対応時デザインが崩れるときに */
+    /* display: none; */
+}
+
+aside a{
+    text-decoration: none;
+    color: #000;
+}
+
+footer {
+    clear: left;
+    /* 内余白 */
+    padding: 10px;
+    /* 外余白 */
+    margin: 10px;
+    background-color:indianred;
+}
+div#main-container {
+    padding: 10px;
+    margin: 10px;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+}
+
+/* レスポンシブ対応。異なる画面サイズに適応させる */
+
+/* スクリーンが400pxでサイドが表示されなくなる */
+@media screen and (min-width: 400px) {
+    aside{
+        display: block;
+    }
+}
+/* 画面が1250px超えるとmainの横幅が1000pxに調整される */
+@media screen and (min-width: 1250px) {
+    main{
+        width: 1000px;
+    }
+    div#main-container {
+        padding: 10px;
+        margin: 10px;
+        background-color: brown;
+        display: flex;
+        flex-direction: row;
+    }
+}
