@@ -1,4 +1,4 @@
-export default class cart {
+export default class art {
     // 商品リスト配列
     #itemList = [];
 

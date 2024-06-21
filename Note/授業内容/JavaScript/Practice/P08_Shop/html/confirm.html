@@ -1,36 +1,18 @@
+<!-- html/confirm.html -->
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購入確認</title>
-
-    <!-- css埋め込み -->
-    <link rel="stylesheet" href="../css/style.css">
-    <!-- BootStrap埋め込み -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/confirm.css">
 </head>
-
-<!-- カートの中をリストで表示
-購入のボタン⇛カートの中身を削除し購入完了画面へ遷移 -->
-
 <body>
-    <header>
-        <!-- 見出し -->
-        <h1>購入確認</h1>
-    </header>
+    <div id="cartContents" class="container"></div>
 
-    <!-- ここに表示される -->
-    <div id="confirm"></div>
+    <button id="purchaseButton" class="btn btn-primary">購入する</button>
 
-    <!-- 購入ボタン -->
-    <input type="button" value="購入する" id="buy">
-
-    <!-- JS埋め込み -->
-    <script src="../js/cart.js"></script>
-    <!-- BootStrap埋め込み -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/Cart.js"></script>
+    <script src="js/confirm.js"></script>
 </body>
-
 </html>
