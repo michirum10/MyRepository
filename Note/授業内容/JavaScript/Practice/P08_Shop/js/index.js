@@ -38,11 +38,12 @@ window.onload = function () {
                     // クラスを指定
                     card.classList.add('card', 'mb-3', 'item');
                     card.style.width = '18rem';
+                    card.style.cursor = 'pointer'; // カーソルをポインターに変更;
 
                     // カード全体のクリックイベント
                     card.addEventListener('click', function () {
                         // 新しいウィンドウで詳細画面を開く
-                        window.open(`../html/detail.html?index=${index}`, '_blank');
+                        goToDetailPage(index);
                     });
 
                     // カードボディ(大枠)の生成
@@ -76,7 +77,7 @@ window.onload = function () {
                     // 詳細ボタン押したら詳細画面に遷移
                     detailBtn.addEventListener('click', function () {
                         // 新しいウィンドウで詳細画面を開く
-                        window.open(`../html/detail.html?index=${index}`, '_blank');
+                        goToDetailPage(index);
                     });
 
                     // カードボディ(親)に購入ボタンを追加
@@ -91,6 +92,10 @@ window.onload = function () {
                 });
 
             });
+        // 詳細ページに遷移する関数
+        function goToDetailPage(index) {
+            window.open(`../html/detail.html?index=${index}`, '_blank');
+        }
     }
     itemList()
 }
