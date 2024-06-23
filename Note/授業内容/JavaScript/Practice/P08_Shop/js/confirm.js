@@ -1,57 +1,32 @@
-// confirm.js
-
 import Cart from './Cart.js';
 
-console.log('Debug cart:', JSON.parse(sessionStorage.getItem('debugCart')));
+document.addEventListener('DOMContentLoaded', () => {
 
-window.onload = function() {
-    console.log('Cart contents:', cart.itemList);
+    const cartList = document.getElementById('cart-list');
+    const totalPriceElement = document.getElementById('total-price');
+    const buyButton = document.getElementById('buy-button');
+    // 戻るボタン
+    const backButton = document.getElementById('back-button');
 
-    const cart = new Cart();
-    const output = document.getElementById('output');
+    // カート内の商品を表示する
+    Cart.displayCart(cartList);
 
-    if (cart.itemList.length === 0) {
-        output.innerHTML = '<p>カートは空です。</p>';
-    } else {
-        let totalPrice = 0;
-        const itemList = document.createElement('ul');
-        itemList.classList.add('list-group');
+    // 合計金額を表示する
+    const totalPrice = Cart.getTotal();
+    totalPriceElement.textContent = totalPrice;
 
-        cart.itemList.forEach(item => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-            
-            const itemInfo = document.createElement('div');
-            itemInfo.innerHTML = `
-                <img src="../img/${item.img}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover;">
-                <span>${item.name}</span>
-            `;
-            
-            const itemPrice = document.createElement('span');
-            itemPrice.textContent = `${item.price}円`;
+    // 購入ボタンのイベントリスナー
+    buyButton.addEventListener('click', () => {
+        // カートをクリアする
+        Cart.clearCart();
+        // 購入完了画面に遷移する
+        window.location.href = '../html/complete.html';
+    });
 
-            listItem.appendChild(itemInfo);
-            listItem.appendChild(itemPrice);
-            itemList.appendChild(listItem);
+    // 商品一覧へ戻る
+    backButton.addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
 
-            totalPrice += item.price;
-        });
-
-        output.appendChild(itemList);
-
-        const totalElement = document.createElement('div');
-        totalElement.classList.add('mt-3', 'text-right');
-        totalElement.innerHTML = `<strong>合計: ${totalPrice}円</strong>`;
-        output.appendChild(totalElement);
-
-        const purchaseButton = document.createElement('button');
-        purchaseButton.classList.add('btn', 'btn-primary', 'mt-3');
-        purchaseButton.textContent = '購入する';
-        purchaseButton.addEventListener('click', function() {
-            alert('購入が完了しました！');
-            cart.purchase(); // カートをクリア
-            window.location.href = 'index.html';
-        });
-        output.appendChild(purchaseButton);
-    }
-};
+    
+});

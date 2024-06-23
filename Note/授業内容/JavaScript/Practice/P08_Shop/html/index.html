@@ -17,17 +17,29 @@
     購入ボタン⇛購入確認画面へ遷移 -->
 
 <body>
+    <!-- 見出し -->
     <header>
-        <!-- 見出し -->
         <h1>商品一覧</h1>
     </header>
+    <main>
+        <!-- Bootstrapコンテナ -->
+        <div class="container mt-5"> <!-- mtは"margin-top"の略 -->
 
-    <!-- 商品一覧表示 -->
-    <div id="output"></div>
+            <!-- 見出し
+        <h1></h1> -->
 
-    <!-- 購入確認リンク -->
-    <a href="confirm.html">購入確認</a>
-
+            <!-- 商品一覧表示 -->
+            <div id="output"></div>
+            <div id="count-item">
+                カート内の商品数: <span id="cart-count">0</span>
+            </div>
+            
+            <div>
+                <!-- 購入確認ページへ遷移させるボタン -->
+                <button id="confirm-button" class="btn btn-primary">購入確認</button>
+            </div>
+        </div>
+    </main>
     <!-- module埋め込み -->
     <script type="module" src="../js/index.js"></script>
 

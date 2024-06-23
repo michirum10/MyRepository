@@ -1,102 +1,82 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0;
-}
+/* index.css */
+
 /* ヘッダーのスタイル */
 header {
     background-color: #fddbdb; /* ヘッダーの背景色を淡いピンクに設定 */
-    padding: 20px 0; /* 上下に20pxのパディングを設定 */
-    text-align: center; /* テキストを中央に揃える */
-    border-bottom: 1px solid #ccc; /* 下部に薄い灰色のボーダーを設定 */
+    padding: 20px 0; /* 上下のパディングを20pxに設定 */
+    text-align: center; /* テキストを中央揃えに */
+    border-bottom: 1px solid #ccc; /* 下部に薄いグレーの境界線を追加 */
 }
-/* h1 {
-    text-align: center;
-    padding: 20px 0;
-    background-color: #343a40;
-    color: white;
-    margin: 0;
-} */
+
+body {
+    background-color: #f8f9fa; /* ボディの背景色を淡いグレーに設定 */
+    margin: 0; /* ボディのマージンを0に設定 */
+}
+
+main {
+    position: relative; /* 子要素の絶対位置指定の基準点として設定 */
+    padding-top: 20px; /* 上部に20pxのパディングを追加 */
+}
+
+.container {
+    max-width: 1200px; /* コンテナの最大幅を1200pxに設定 */
+    margin: 0 auto; /* 左右のマージンを自動で中央揃え */
+    padding: 0 15px; /* 左右に15pxのパディングを追加 */
+}
 
 #output {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
+    display: flex; /* フレックスボックスレイアウトを使用 */
+    flex-wrap: wrap; /* 要素を折り返す */
+    justify-content: flex-start; /* 要素を左揃えに */
+    gap: 20px; /* カード間の間隔を20pxに設定 */
 }
 
-.item {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 10px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-    width: calc(33.333% - 40px); /* 3列配置 */
+.card {
+    width: calc((100% - 40px) / 3); /* 3列レイアウトを実現（間隔を考慮） */
+    margin: 0; /* マージンを0に設定 */
+    transition: transform 0.3s ease-in-out; /* ホバーエフェクトのアニメーション設定 */
 }
 
-.item img {
-    max-width: 100%;
-    max-height: 150px; /* 画像の高さを固定 */
-    object-fit: cover; /* 画像を枠にフィットさせる */
-    margin-bottom: 10px;
-    border-radius: 5px;
+.card:hover {
+    transform: translateY(-5px); /* ホバー時に5px上に移動 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ホバー時に影を追加 */
 }
 
-.item div {
-    margin-bottom: 10px;
+.card-img-top {
+    height: 200px; /* カード内の画像の高さを200pxに固定 */
+    object-fit: cover; /* 画像のアスペクト比を保持しつつ、要素を埋める */
 }
 
-.item button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    margin-top: 10px;
-    width: 100%;
+#confirm-button {
+    position: absolute; /* 絶対位置指定 */
+    top: 20px; /* 上端から20pxの位置に配置 */
+    right: 15px; /* 右端から15pxの位置に配置 */
+    z-index: 1000; /* 他の要素より前面に表示 */
 }
 
-.item button:hover {
-    opacity: 0.9;
+#count-item {
+    position: absolute; /* 絶対位置指定 */
+    top: 60px; /* 上端から60pxの位置に配置 */
+    right: 15px; /* 右端から15pxの位置に配置 */
+    margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
+    padding: 5px 10px; /* 上下5px、左右10pxのパディングを追加 */
+    border-radius: 5px; /* 角を5px丸める */
+    z-index: 1000; /* 他の要素より前面に表示 */
 }
 
-.item button:active {
-    transform: scale(0.98);
-}
-
-#buy {
-    display: block;
-    margin: 20px auto;
-    padding: 15px;
-    width: 200px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#buy:hover {
-    opacity: 0.9;
-}
-
-#buy:active {
-    transform: scale(0.98);
-}
-
-/* メディアクエリ */
-/* レスポンシブ */
-@media (max-width: 1024px) {
-    .item {
-        width: calc(50% - 40px); /* 2列配置 */
+@media (max-width: 991px) {
+    .card {
+        width: calc(50% - 20px); /* 画面幅が991px以下の場合、カードを2列に */
     }
 }
 
-@media (max-width: 600px) {
-    .item {
-        width: calc(100% - 40px); /* 1列配置 */
+@media (max-width: 767px) {
+    .card {
+        width: calc(100% - 20px); /* 画面幅が767px以下の場合、カードを1列に */
+    }
+    #confirm-button,
+    #cart-count {
+        position: static; /* 絶対位置指定を解除 */
+        margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
     }
 }

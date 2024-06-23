@@ -1,41 +1,56 @@
-// Cart.js
+// js/Cart.js
 
 export default class Cart {
-    // 商品リスト配列
-    #itemList = [];
-
-    // コンストラクタ(メソッド)の宣言
-    constructor(itemList = []) {
-        this.loadCart(); // コンストラクタでカートをロード
-    }
-
-    // メソッド:商品一覧取得
-    get itemList() {
-        return this.#itemList;
-    }
-
-    // メソッド:商品追加
-    addItem(item) {
-        this.#itemList.push(item);
-        this.saveCart(); // 商品追加後にカートを保存
-    }
-
-    // メソッド:商品購入
-    purchase() {
-        this.#itemList = [];
-        this.saveCart(); // 購入後にカートをクリアして保存
-    }
-
-    //  メソッド: カートをsessionStorageに保存
-    saveCart() {
-        sessionStorage.setItem('cart', JSON.stringify(this.#itemList));
-    }
-
-    // メソッド: カートをsessionStorageからロード
-    loadCart() {
+    // カート内の商品リストを取得する
+    static getItems() {
         const cartData = sessionStorage.getItem('cart');
-        if (cartData) {
-            this.#itemList = JSON.parse(cartData);
+        return cartData ? JSON.parse(cartData) : [];
+    }
+
+    // カートに商品を追加する
+    static addItem(item) {
+        const items = Cart.getItems();
+        items.push(item);
+        sessionStorage.setItem('cart', JSON.stringify(items));
+    }
+
+    // カートから特定の商品を削除する
+    static removeItem(index) {
+        const items = Cart.getItems();
+        items.splice(index, 1);
+        sessionStorage.setItem('cart', JSON.stringify(items));
+    }
+
+    // カートをクリアする
+    static clearCart() {
+        sessionStorage.removeItem('cart');
+    }
+
+    // カートの合計金額を取得する
+    static getTotal() {
+        return Cart.getItems().reduce((total, item) => total + item.price, 0);
+    }
+
+    // カートの商品リストを表示する
+    static displayCart(container) {
+        const items = Cart.getItems();
+        container.innerHTML = items.map((item, index) => `
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <img src="../img/${item.img}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover;">
+                    <span>${item.name}</span>
+                </div>
+                <span>${item.price}円</span>
+                <button onclick="Cart.removeItem(${index}); Cart.displayCart(this.closest('ul'));" class="btn btn-danger btn-sm">削除</button>
+            </li>
+        `).join('');
+    }
+
+    // カート表示の更新
+    static updateCartDisplay() {
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = Cart.getItems().length;
         }
     }
 }
