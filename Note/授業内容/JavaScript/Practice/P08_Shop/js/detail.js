@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // 出力準備
     const output = document.getElementById('output');
+
     // セッションストレージから選択された商品情報を取得
     const item = JSON.parse(sessionStorage.getItem('selectedItem'));
     // 商品情報が存在する場合、詳細情報を表示
     if (item) {
-        itemDetails(item, output);
+        itemDetails(item, output);  //ここにoutput
     } else {
         output.innerHTML = '<p>商品情報が見つかりませんでした。</p>';
     }

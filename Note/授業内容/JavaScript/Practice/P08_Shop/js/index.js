@@ -10,6 +10,7 @@ import { displayItems } from './displayItems.js'; // displayItems関数をイン
 
 // // 画面が読み込まれたら実行
 // window.onload = function () {
+
 // DOMが読み込まれたら実行（window.onloadより速いらしい）
 document.addEventListener('DOMContentLoaded', function () {
 

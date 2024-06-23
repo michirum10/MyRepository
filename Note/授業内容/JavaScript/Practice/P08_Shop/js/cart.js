@@ -43,7 +43,7 @@ export default class Cart {
         Cart.displayCart(cartList);
     }
 
-    // カートをクリアする（全ての商品を削除）
+    // カートをクリアする（商品を削除）
     static clearCart() {
         // セッションストレージからカートデータを削除
         sessionStorage.removeItem('cart');
@@ -61,6 +61,7 @@ export default class Cart {
         // カート内の商品を取得
         const items = Cart.getItems();
         console.log('[Cart] displayCart: items:', items);
+
         // 各商品をHTML形式で表示
         // BootStrapのリスト化を使う
         // 削除ボタンを追加(confirm.jsのイベントリスナーで削除)
@@ -72,7 +73,7 @@ export default class Cart {
             <span class="me-3">${item.price}円</span>
             <button class="btn btn-danger btn-sm btn-delete" data-index="${index}">削除</button>
         </li>
-        `).join('');
+        // `).join('');  // join？
     }
 
     // カート表示の更新（カート内の商品数を表示）
@@ -82,8 +83,8 @@ export default class Cart {
         if (cartCountElement) {
             // カート内の商品数を設定
             const cartItems = Cart.getItems();
-            console.log('[Cart] updateCartDisplay: cartItems:', cartItems);
             cartCountElement.textContent = cartItems.length;
+            console.log('[Cart] updateCartDisplay: cartItems:', cartItems);
         }
     }
 }
