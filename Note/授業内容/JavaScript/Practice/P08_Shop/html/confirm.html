@@ -5,12 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購入確認</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/confirm.css">
     <!-- BootStrap埋め込み -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
+<!-- confirm -->
+<!-- カートの中をリストで表示
+購入のボタン⇛カートの中身を削除し購入完了画面へ遷移 -->
+
 <body>
+
     <!-- Bootstrapコンテナ -->
     <div class="container mt-5">
         <h1>購入確認</h1>
@@ -18,14 +23,16 @@
         <div class="total-price">
             合計金額: <span id="total-price">0</span>円
         </div>
+        <!-- 購入ボタン -->
         <button id="buy-button" class="btn btn-primary mt-3">購入する</button>
-        <button id="back-button" class="btn btn-secondary mt-3">戻る</button>
         <!-- 戻るボタン -->
-        <!-- <div><a href="../html/index.html">戻る</a></div> -->
+        <button id="back-button" class="btn btn-secondary mt-3">戻る</button>
     </div>
+
+    <!-- module埋め込み -->
     <script type="module" src="../js/confirm.js"></script>
-     <!-- BootStrap埋め込み -->
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- BootStrap埋め込み -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

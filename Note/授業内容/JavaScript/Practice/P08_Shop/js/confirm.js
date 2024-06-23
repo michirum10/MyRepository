@@ -1,12 +1,15 @@
+// confirm.js - 購入確認画面
+
 import Cart from './Cart.js';
 
+// DOMが読み込まれたら実行
 document.addEventListener('DOMContentLoaded', () => {
 
-    const cartList = document.getElementById('cart-list');
-    const totalPriceElement = document.getElementById('total-price');
-    const buyButton = document.getElementById('buy-button');
-    // 戻るボタン
-    const backButton = document.getElementById('back-button');
+    // DOM要素の取得
+    const cartList = document.getElementById('cart-list'); // カート内の商品表示エリア
+    const totalPriceElement = document.getElementById('total-price'); // 合計金額表示エリア
+    const buyButton = document.getElementById('buy-button'); // 購入ボタン
+    const backButton = document.getElementById('back-button'); // 戻るボタン
 
     // カート内の商品を表示する
     Cart.displayCart(cartList);
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalPrice = Cart.getTotal();
     totalPriceElement.textContent = totalPrice;
 
-    // 購入ボタンのイベントリスナー
+    // 購入ボタンのクリックイベント
     buyButton.addEventListener('click', () => {
         // カートをクリアする
         Cart.clearCart();
@@ -23,10 +26,28 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '../html/complete.html';
     });
 
-    // 商品一覧へ戻る
+    // 戻るボタンのクリックイベント
     backButton.addEventListener('click', () => {
-        window.location.href = 'index.html';
+        // 前の画面に戻る
+        window.history.back();
+
     });
 
-    
+    // 削除ボタンのクリックイベント
+cartList.addEventListener('click', (event) => {
+    // クリックされた要素が削除ボタン（btn-deleteクラスを持つボタン）かどうかを確認
+    if (event.target.classList.contains('btn-delete')) {
+        // クリックされた削除ボタンのdata-index属性から、削除する商品のインデックスを取得
+        const index = parseInt(event.target.dataset.index);
+        
+        // カートから商品を削除
+        Cart.removeItem(index);
+        
+        // 合計金額を更新
+        const updatedTotalPrice = Cart.getTotal();
+        totalPriceElement.textContent = updatedTotalPrice;
+    }
+});
+
+
 });

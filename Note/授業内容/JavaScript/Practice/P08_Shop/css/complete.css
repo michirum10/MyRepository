@@ -1,0 +1,26 @@
+/* コンテナのスタイル */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+    text-align: center;
+}
+
+/* 購入完了メッセージのスタイル */
+h1 {
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+/* 戻るボタンのスタイル */
+#back-button {
+    margin-top: 20px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 767px) {
+    .container {
+        padding: 0 10px;
+    }
+}
+

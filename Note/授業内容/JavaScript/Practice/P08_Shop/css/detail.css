@@ -1,0 +1,50 @@
+/* コンテナのスタイル */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* 商品詳細タイトルのスタイル */
+h1 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* 戻るボタンのスタイル */
+#back-button {
+    margin-top: 20px;
+}
+
+/* 画像のスタイル */
+#output img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 説明文のスタイル */
+#output p {
+    text-align: left;
+    line-height: 1.6;
+}
+
+/* カート内商品数のスタイル */
+#count-item {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 767px) {
+    .container {
+        padding: 0 10px;
+    }
+}
+
