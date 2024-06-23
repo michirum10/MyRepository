@@ -57,7 +57,7 @@ export default class Cart {
 
     // カートの商品リストを表示する
     static displayCart(container) {
-        
+
         // カート内の商品を取得
         const items = Cart.getItems();
         console.log('[Cart] displayCart: items:', items);
@@ -73,7 +73,7 @@ export default class Cart {
             <span class="me-3">${item.price}円</span>
             <button class="btn btn-danger btn-sm btn-delete" data-index="${index}">削除</button>
         </li>
-        // `).join('');  // join？
+         `).join('');  // join？
     }
 
     // カート表示の更新（カート内の商品数を表示）
