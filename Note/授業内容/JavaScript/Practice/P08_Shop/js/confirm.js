@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 合計金額を表示する
     const totalPrice = Cart.getTotal();
-    totalPriceElement.textContent = totalPrice;
+    totalPriceElement.textContent = `${totalPrice}円`;
 
     // 購入ボタンのクリックイベント
     buyButton.addEventListener('click', () => {
@@ -25,10 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = '../html/complete.html';
     });
 
+    // // 購入ボタンのクリックイベント
+    // const buyButton = document.getElementById('buy-button'); // 購入ボタン
+    // if (buyButton) {
+    //     buyButton.addEventListener('click', () => {
+    //         // カートをクリアする
+    //         Cart.clearCart();
+    //         // 購入完了画面に遷移する
+    //         window.location.href = '../html/complete.html';
+    //     });
+    // }
 
     // 戻るボタンのイベントリスナー
     document.getElementById('back-button').addEventListener('click', () => {
-        window.history.back();
+        window.location.href = 'index.html';
     });
 
     // 削除ボタンのクリックイベント

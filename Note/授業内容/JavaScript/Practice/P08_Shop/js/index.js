@@ -11,6 +11,10 @@ import { displayItems } from './displayItems.js'; // displayItems関数をイン
 // // 画面が読み込まれたら実行
 // window.onload = function () {
 
+window.updateCartDisplay = function() {
+    Cart.updateCartDisplay();
+};
+
 // DOMが読み込まれたら実行（window.onloadより速いらしい）
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -25,13 +29,15 @@ document.addEventListener('DOMContentLoaded', function () {
             displayItems(json.items, output);  //ここにoutput
         });
 
-    // 購入確認ボタンのイベントリスナー
-    document.getElementById('confirm-button').addEventListener('click', () => {
-        window.location.href = 'confirm.html';
-    });
+        const confirmButton = document.getElementById('confirm-button');
+        if (confirmButton) {
+            confirmButton.addEventListener('click', () => {
+                window.location.href = 'confirm.html';
+            });
+        }
 
     // カート表示の更新
-    Cart.updateCartDisplay();
+    window.updateCartDisplay();
 
 });
 

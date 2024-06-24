@@ -60,24 +60,26 @@ function createCard(item, withDetailButton = false, withCartButton = false) {
         cardBody.appendChild(detailBtn); // カードボディに詳細ボタンを追加
     }
 
-    // カート追加ボタン（詳細ページのみ）
+    // カートに追加ボタン（詳細ページのみ）
     if (withCartButton) {
         const buyButton = document.createElement('button');
         buyButton.classList.add('btn', 'btn-primary'); // カート追加ボタンにBootstrapのクラスを追加
         buyButton.textContent = 'カートに追加'; // ボタンのテキストを設定
+
         buyButton.addEventListener('click', () => {
             Cart.addItem(item); // カートに商品を追加
             Cart.updateCartDisplay(); // カート表示を更新
             alert(`${item.name}をカートに追加しました`); // 追加完了のアラートを表示
 
-            // 元のウィンドウのカート表示を更新
-            if (window.opener && !window.opener.closed) {
-                window.opener.Cart.updateCartDisplay();
-            };
-
-            window.location.href = 'confirm.html'; // 購入確認ページに遷移
+            // 元のウィンドウのカートを更新
+        if (window.opener && !window.opener.closed) {
+            window.opener.Cart.updateCartDisplay();
+            // window.opener.location.reload(); // 元のウィンドウをリロードしてカートの表示を更新
+        }
+    
+        window.close(); // 現在のポップアップウィンドウを閉じる
         });
-        cardBody.appendChild(buyButton); // カードボディにカート追加ボタンを追加
+        cardBody.appendChild(buyButton);
     }
 
     card.appendChild(cardBody); // カードにボディを追加

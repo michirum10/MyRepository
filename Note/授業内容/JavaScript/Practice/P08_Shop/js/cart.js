@@ -7,11 +7,8 @@ export default class Cart {
     static getItems() {
         // セッションストレージからカートデータを取得
         const cartData = sessionStorage.getItem('cart');
-
         // カートデータが存在する場合はJSONを返し、存在しない場合は空配列を返す
         const items = cartData ? JSON.parse(cartData) : [];
-        console.log('[Cart] getItems: items:', items);
-
         return items;
     }
 
@@ -24,7 +21,6 @@ export default class Cart {
         items.push(item);
         // 更新されたカート内容をセッションストレージに保存
         sessionStorage.setItem('cart', JSON.stringify(items));
-        console.log('[Cart] addItem: cart data saved:', sessionStorage.getItem('cart'));
     }
 
     // カートから商品を削除する
@@ -33,14 +29,13 @@ export default class Cart {
         const items = Cart.getItems();
         // 指定されたインデックスの商品を削除
         items.splice(index, 1);
-        console.log('[Cart] removeItem: updated cart:', items);
         // 更新されたカート内容をセッションストレージに保存
         sessionStorage.setItem('cart', JSON.stringify(items));
         // カートを再描画する
         // カートリストの要素を取得
         const cartList = document.getElementById('cart-list');
         // 削除後のカート内容を再度表示
-        Cart.displayCart(cartList);
+        // Cart.displayCart(cartList);
     }
 
     // カートをクリアする（商品を削除）
@@ -76,15 +71,22 @@ export default class Cart {
          `).join('');  // join？
     }
 
-    // カート表示の更新（カート内の商品数を表示）
+    
+    // カート表示の更新
     static updateCartDisplay() {
-        // カート内の商品数を表示する要素を取得
+
         const cartCountElement = document.getElementById('cart-count');
         if (cartCountElement) {
-            // カート内の商品数を設定
             const items = Cart.getItems();
             cartCountElement.textContent = items.length;
-            console.log('[Cart] updateCartDisplay: cartItems:', items);
+        }
+        const cartList = document.getElementById('cart-list');
+        if (cartList) {
+            Cart.displayCart(cartList);
+        }
+        const totalPriceElement = document.getElementById('total-price');
+        if (totalPriceElement) {
+            totalPriceElement.textContent = `${Cart.getTotal()}円`;
         }
     }
 }
