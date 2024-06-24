@@ -3,7 +3,7 @@
 /* ヘッダーのスタイル */
 header {
     background-color: #fddbdb; /* ヘッダーの背景色を淡いピンクに設定 */
-    padding: 20px 0; /* 上下のパディングを20pxに設定 */
+    padding: 20px 15px; /* 左右のパディングも追加 */
     text-align: center; /* テキストを中央揃えに */
     border-bottom: 1px solid #ccc; /* 下部に薄いグレーの境界線を追加 */
 }
@@ -24,15 +24,8 @@ main {
     padding: 0 15px; /* 左右に15pxのパディングを追加 */
 }
 
-#output {
-    display: flex; /* フレックスボックスレイアウトを使用 */
-    flex-wrap: wrap; /* 要素を折り返す */
-    justify-content: flex-start; /* 要素を左揃えに */
-    gap: 20px; /* カード間の間隔を20pxに設定 */
-}
-
 .card {
-    width: calc((100% - 40px) / 3); /* 3列レイアウトを実現（間隔を考慮） */
+    height: 100%;
     margin: 0; /* マージンを0に設定 */
     transition: transform 0.3s ease-in-out; /* ホバーエフェクトのアニメーション設定 */
 }
@@ -46,12 +39,28 @@ main {
     height: 200px; /* カード内の画像の高さを200pxに固定 */
     object-fit: cover; /* 画像のアスペクト比を保持しつつ、要素を埋める */
 }
+/* カートボタン */
+.confirm-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
 
 #confirm-button {
     position: absolute; /* 絶対位置指定 */
     top: 20px; /* 上端から20pxの位置に配置 */
     right: 15px; /* 右端から15pxの位置に配置 */
     z-index: 1000; /* 他の要素より前面に表示 */
+}
+
+/* 購入確認ボタンとカート数のスタイル */
+#cart-and-confirm {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
 }
 
 #count-item {
@@ -64,19 +73,29 @@ main {
     z-index: 1000; /* 他の要素より前面に表示 */
 }
 
-@media (max-width: 991px) {
-    .card {
-        width: calc(50% - 20px); /* 画面幅が991px以下の場合、カードを2列に */
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    #cart-and-confirm {
+        width: 100%;
+        justify-content: center;
     }
 }
 
-@media (max-width: 767px) {
-    .card {
-        width: calc(100% - 20px); /* 画面幅が767px以下の場合、カードを1列に */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
     }
-    #confirm-button,
-    #cart-count {
-        position: static; /* 絶対位置指定を解除 */
-        margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
+
+    #count-item, #confirm-button {
+        font-size: 0.8rem;
     }
 }

@@ -6,7 +6,7 @@
 // カート機能のモジュールをインポート
 import Cart from './Cart.js';
 // itemDetails関数をインポート
-import { itemDetails } from './displayItems.js'; 
+import { itemDetails } from './displayItems.js';
 
 // 画面が読み込まれたら実行
 // window.onload = function () {
@@ -26,14 +26,30 @@ document.addEventListener('DOMContentLoaded', function () {
         output.innerHTML = '<p>商品情報が見つかりませんでした。</p>';
     }
 
+    //  購入確認ボタンのイベントリスナー
+    document.getElementById('confirm-button').addEventListener('click', () => {
+        // window.opener.location.reload(); // 元のウィンドウをリロードしてカートの表示を更新
+        window.location.href = 'confirm.html';
+    });
+
+    // 戻るボタンのイベントリスナー
+    document.getElementById('back-button').addEventListener('click', () => {
+        window.location.href = 'index.html';
+    });
+
     // ページ読み込み時にカート表示を更新
     Cart.updateCartDisplay();
 });
 
-// Bootstrap戻るボタン
-document.getElementById('back-button').addEventListener('click', () => {
-    window.location.href = 'index.html';
-});
+// // 購入確認ページへ
+// document.getElementById('confirm-button').addEventListener('click', () => {
+//     window.location.href = 'confirm.html';
+// });
+
+// // Bootstrap戻るボタン
+// document.getElementById('back-button').addEventListener('click', () => {
+//     window.location.href = 'index.html';
+// });
 
 // displayItems.jsでまとめたので不要
 

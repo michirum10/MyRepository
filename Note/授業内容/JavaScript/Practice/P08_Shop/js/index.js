@@ -24,9 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // 商品一覧を表示
             displayItems(json.items, output);  //ここにoutput
         });
-        
 
-    // 購入確認ページへ
+    // 購入確認ボタンのイベントリスナー
     document.getElementById('confirm-button').addEventListener('click', () => {
         window.location.href = 'confirm.html';
     });

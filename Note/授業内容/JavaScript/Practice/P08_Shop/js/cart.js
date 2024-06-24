@@ -82,9 +82,12 @@ export default class Cart {
         const cartCountElement = document.getElementById('cart-count');
         if (cartCountElement) {
             // カート内の商品数を設定
-            const cartItems = Cart.getItems();
-            cartCountElement.textContent = cartItems.length;
-            console.log('[Cart] updateCartDisplay: cartItems:', cartItems);
+            const items = Cart.getItems();
+            cartCountElement.textContent = items.length;
+            console.log('[Cart] updateCartDisplay: cartItems:', items);
         }
     }
 }
+// 一番下に書く
+// グローバルにアクセス可能にする
+window.Cart = Cart;

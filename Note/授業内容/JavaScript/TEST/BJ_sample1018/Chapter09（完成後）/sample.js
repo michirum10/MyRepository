@@ -138,18 +138,21 @@ function pickAI(handCards) {
   if (total <= 11) {
     isPick = true;
   }
+
   // 合計が12～14なら80%の確率で「引く」
   else if (total >=12 && total <= 14) {
     if (Math.random() < 0.8) {
       isPick = true;
     }
   }
+
   // 合計が15～17なら35%の確率で「引く」
   else if (total >=15 && total <= 17) {
     if (Math.random() < 0.35) {
       isPick = true;
     }
   }
+  
   // 合計が18以上なら「引かない」
   else if (total >=18) {
     isPick = false;
@@ -239,7 +242,7 @@ function judge() {
   // 勝敗のパターン表に当てはめて勝敗を決める
   if (myTotal > 21 && comTotal <= 21) {
     // 自分の合計が21を超えていれば負け
-    result = "loose";
+    result = "lose";
   }
   else if (myTotal <= 21 && comTotal > 21) {
     // 相手の合計が21を超えていれば勝ち
@@ -275,7 +278,7 @@ function showResult(result) {
     case "win":
       message = "あなたの勝ちです！";
       break;
-    case "loose":
+    case "lose":
       message = "あなたの負けです！";
       break;
     case "draw":

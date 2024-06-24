@@ -55,7 +55,7 @@ function createCard(item, withDetailButton = false, withCartButton = false) {
         detailBtn.textContent = '詳細'; // ボタンのテキストを設定
         detailBtn.addEventListener('click', () => {
             sessionStorage.setItem('selectedItem', JSON.stringify(item)); // 商品情報をセッションストレージに保存
-            window.location.href = 'detail.html'; // 詳細ページに遷移
+            window.open('detail.html', '_blank', 'width=1200, height=1000'); // 新しいwindowで詳細ページを開く
         });
         cardBody.appendChild(detailBtn); // カードボディに詳細ボタンを追加
     }
@@ -69,6 +69,12 @@ function createCard(item, withDetailButton = false, withCartButton = false) {
             Cart.addItem(item); // カートに商品を追加
             Cart.updateCartDisplay(); // カート表示を更新
             alert(`${item.name}をカートに追加しました`); // 追加完了のアラートを表示
+
+            // 元のウィンドウのカート表示を更新
+            if (window.opener && !window.opener.closed) {
+                window.opener.Cart.updateCartDisplay();
+            };
+
             window.location.href = 'confirm.html'; // 購入確認ページに遷移
         });
         cardBody.appendChild(buyButton); // カードボディにカート追加ボタンを追加
@@ -84,13 +90,18 @@ export function displayItems(items, output) {
     output.innerHTML = ''; // 初期化
 
     items.forEach(item => {
+        // Bootstrapグリッド
+        const col = document.createElement('div');
+        col.classList.add('col');
+
         const card = createCard(item, true, false); // 詳細ボタン付きのカードを生成
         card.style.cursor = 'pointer'; // カーソルをポインターに変更
         card.addEventListener('click', () => {
             sessionStorage.setItem('selectedItem', JSON.stringify(item)); // 商品情報をセッションストレージに保存
-            window.location.href = 'detail.html'; // 詳細ページに遷移
+            window.open('detail.html', '_blank', 'width=1200, height=1000'); // 新しいwindowで詳細ページを開く
         });
-        output.appendChild(card); // 出力要素にカードを追加
+        col.appendChild(card);
+        output.appendChild(col); // 出力要素にカードを追加
     });
 }
 
@@ -100,3 +111,17 @@ export function itemDetails(item, output) {
     const card = createCard(item, false, true); // カート追加ボタン付きのカードを生成
     output.appendChild(card); // 出力要素にカードを追加
 }
+
+
+// 購入確認ボタンを生成する関数
+// export function createConfirmButton() {
+//     const confirmButton = document.createElement('button');
+//     confirmButton.classList.add('btn', 'btn-primary', 'confirm-button');
+//     // confirmButton.className = 'btn btn-primary';
+//     confirmButton.textContent = '購入確認';
+//     confirmButton.addEventListener('click', () => {
+//         // 新しいウィンドウで購入確認ページを開く
+//         window.open('confirm.html', 'confirmWindow', 'width=600,height=400');
+//     });
+//     return confirmButton;
+// }

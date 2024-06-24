@@ -17,17 +17,27 @@
     カートに入れるボタン⇛カートにデータを追加 -->
 
 <body>
-    <!-- Bootstrapコンテナ -->
-    <div class="container mt-5">  <!-- mtは"margin-top"の略 -->
-        <h1>商品詳細</h1>
-        <div id="output"></div>
-        <div>
+    <main>
+
+        <header>
+            <h1>商品詳細</h1>
+        </header>
+        <!-- Bootstrapコンテナ -->
+        <div class="container mt-5"> <!-- mtは"margin-top"の略 -->
+            <div id="output"></div>
+            <!-- Bootstrapボタン -->
+            <button id="back-button" class="btn btn-secondary">戻る</button>
+        </div>
+    </main>
+
+    <div>
+        <!-- 購入確認ページへ遷移させるボタン -->
+        <button id="confirm-button" class="btn btn-primary confirm-button">カート確認</button>
+        <div id="count-item">
             カート内の商品数: <span id="cart-count">0</span>
         </div>
-        <!-- Bootstrap戻るボタン -->
-        <button id="back-button" class="btn btn-secondary mt-3">戻る</button>
     </div>
-    
+
     <!-- module埋め込み -->
     <script type="module" src="../js/detail.js"></script>
     <!-- BootStrap埋め込み -->

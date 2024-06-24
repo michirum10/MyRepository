@@ -40,6 +40,12 @@ h1 {
 #back-button {
     margin-top: 20px;
 }
+.purchase-button-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
 
 /* レスポンシブ対応 */
 @media (max-width: 767px) {

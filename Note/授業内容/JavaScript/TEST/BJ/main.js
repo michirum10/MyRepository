@@ -46,9 +46,11 @@ function loadHandler() {
     // 自分がカードを引く
     pickMyCard();
     // 相手がカードを引く
-    picComCard();
+    pickComCard();
     // 画面更新する
     updateView();
+    // デバッグ関数を呼び出す
+    debug();
 }
 
 // 「カードを引く」ボタンを押したとき実行する関数
@@ -59,7 +61,7 @@ function clickPickHandler() {
         // 自分がカードを引く関数
         pickMyCard();
         // 相手がカードを引く関数
-        picComCard();
+        pickComCard();
         // 画面更新する関数
         updateView();
     }
@@ -82,9 +84,18 @@ function clickJudgeHandler() {
 }
 
 // 「もう一回遊ぶ」ボタンを押したとき実行する関数
-function もう一回遊ぶ() {
+function clickResetHandler() {
     // 画面を初期表示にもどす
     // location.reloadメソッドでページを再読み込みする
+    location.reload();
+
+    // リロードせずゲームを初期化
+    // cards = [];
+    // myCards = [];
+    // comCards = [];
+    // isGameOver = false;
+    // loadHandler();
+    // clickResetHandler()を呼び出して実行
 }
 
 /***********************************************
@@ -97,11 +108,11 @@ function shuffle() {
     // カードの中に52個の配列要素を追加
     for (let i = 1; i <= 52; i++) {
         // カードに初期値を入れる
-        cards.push = (i);    // push: 配列の末尾に要素を追加する
+        cards.push(i);    // push: 配列の末尾に要素を追加する
     }
 
     // 十分に混ぜるため100回繰り返す
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 0; i < 100; i++) {
         // カードの山からランダムに選んだ2枚を入れ替える
         // 0~51までのランダムな値を取得し「j」「k」に代入
         let j = Math.floor(Math.random() * 52);
@@ -118,28 +129,29 @@ function pickMyCard() {
     // 自分のカードが４枚以下の場合
     if (myCards.length <= 4) {
         // カードの山(配列)から1枚取り出す
-        let cards = cards.pop();    // pop: 配列の末尾から要素を取り出す
+        let card = cards.pop();    // pop: 配列の末尾から要素を取り出す
         // 取り出した(pop)カードを自分のカード(配列)に追加(push)する
-        myCards.push(cards);
+        myCards.push(card);
     }
 }
 
 //相手がカードを引く関数
-function picComCard() {
+function pickComCard() {
     // カードは5枚までなので
     if (comCards.length <= 4) {
         // カードを引くかどうか考える
         // 考える(pickAI)関数を呼び出す
         if (pickAI(comCards)) {
             // カードの山(配列)から1枚取り出す
-            let cards = cards.pop();
+            let card = cards.pop();
             // 取り出したカードを自分のカード(配列)に追加する
-            comCards.push(cards);
+            comCards.push(card);
         }
     }
 }
 // カードを引くかどうか考える関数
 function pickAI(handCards) {
+
     // 現在のカードの合計を計算する
     let total = getTotal(handCards);
     // カードを引くかどうか
@@ -206,30 +218,30 @@ function updateView() {
     let myFields = document.querySelectorAll(".myCard");    //ノードが5つ入ったNodeListオブジェクトを返す
     for (let i = 0; i < myFields.length; i++) {    // 5つのノードを繰り返す
         // 自分のカードの枚数が1より大きい場合
-        if (myCards.length > i) {
+        if (i < myCards.length) {
             // 表面の画像を表示する
             myFields[i].setAttribute('src', getCardPath(myCards[i]));    //src:属性を変更する//getCardPath:カードの画像パスを取得する関数を呼び出す
         } else {
             // 表面の画像を表示する
-            myFields[i].setAttribute('src', 'blue.png');    //src属性を変更する
+            myFields[i].setAttribute('src', "blue.png");    //src属性を変更する
         }
     }
     // 相手のカードを表示
     let comFields = document.querySelectorAll(".comCard");    //ノードが5つ入ったNodeListオブジェクトを返す
-    for (let i = 0; i < comCardsFields.length; i++) {    // 5つのノードを繰り返す
+    for (let i = 0; i < comFields.length; i++) {    // 5つのノードを繰り返す
         // 相手のカードの枚数が1より大きい場合
-        if (comCardsCards.length > i) {
+        if (i < comCards.length) {
             // 表面の画像を表示する
-            comCardsFields[i].setAttribute('src', getCardPath(comCardsCards[i]));    //src:属性を変更する//getCardPath:カードの画像パスを取得する関数を呼び出す
+            comFields[i].setAttribute('src', getCardPath(comCards[i]));    //src:属性を変更する//getCardPath:カードの画像パスを取得する関数を呼び出す
         } else {
             // 表面の画像を表示する
-            comCardsFields[i].setAttribute('src', 'red.png');    //src属性を変更する
+            comFields[i].setAttribute('src', 'red.png');    //src属性を変更する
         }
     }
     // カードの合計を再計算する
     // function getTotal
-    document.querySelector('#myTotal').innerText = getTotal(mycards);
-    document.querySelector('#comTotal').innerText = getTotal(comCardsCards);
+    document.querySelector('#myTotal').innerText = getTotal(myCards);
+    document.querySelector('#comTotal').innerText = getTotal(comCards);
 }
 
 // カードの画像パスを求める関数
@@ -237,30 +249,12 @@ function getCardPath(card) {
     // カードのパスを入れる変数
     let path = '';
     // カードの数字が１桁(9以下)なら先頭にゼロをつける
-    if (card < 9) {
+    if (card <= 9) {
         path = '0' + card + '.png';
     } else {
         path = card + '.png';
     }
     return path;
-}
-
-// 自分のカードを表示する
-for (iを5回繰り返す) {
-    if (自分のカードの枚数がiより大きい) {
-        // 表面の画像を表示する
-    } else {
-        // 表面の画像を表示する
-    }
-}
-
-// 相手のカードを表示する  
-for (iを5回繰り返す) {
-    if (相手のカードの枚数がiより大きい) {
-        // 表面の画像を表示する
-    } else {
-        // 表面の画像を表示する
-    }
 }
 
 // 勝敗を判定する関数
@@ -289,6 +283,27 @@ function judge() {
         }
     }
     // 勝敗を呼び出し元に戻す
+    return result;
+}
+
+// 勝敗を画面に表示する関数
+function showResult(result) {
+    // メッセージを入れる変数
+    let message = '';
+    // 勝敗に応じてメッセージを決める(switch)
+    switch (result) {
+        case 'win':
+            message = 'あなたの勝ちです！';
+            break;
+        case 'lose':
+            message = 'あなたの負けです！';
+            break;
+        case 'draw':
+            message = '引き分けです！';
+            break;
+    }
+    // ダイアログにメッセージを表示する
+    alert(message);
 }
 
 /***********************************************
@@ -297,8 +312,8 @@ function judge() {
 
 // デバッグ用の関数
 function debug() {
-    console.log('カードの山', カードの山);
-    console.log('自分のカード', 自分のカード);
-    console.log('相手のカード', 相手のカード);
-    console.log('勝敗決定フラグ', 勝敗決定フラグ);
+    console.log('カードの山', cards);
+    console.log('自分のカード', myCards);
+    console.log('相手のカード', comCards);
+    console.log('勝敗決定フラグ', isGameOver);
 }

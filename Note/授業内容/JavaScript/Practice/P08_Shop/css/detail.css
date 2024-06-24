@@ -31,20 +31,49 @@ h1 {
     line-height: 1.6;
 }
 
-/* カート内商品数のスタイル */
-#count-item {
-    position: absolute;
+/* 購入確認ボタンとカート数のコンテナ */
+.cart-info {
+    position: fixed;
     top: 20px;
-    right: 15px;
-    padding: 5px 10px;
-    border-radius: 5px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* カートボタン */
+#confirm-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
     z-index: 1000;
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 767px) {
-    .container {
-        padding: 0 10px;
-    }
+
+#count-item {
+    position: absolute; /* 絶対位置指定 */
+    top: 60px; /* 上端から60pxの位置に配置 */
+    right: 15px; /* 右端から15pxの位置に配置 */
+    margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
+    padding: 5px 10px; /* 上下5px、左右10pxのパディングを追加 */
+    border-radius: 5px; /* 角を5px丸める */
+    z-index: 1000; /* 他の要素より前面に表示 */
 }
 
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .cart-info {
+        top: 10px;
+        right: 10px;
+    }
+
+    .confirm-button {
+        font-size: 0.9em;
+        padding: 5px 10px;
+    }
+
+    #count-item {
+        font-size: 0.8em;
+    }
+}
