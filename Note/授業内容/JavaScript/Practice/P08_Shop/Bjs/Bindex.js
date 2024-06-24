@@ -3,36 +3,43 @@
 // それらをクリックすると商品詳細画面へ遷移(新しくウィンドウを開く)
 // 購入ボタン⇛購入確認画面へ遷移
 
-// index.js: 商品一覧を表示し、カート機能を初期化する
+// カート機能のモジュールをインポート
+import Cart from './Bcart.js';
+// displayItems関数をインポート
+import { displayItems } from './BdisplayItems.js'; // displayItems関数をインポート
 
-import Cart from './Cart.js';
-import { displayItems } from './displayItems.js';
+// // 画面が読み込まれたら実行
+// window.onload = function () {
+
+window.updateCartDisplay = function() {
+    Cart.updateCartDisplay();
+};
 
 // DOMが読み込まれたら実行（window.onloadより速いらしい）
 document.addEventListener('DOMContentLoaded', function () {
 
-    const output = document.getElementById('output'); // 商品一覧を表示する要素
+    // 出力準備
+    const output = document.getElementById('output');
 
-    // ローカルのdata.jsonから商品データを取得して表示
+    // JSONデータを取得
     fetch('../data/data.json')
         .then(response => response.json())
         .then(json => {
-            displayItems(json.items, output); // 商品データを取得して表示
+            // 商品一覧を表示
+            displayItems(json.items, output);  //ここにoutput
         });
 
-    // 購入確認ボタンのイベントリスナーを設定
-    const confirmButton = document.getElementById('confirm-button');
-    if (confirmButton) {
-        confirmButton.addEventListener('click', () => {
-            window.location.href = 'confirm.html'; // 購入確認ページに遷移
-        });
-    }
+        const confirmButton = document.getElementById('confirm-button');
+        if (confirmButton) {
+            confirmButton.addEventListener('click', () => {
+                window.location.href = 'confirm.html';
+            });
+        }
 
     // カート表示の更新
-    Cart.updateCartDisplay(); // カートの表示を更新
+    window.updateCartDisplay();
 
 });
-
 
 // displayItems.jsでまとめたので不要
 

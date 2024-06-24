@@ -6,7 +6,7 @@
 // カート機能のモジュールをインポート
 import Cart from './Cart.js';
 // itemDetails関数をインポート
-import { itemDetails } from './displayItems.js';
+import { itemDetails } from './BdisplayItems.js';
 
 // 画面が読み込まれたら実行
 // window.onload = function () {
@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //  購入確認ボタンのイベントリスナー
     document.getElementById('confirm-button').addEventListener('click', () => {
         // window.opener.location.reload(); // 元のウィンドウをリロードしてカートの表示を更新
-        window.location.href = 'confirm.html'; // 購入確認ページに遷移
+        window.location.href = 'confirm.html';
     });
 
     // 戻るボタンのイベントリスナー
     document.getElementById('back-button').addEventListener('click', () => {
-        window.location.href = 'index.html'; // 商品一覧ページに戻る
+        window.location.href = 'index.html';
     });
 
     // ページ読み込み時にカート表示を更新

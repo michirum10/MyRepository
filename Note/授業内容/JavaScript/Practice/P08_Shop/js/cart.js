@@ -1,66 +1,102 @@
-// Cart.js - カート機能を提供するクラス
+// Cartクラス: カート機能を提供するクラス
 
-// Cartクラスをエクスポート
 export default class Cart {
+    #itemList = []; // プライベートフィールドとして商品リストを保持する
 
-    // カート内の商品リストを取得する
-    static getItems() {
-        // セッションストレージからカートデータを取得
-        const cartData = sessionStorage.getItem('cart');
-        // カートデータが存在する場合はJSONを返し、存在しない場合は空配列を返す
-        const items = cartData ? JSON.parse(cartData) : [];
-        return items;
+    /**
+     * コンストラクタ: カートを初期化する
+     * @param {Array} itemList 初期の商品リスト
+     */
+    constructor(itemList = []) {
+        this.#itemList = itemList;
     }
 
-    // カートに商品を追加する
-    static addItem(item) {
-        console.log('[Cart] addItem: item:', item);
-        // 現在のカート内容を取得
-        const items = Cart.getItems();
-        // 新しい商品をカートに追加
-        items.push(item);
-        // 更新されたカート内容をセッションストレージに保存
-        sessionStorage.setItem('cart', JSON.stringify(items));
+    /**
+     * itemListのgetter: 現在のカート内の商品リストを取得する
+     * @returns {Array} 現在の商品リスト
+     */
+    get itemList() {
+        return this.#itemList;
     }
 
-    // カートから商品を削除する
-    static removeItem(index) {
-        // 現在のカート内容を取得
-        const items = Cart.getItems();
-        // 指定されたインデックスの商品を削除
-        items.splice(index, 1);
-        // 更新されたカート内容をセッションストレージに保存
-        sessionStorage.setItem('cart', JSON.stringify(items));
-        // カートを再描画する
-        // カートリストの要素を取得
+    /**
+     * 商品をカートに追加する
+     * @param {object} item 追加する商品オブジェクト
+     */
+    addItem(item) {
+        this.#itemList.push(item);
+        this.saveToSessionStorage(); // カートの状態をセッションストレージに保存
+    }
+
+    /**
+     * インデックスを指定して商品をカートから削除する
+     * @param {number} index 削除する商品のインデックス
+     */
+    removeItem(index) {
+        this.#itemList.splice(index, 1);
+        this.saveToSessionStorage(); // カートの状態をセッションストレージに保存
+    }
+
+    /**
+     * カート内の商品を全て削除する
+     */
+    clearCart() {
+        this.#itemList = [];
+        this.saveToSessionStorage(); // カートの状態をセッションストレージに保存
+    }
+
+    /**
+     * カート内の商品の合計金額を計算する
+     * @returns {number} 合計金額
+     */
+    getTotal() {
+        return this.#itemList.reduce((total, item) => total + item.price, 0);
+    }
+
+    /**
+     * カートの商品リストをセッションストレージに保存する
+     */
+    saveToSessionStorage() {
+        sessionStorage.setItem('cartItems', JSON.stringify(this.#itemList));
+    }
+
+    /**
+     * セッションストレージからカートの商品リストを読み込み、Cartオブジェクトとして返す
+     * @returns {Cart} セッションストレージから読み込んだCartオブジェクト
+     */
+    static loadFromSessionStorage() {
+        const storedItems = sessionStorage.getItem('cartItems');
+        return new Cart(storedItems ? JSON.parse(storedItems) : []);
+    }
+
+    /**
+     * カートの表示を更新する静的メソッド
+     * カート内の商品数と合計金額を更新して表示する
+     */
+    static updateCartDisplay() {
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            const items = Cart.getItems();
+            cartCountElement.textContent = items.length; // カート内の商品数を表示
+        }
+
         const cartList = document.getElementById('cart-list');
-        // 削除後のカート内容を再度表示
-        // Cart.displayCart(cartList);
+        if (cartList) {
+            Cart.displayCart(cartList); // カート内の商品をHTMLとして表示
+        }
+
+        const totalPriceElement = document.getElementById('total-price');
+        if (totalPriceElement) {
+            totalPriceElement.textContent = `${Cart.getTotal()}円`; // カート内の合計金額を表示
+        }
     }
 
-    // カートをクリアする（商品を削除）
-    static clearCart() {
-        // セッションストレージからカートデータを削除
-        sessionStorage.removeItem('cart');
-    }
-
-    // カートの合計金額を計算する
-    static getTotal() {
-        // カート内の全商品の価格を合計して返す
-        return Cart.getItems().reduce((total, item) => total + item.price, 0);
-    }
-
-    // カートの商品リストを表示する
+    /**
+     * カート内の商品をHTMLとして表示する
+     * @param {HTMLElement} container 商品リストを表示するHTML要素
+     */
     static displayCart(container) {
-
-        // カート内の商品を取得
-        const items = Cart.getItems();
-        console.log('[Cart] displayCart: items:', items);
-
-        // 各商品をHTML形式で表示
-        // BootStrapのリスト化を使う
-        // 削除ボタンを追加(confirm.jsのイベントリスナーで削除)
-        // data-index="${index}:削除するindexを指定
+        const items = Cart.getItems(); // カート内の商品を取得
         container.innerHTML = items.map((item, index) => `
         <li class="list-group-item d-flex align-items-center">
             <img src="../img/${item.img}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover;">
@@ -68,28 +104,6 @@ export default class Cart {
             <span class="me-3">${item.price}円</span>
             <button class="btn btn-danger btn-sm btn-delete" data-index="${index}">削除</button>
         </li>
-         `).join('');  // join？
-    }
-
-    
-    // カート表示の更新
-    static updateCartDisplay() {
-
-        const cartCountElement = document.getElementById('cart-count');
-        if (cartCountElement) {
-            const items = Cart.getItems();
-            cartCountElement.textContent = items.length;
-        }
-        const cartList = document.getElementById('cart-list');
-        if (cartList) {
-            Cart.displayCart(cartList);
-        }
-        const totalPriceElement = document.getElementById('total-price');
-        if (totalPriceElement) {
-            totalPriceElement.textContent = `${Cart.getTotal()}円`;
-        }
+         `).join(''); // 商品リストをHTMLとして生成し、コンテナに表示
     }
 }
-// 一番下に書く
-// グローバルにアクセス可能にする
-window.Cart = Cart;

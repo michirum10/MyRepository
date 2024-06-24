@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 戻るボタンのイベントリスナー
     document.getElementById('back-button').addEventListener('click', () => {
-        window.location.href = 'index.html'; // 商品一覧ページに戻る
+        window.location.href = 'index.html';
     });
 
     // 削除ボタンのクリックイベント
@@ -48,10 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // クリックされた削除ボタンのdata-index属性から、削除する商品のインデックスを取得
             const index = parseInt(event.target.dataset.index);
 
-            Cart.removeItem(index);// カートから商品を削除
-            Cart.displayCart(cartList); // カートを再表示
+            // カートから商品を削除
+            Cart.removeItem(index);
+
             // 合計金額を更新
-            // const updatedTotalPrice = Cart.getTotal(); //いる？
+            const updatedTotalPrice = Cart.getTotal();
             totalPriceElement.textContent = `${updatedTotalPrice}円`;
         }
     });
