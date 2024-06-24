@@ -223,7 +223,7 @@ function updateView() {
             myFields[i].setAttribute('src', getCardPath(myCards[i]));    //src:属性を変更する//getCardPath:カードの画像パスを取得する関数を呼び出す
         } else {
             // 表面の画像を表示する
-            myFields[i].setAttribute('src', "blue.png");    //src属性を変更する
+            myFields[i].setAttribute('src', "./img/blue.png");    //src属性を変更する
         }
     }
     // 相手のカードを表示
@@ -235,7 +235,7 @@ function updateView() {
             comFields[i].setAttribute('src', getCardPath(comCards[i]));    //src:属性を変更する//getCardPath:カードの画像パスを取得する関数を呼び出す
         } else {
             // 表面の画像を表示する
-            comFields[i].setAttribute('src', 'red.png');    //src属性を変更する
+            comFields[i].setAttribute('src', './img/red.png');    //src属性を変更する
         }
     }
     // カードの合計を再計算する
