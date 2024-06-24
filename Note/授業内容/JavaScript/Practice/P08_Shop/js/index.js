@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // カート表示の更新
     Cart.updateCartDisplay(); // カートの表示を更新
 
+    // 親ウィンドウでCartクラスの静的メソッドを定義しておく
+    window.Cart = Cart;
+    
 });
 
 

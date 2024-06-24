@@ -26,6 +26,18 @@ document.addEventListener('DOMContentLoaded', function () {
         output.innerHTML = '<p>商品情報が見つかりませんでした。</p>';
     }
 
+    // カートに追加するボタンのクリックイベント
+    const addToCartButton = document.getElementById('add-to-cart');
+    if (addToCartButton) {
+        addToCartButton.addEventListener('click', () => {
+            Cart.addItem(item); // Cart クラスを使用してカートに商品を追加
+            alert(`${item.name} をカートに追加しました。`); // 追加メッセージを表示（例示）
+            window.opener.Cart.updateCartDisplay(); // 親ウィンドウでカートの表示を更新
+            window.close(); // 商品詳細ページを閉じる
+        });
+    }
+
+
     //  購入確認ボタンのイベントリスナー
     document.getElementById('confirm-button').addEventListener('click', () => {
         // window.opener.location.reload(); // 元のウィンドウをリロードしてカートの表示を更新
