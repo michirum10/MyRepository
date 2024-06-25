@@ -35,7 +35,7 @@ window.draw = function(){
     // 増える
     // size++
 
-    // 増えたり減ったり 
+    // 増えたり 
     if(f){
         size++
     }else{
