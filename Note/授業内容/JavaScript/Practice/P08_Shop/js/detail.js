@@ -5,63 +5,37 @@
 
 // カート機能のモジュールをインポート
 import Cart from './Cart.js';
-// itemDetails関数をインポート
-import { itemDetails } from './displayItems.js';
+// itemDetails.jsをインポート
+import { itemDetails } from './displayItems.js'; // itemDetails関数をインポート
+
+// カートのインスタンスを作成（グローバル）
+// let cart;
+// カートに商品を追加
+// Cart.addItem(newItem);
 
 // 画面が読み込まれたら実行
-// window.onload = function () {
-
-// DOMが読み込まれたら実行（window.onloadより速いらしい）
-document.addEventListener('DOMContentLoaded', function () {
+window.onload = function () {
 
     // 出力準備
     const output = document.getElementById('output');
-
     // セッションストレージから選択された商品情報を取得
     const item = JSON.parse(sessionStorage.getItem('selectedItem'));
     // 商品情報が存在する場合、詳細情報を表示
     if (item) {
-        itemDetails(item, output);  //ここにoutput
+        itemDetails(item, output);
     } else {
         output.innerHTML = '<p>商品情報が見つかりませんでした。</p>';
     }
 
-    // カートに追加するボタンのクリックイベント
-    const addToCartButton = document.getElementById('add-to-cart');
-    if (addToCartButton) {
-        addToCartButton.addEventListener('click', () => {
-            Cart.addItem(item); // Cart クラスを使用してカートに商品を追加
-            alert(`${item.name} をカートに追加しました。`); // 追加メッセージを表示（例示）
-            window.opener.Cart.updateCartDisplay(); // 親ウィンドウでカートの表示を更新
-            window.close(); // 商品詳細ページを閉じる
-        });
-    }
-
-
-    //  購入確認ボタンのイベントリスナー
-    document.getElementById('confirm-button').addEventListener('click', () => {
-        // window.opener.location.reload(); // 元のウィンドウをリロードしてカートの表示を更新
-        window.location.href = 'confirm.html'; // 購入確認ページに遷移
-    });
-
-    // 戻るボタンのイベントリスナー
-    document.getElementById('back-button').addEventListener('click', () => {
-        window.location.href = 'index.html'; // 商品一覧ページに戻る
-    });
-
     // ページ読み込み時にカート表示を更新
     Cart.updateCartDisplay();
+};
+
+// Bootstrap戻るボタン
+document.getElementById('back-button').addEventListener('click', () => {
+    window.location.href = 'index.html';
 });
 
-// // 購入確認ページへ
-// document.getElementById('confirm-button').addEventListener('click', () => {
-//     window.location.href = 'confirm.html';
-// });
-
-// // Bootstrap戻るボタン
-// document.getElementById('back-button').addEventListener('click', () => {
-//     window.location.href = 'index.html';
-// });
 
 // displayItems.jsでまとめたので不要
 

@@ -1,19 +1,11 @@
-// displayItems.js
+// displayItems.js 
+// 商品一覧表示共通
 
-// カート機能のモジュールをインポート
-import Cart from './Cart.js';
+import Cart from './Cart.js'; // カート機能のモジュールをインポート
 
-
-/**
- * 商品情報からBootstrapのカード要素を生成する関数。
- * @param {object} item - 商品情報を含むオブジェクト。
- * @param {boolean} withDetailButton - 詳細ボタンを生成するかどうかのフラグ。デフォルトはfalse。
- * @param {boolean} withCartButton - カート追加ボタンを生成するかどうかのフラグ。デフォルトはfalse。
- * @returns {HTMLElement} 生成されたカード要素。
- */
-
-// index.js,detail.js共通カード生成関数(createCard)
+// 汎用的なカード生成関数
 function createCard(item, withDetailButton = false, withCartButton = false) {
+    
     // Bootstrapカードの生成
     const card = document.createElement('div');
     card.classList.add('card', 'mb-3', 'item'); // カードにBootstrapのクラスを追加
@@ -42,7 +34,7 @@ function createCard(item, withDetailButton = false, withCartButton = false) {
     cardBody.appendChild(cardText); // カードボディに商品価格を追加
 
     // 商品説明（詳細ページのみ）
-    if (item.detail && withDetailButton) {
+    if (item.detail) {
         const cardDetail = document.createElement('p');
         cardDetail.textContent = item.detail; // 商品説明を設定
         cardBody.appendChild(cardDetail); // カードボディに商品説明を追加
@@ -55,31 +47,23 @@ function createCard(item, withDetailButton = false, withCartButton = false) {
         detailBtn.textContent = '詳細'; // ボタンのテキストを設定
         detailBtn.addEventListener('click', () => {
             sessionStorage.setItem('selectedItem', JSON.stringify(item)); // 商品情報をセッションストレージに保存
-            window.open('detail.html', '_blank', 'width=1200, height=1000'); // 新しいwindowで詳細ページを開く
+            window.location.href = 'detail.html'; // 詳細ページに遷移
         });
         cardBody.appendChild(detailBtn); // カードボディに詳細ボタンを追加
     }
 
-    // カートに追加ボタン（詳細ページのみ）
+    // カート追加ボタン（詳細ページのみ）
     if (withCartButton) {
         const buyButton = document.createElement('button');
         buyButton.classList.add('btn', 'btn-primary'); // カート追加ボタンにBootstrapのクラスを追加
         buyButton.textContent = 'カートに追加'; // ボタンのテキストを設定
-
         buyButton.addEventListener('click', () => {
             Cart.addItem(item); // カートに商品を追加
             Cart.updateCartDisplay(); // カート表示を更新
             alert(`${item.name}をカートに追加しました`); // 追加完了のアラートを表示
-
-            // 元のウィンドウのカートを更新
-        if (window.opener && !window.opener.closed) {
-            window.opener.Cart.updateCartDisplay();
-            // window.opener.location.reload(); // 元のウィンドウをリロードしてカートの表示を更新
-        }
-    
-        window.close(); // 現在のポップアップウィンドウを閉じる
+            window.location.href = 'confirm.html'; // 購入確認ページに遷移
         });
-        cardBody.appendChild(buyButton);
+        cardBody.appendChild(buyButton); // カードボディにカート追加ボタンを追加
     }
 
     card.appendChild(cardBody); // カードにボディを追加
@@ -87,43 +71,24 @@ function createCard(item, withDetailButton = false, withCartButton = false) {
     return card; // 生成したカードを返す
 }
 
-// 商品一覧を表示(index.jsで使う)
+// 商品一覧を表示する関数
 export function displayItems(items, output) {
     output.innerHTML = ''; // 初期化
 
     items.forEach(item => {
-        // Bootstrapグリッド
-        const col = document.createElement('div');
-        col.classList.add('col');
-
         const card = createCard(item, true, false); // 詳細ボタン付きのカードを生成
         card.style.cursor = 'pointer'; // カーソルをポインターに変更
         card.addEventListener('click', () => {
             sessionStorage.setItem('selectedItem', JSON.stringify(item)); // 商品情報をセッションストレージに保存
-            window.open('detail.html', '_blank', 'width=1200, height=1000'); // 新しいwindowで詳細ページを開く
+            window.location.href = 'detail.html'; // 詳細ページに遷移
         });
-        col.appendChild(card);
-        output.appendChild(col); // 出力要素にカードを追加
+        output.appendChild(card); // 出力要素にカードを追加
     });
 }
 
-// 商品の詳細情報を表示(detail.jsで使う)
+// 商品の詳細情報を表示する関数
 export function itemDetails(item, output) {
     output.innerHTML = ''; // 初期化
     const card = createCard(item, false, true); // カート追加ボタン付きのカードを生成
     output.appendChild(card); // 出力要素にカードを追加
 }
-
-
-// 購入確認ボタンを生成する関数
-// export function createConfirmButton() {
-//     const confirmButton = document.createElement('button');
-//     confirmButton.classList.add('btn', 'btn-primary', 'confirm-button');
-//     // confirmButton.className = 'btn btn-primary';
-//     confirmButton.textContent = '購入確認';
-//     confirmButton.addEventListener('click', () => {
-//         // 新しいウィンドウで購入確認ページを開く
-//         window.open('confirm.html', 'confirmWindow', 'width=600,height=400');
-//     });
-//     return confirmButton;
-// }

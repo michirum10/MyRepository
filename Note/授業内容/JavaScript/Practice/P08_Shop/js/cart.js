@@ -1,4 +1,6 @@
 // Cartクラス: カート機能を提供するクラス
+// インスタンス化したオブジェクトを操作する
+// クラスメソッドは静的メソッド
 
 export default class Cart {
     #itemList = []; // プライベートフィールドとして商品リストを保持する
@@ -15,6 +17,7 @@ export default class Cart {
      * itemListのgetter: 現在のカート内の商品リストを取得する
      * @returns {Array} 現在の商品リスト
      */
+    // アクセサ
     get itemList() {
         return this.#itemList;
     }

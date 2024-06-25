@@ -1,4 +1,5 @@
 // Cart.js - カート機能を提供するクラス
+// クラスメソッドは静的メソッド
 
 // Cartクラスをエクスポート
 export default class Cart {

@@ -1,7 +1,7 @@
 // js/complete.js
 // 購入完了画面
 
-import Cart from './Cart.js';
+import Cart from './Bcart.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // 戻るボタンのイベントリスナーを設定

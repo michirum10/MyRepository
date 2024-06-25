@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品詳細</title>
+    <!-- css埋め込み -->
+    <link rel="stylesheet" href="../css/detail.css">
+    <!-- BootStrap埋め込み -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<!-- detail -->
+<!-- 一つのクリックした商品の情報を表示する
+    （商品名と値段、画像、説明を大きく表示する。）
+    カートに入れるボタン⇛カートにデータを追加 -->
+
+<body>
+    <main>
+
+        <header>
+            <h1>商品詳細</h1>
+        </header>
+        <!-- Bootstrapコンテナ -->
+        <div class="container mt-5"> <!-- mtは"margin-top"の略 -->
+            <div id="output"></div>
+            <!-- Bootstrapボタン -->
+            <button id="back-button" class="btn btn-secondary">戻る</button>
+        </div>
+    </main>
+
+    <div>
+        <!-- 購入確認ページへ遷移させるボタン -->
+        <button id="confirm-button" class="btn btn-primary confirm-button">カート確認</button>
+        <div id="count-item">
+            カート内の商品数: <span id="cart-count">0</span>
+        </div>
+    </div>
+
+    <!-- これいる？ -->
+    <!-- <script src="../js/Cart.js"></script> -->
+    <!-- module埋め込み -->
+    <script type="module" src="../Bjs/Bdetail.js"></script>
+    <!-- BootStrap埋め込み -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

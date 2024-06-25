@@ -5,18 +5,11 @@
 
 // カート機能のモジュールをインポート
 import Cart from './Bcart.js';
-// displayItems関数をインポート
+// itemDetails.jsをインポート
 import { displayItems } from './BdisplayItems.js'; // displayItems関数をインポート
 
-// // 画面が読み込まれたら実行
-// window.onload = function () {
-
-window.updateCartDisplay = function() {
-    Cart.updateCartDisplay();
-};
-
-// DOMが読み込まれたら実行（window.onloadより速いらしい）
-document.addEventListener('DOMContentLoaded', function () {
+// 画面が読み込まれたら実行
+window.onload = function () {
 
     // 出力準備
     const output = document.getElementById('output');
@@ -29,17 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
             displayItems(json.items, output);  //ここにoutput
         });
 
-        const confirmButton = document.getElementById('confirm-button');
-        if (confirmButton) {
-            confirmButton.addEventListener('click', () => {
-                window.location.href = 'confirm.html';
-            });
-        }
+    // 購入確認ページへ
+    document.getElementById('confirm-button').addEventListener('click', () => {
+        window.location.href = 'confirm.html';
+    });
 
     // カート表示の更新
-    window.updateCartDisplay();
-
-});
+    Cart.updateCartDisplay();
+}
 
 // displayItems.jsでまとめたので不要
 

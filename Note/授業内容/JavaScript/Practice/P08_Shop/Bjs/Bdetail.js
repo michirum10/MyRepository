@@ -4,7 +4,7 @@
 // カートに入れるボタン⇛カートにデータを追加
 
 // カート機能のモジュールをインポート
-import Cart from './Cart.js';
+import Cart from './Bcart.js';
 // itemDetails関数をインポート
 import { itemDetails } from './BdisplayItems.js';
 
