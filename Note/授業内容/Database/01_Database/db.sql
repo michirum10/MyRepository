@@ -4,7 +4,6 @@
 -- 最後に「 ; 」忘れずに
 -- 大文字のほうが見やすい
 
-
 -- テーブルを削除
 DROP TABLE product_master;
 
@@ -21,6 +20,7 @@ INSERT INTO product_master VALUES('B-345-Y', 'ティッシュペーパー', '京
 INSERT INTO product_master VALUES('A-567-X', 'クッキングシート ', '滋賀キッチン ', 128);
 INSERT INTO product_master VALUES('C-111-Z', 'バススポンジ', '滋賀キッチン ', 98);
 INSERT INTO product_master VALUES('B-987-X ', '綿棒', '奈良綿業', 398);
+INSERT INTO product_master VALUES('A-345-Z', 'キッチンペーパー', '大阪製紙', 248);
 INSERT INTO product_master VALUES('A-623-Z', 'キッチンペーパーA', '大阪製紙', 248);
 INSERT INTO product_master VALUES('A-723-Z', 'キッチンペーパーZ', '大阪製紙', 100);
 INSERT INTO product_master VALUES('B-987-X ', 'スポーツドリンク', '奈良綿業', 398);
@@ -61,4 +61,10 @@ SELECT * FROM product_master WHERE name LIKE '%スポ%';
 SELECT * FROM product_master WHERE name LIKE 'ペーパー%';
 --  後方一致
 SELECT * FROM product_master WHERE name LIKE '%ペーパー';
+
+-- レコードの更新
+UPDATE product_master SET name = 'キッチンペーパー02' WHERE number = 'A-123-Z';
+
+-- レコードの削除
+DELETE FROM product_master WHERE number = 'A-345-Z';
 
