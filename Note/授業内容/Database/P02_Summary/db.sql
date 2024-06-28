@@ -3,7 +3,7 @@
 
 -- db.dbの統合ターミナルを開いて
 -- C:\Users\hit0037\Documents\MyRepository\Note\授業内容\Database\P02_Summary>
--- sqlite3.exeの絶対パス、スペース、実行したいファイル名
+-- sqlite3.exeの絶対パス、スペース、実行したいファイル名(db.db)
 -- C:\Users\hit0037\Downloads\sqlite-tools-win-x64-3460000\sqlite3.exe db.db
 -- エンター押してエラーでなかったら
 -- .mode csv
