@@ -41,8 +41,6 @@ SELECT name ,email, gender, age FROM personal_data WHERE age >= 30 AND age <= 39
 
 -- 大阪府、京都府、兵庫県、滋賀県、奈良県、和歌山県在住の人のデータを抽出してください。
 -- 表示するカラムは『年齢』と『住所』
-
-
 SELECT
     age,
     address 

@@ -8,6 +8,15 @@
 - DML：データ操作言語
   - Data Manipulation Language
   - データベースを操作し、格納されているデータの検索や削除などを行うための言語です。データベースを使用する中で最も使用する言語と言えます。命令文は、データの検索（SELECT）、更新（UPDATE）、挿入（INSERT）、削除（DELETE）があります。
+  - CRAD
+    - Create
+      - データを作成する(INSERT)
+    - Read
+      - データを読み込む(SELECT)
+    - Update
+      - データを更新する(UPDATE)
+    - Delete
+      - データを削除する(DELETE)
 - DCL：データ制御言語
   - Data Control Language
   - データやトランザクションを制御するための言語です。ユーザーに対してアクセス権限を付与（GRANT）する命令や、権限の取消（REVOKE）が含まれます。

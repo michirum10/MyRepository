@@ -20,7 +20,10 @@ DELETE FROM crass_data WHERE nomber = '番号' AND name = '氏名' AND height = 
 -- テーブルを作る
 CREATE TABLE crass_data(nomber INTEGER,name TEXT,height INTEGER,weight INTEGER);
 
--- csvを作成して読み込
+-- データの挿入(追加)
+-- INSERT INTO crass_data VALUES(1, '近本光司', 168, 60);
+
+-- csvを作成して読み込む
 -- 番号  氏名      身長(cm) 体重(kg)
 -- 1    近本光司   168     60
 -- 2    中野拓夢   172     80
@@ -33,7 +36,7 @@ CREATE TABLE crass_data(nomber INTEGER,name TEXT,height INTEGER,weight INTEGER);
 -- 9    岩崎優     168     73
 
 -- 1. このクラスの人数を出力する
-SELECT COUNT() FROM crass_data;
+SELECT COUNT() AS 人数 FROM crass_data;
 
 -- 2. このクラスの身長の平均値を出力する
 -- ROUND(AVG(height), 2) ROUNDで囲んで2と指定することで小数点以下2桁に指定
@@ -41,13 +44,13 @@ SELECT COUNT() FROM crass_data;
 SELECT AVG(height) FROM crass_data;
 
 -- 3. 身長が一番高い人の名前と身長を出力する
-SELECT name, max(height) FROM crass_data;
+SELECT name, MAX(height) FROM crass_data;
 
 -- 4. 体重が一番軽い人の名前と体重を出力する
-SELECT name, min(weight) FROM crass_data;
+SELECT name, MIN(weight) FROM crass_data;
 
 -- 5. 全員の体重の合計を出力する
-SELECT sum(weight) FROM crass_data;
+SELECT SUM(weight) FROM crass_data;
 
 -- 6. 各人のBMIを計算して、名前とBMI値を出力する
 -- ROUND(AVG(height), 2) ROUNDで囲んで2と指定することで小数点以下2桁に指定
