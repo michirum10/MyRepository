@@ -53,14 +53,28 @@ SELECT name FROM student_data WHERE gender = '男';
 -- 1教科でも30点以下の点数を取った生徒の名前を一覧で表示せよ。
 -- ただし、重複は許さないものとする。
 -- DISTINCT:重複データを削除
-SELECT DISTINCT student_data.name, test_result.score FROM student_data INNER JOIN test_result ON student_data.id = test_result.id WHERE test_result.score <= 30;
+SELECT DISTINCT 
+    student_data.name,
+    test_result.score
+FROM 
+    student_data 
+INNER JOIN 
+    test_result ON student_data.id = test_result.id 
+WHERE 
+    test_result.score <= 30;
 
 -- 性別ごとに、最も高かった試験の点数を表示せよ。
 -- グループ化して男女それぞれの結果を表示
-SELECT student_data.gender, MAX(test_result.score) FROM student_data INNER JOIN test_result ON student_data.id = test_result.id GROUP BY gender;
+SELECT
+    student_data.gender,
+    MAX(score) -- (test_result.score)省略
+FROM
+    student_data
+INNER JOIN
+    test_result ON student_data.id = test_result.id
+GROUP BY gender;
 
 -- 教科ごとの試験の平均点が50点以下である教科を表示せよ。
-
 SELECT 
     subject AS 教科,
     AVG(score) AS 平均点
@@ -68,38 +82,57 @@ FROM
     test_result
 GROUP BY 
     subject
-HAVING 
+HAVING -- グループ化された結果を絞り込み
+    AVG(score) <= 50
+ORDER BY 
+    平均点 ASC;
+
+-- 試験結果テーブルの点数の右に、その教科の平均点を表示せよ。
+SELECT -- 表示させたい項目(試験結果、平均)
+    test_result.id,
+    student_data.name AS 名前,
+    test_result.subject AS 教科,
+    test_result.score AS 点数,
+    (SELECT 
+        AVG(score)
+    FROM 
+        test_result AS 結果
+    WHERE
+        結果.subject = test_result.subject) AS 教科平均
+FROM
+    student_data
+INNER JOIN
+    test_result 
+ON
+    student_data.id = test_result.id
+ORDER BY
+    student_data.id,test_result.subject;
+
+    SELECT 
+    subject AS 教科,
+    AVG(score) AS 平均点
+FROM
+    test_result
+GROUP BY 
+    subject
+HAVING -- グループ化された結果を絞り込み
     AVG(score) <= 50
 ORDER BY 
     平均点 ASC;
 
 
--- 試験結果テーブルの点数の右に、その教科の平均点を表示せよ。
-SELECT 
-student_data.name AS 名前,
-test_result.subject AS 教科,
-test_result.score AS 点数,
-(SELECT AVG(score)
-FROM test_result AS 結果
-WHERE 結果.subject = test_result.subject)AS 教科平均
-FROM
-student_data
-INNER JOIN
-test_result ON student_data.id = test_result.id
-ORDER BY
-student_data.id,test_result.subject;
-
 -- SELECT AVG(score) FROM test_result;
 
-SELECT 
-    subject AS 教科,
-    AVG(score) AS 平均点
-FROM 
-    test_result
-GROUP BY 
-    subject
-ORDER BY 
-    subject;
+-- 各教科の平均
+-- SELECT 
+--     subject AS 教科,
+--     AVG(score) AS 平均点
+-- FROM 
+--     test_result
+-- GROUP BY 
+--     subject
+-- ORDER BY 
+--     subject;
 
 
 -- SELECT 
