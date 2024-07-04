@@ -105,7 +105,7 @@ GROUP BY
 -- 同じ趣味を持つ社員の一覧を表示せよ。
 SELECT
     hobby_list.hobby AS 趣味,
-    GROUP_CONCAT(emp_list.name) AS 社員 -- グループの中身をカンマ区切りえ表示してくれる
+    GROUP_CONCAT( DISTINCT emp_list.name) AS 社員 -- グループの中身をカンマ区切りえ表示してくれる
 FROM
     hobby_list
 INNER JOIN

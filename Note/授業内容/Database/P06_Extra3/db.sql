@@ -65,9 +65,23 @@ LEFT JOIN -- フォローしていないユーザーも含める
 WHERE -- NULLかどうかチェックして表示
     follow_table.id IS NULL;
 
+-- 別解
+-- 誰もフォローしていないユーザーの名前を表示せよ。
+SELECT 
+    user_table.name, 
+    COUNT(follow_table.id) count
+FROM 
+    user_table
+LEFT JOIN 
+    follow_table ON user_table.id = follow_table.id
+GROUP BY 
+    user_table.name 
+HAVING 
+    count = 0;
+
 -- 10代、20代、30代といった年代別にフォロー数の平均を表示せよ。
 SELECT
-    (age / 10) * 10 || '代' AS 年代,-- 年代を計算して「年代」と置く
+    (age / 10) * 10 || '代' AS 年代, -- 各年代を計算して「年代」と置く
     AVG( -- 平均を計算
         (SELECT COUNT(*)  -- フォロー数を計算
          FROM follow_table 
@@ -82,6 +96,7 @@ ORDER BY
 
 -- 相互フォローしているユーザーのIDを表示せよ。
 -- なお、重複は許さないものとする。
+-- 自己結合使う
 SELECT DISTINCT 
     A.id AS ユーザー1, -- Aテーブルから取得して表示
     A.followerId AS ユーザー2 -- Aテーブルから取得して表示
@@ -89,7 +104,7 @@ FROM
     follow_table AS A -- テーブルにキーワードを付与(A)
 INNER JOIN -- 自己結合
     follow_table AS B -- テーブルにキーワードを付与(B)
-ON -- 相互フォロー
+ON -- 相互フォローを調べる
     A.id = B.followerId AND A.followerId = B.id
 WHERE -- 各ペアを一度だけ表示(絞り込み)
     A.id < A.followerId
@@ -126,4 +141,7 @@ ORDER BY
 -- on A.family_ID = B.flower_ID;
 
 -- SELECT * FROM follow_table;全表示
+
+いま変更しました。7/4 16:17
+こっちがメイン
 
