@@ -1,6 +1,6 @@
+// 九九の答えだけを出力してください。
 // 出力準備1
 let output1 = document.getElementById('output1')
-
 // 1から9までの間、1ずつ増やす。行(横)
 for (let num1 = 1; num1 <= 9; num1++) {
     // 1から9までの間、1ずつ増やす。列(縦)
@@ -11,6 +11,7 @@ for (let num1 = 1; num1 <= 9; num1++) {
     }
 }
 
+// 九九の式と答えを出力してください。
 // 出力準備2
 output2 = document.getElementById('output2')
 for (let num1 = 1; num1 <= 9; num1++) {
@@ -22,6 +23,7 @@ for (let num1 = 1; num1 <= 9; num1++) {
     }
 }
 
+// 九九表を出力してください。
 // 出力準備3
 output3 = document.getElementById('output3')
 // 1から9までの間、1ずつ増やす。行

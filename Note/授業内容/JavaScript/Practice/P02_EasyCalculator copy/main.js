@@ -14,14 +14,13 @@ const MODULO = '%'
 
 /// 出力文字列の生成(テンプレートリテラル)
 // output = `計算結果：${counter}`
-
-// opはオペレーション。演算子。
 function calculate(mode) {
     // 前処理
     // num1n上のnum1と被らないように
     // タグの値の取得は.valueを利用する
     let num1n = Number(num1.value)
     let num2n = Number(num2.value)
+   //  一応初期化
     let resultNum = 0
 
 

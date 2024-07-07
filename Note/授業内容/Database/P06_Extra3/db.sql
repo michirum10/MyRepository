@@ -95,12 +95,12 @@ ORDER BY
     年代;
 
 -- 先生のやつ平均年齢計算してる？
--- SELECT user.age / 10 AS avgGroup, AVG(user.age) 平均年齢 FROM 
--- (SELECT user.name, COUNT(follow.id) count, age
--- FROM user
--- LEFT JOIN follow ON user.ID = follow.id
--- GROUP BY user.name) user
--- GROUP BY avgGroup;
+SELECT user.age / 10 AS avgGroup, AVG(user.age) 平均年齢 FROM 
+(SELECT user.name, COUNT(follow.id) count, age
+FROM user
+LEFT JOIN follow ON user.ID = follow.id
+GROUP BY user.name) user
+GROUP BY avgGroup;
 
 -- 相互フォローしているユーザーのIDを表示せよ。
 -- なお、重複は許さないものとする。
@@ -150,8 +150,8 @@ ORDER BY
 
 -- SELECT * FROM follow;全表示
 
-いま変更しました。7/4 16:17
-こっちがメイン
+-- いま変更しました。7/4 16:17
+-- こっちがメイン
 
-家で変更しました。7/5 01:37
+-- 家で変更しました。7/5 01:37
 
