@@ -1,9 +1,10 @@
+// 出力準備
 let output = document.getElementById("result")
 
 function click1() {
-
-   
-    // 一番上にまとめて書く
+    // num1,num2,resultを取得
+    // Numberで囲むことで、num1.valueを数字として扱う
+    // .valueをつけることで、num1の値を取得
     let num1 = Number(document.getElementById("num1").value)
     let num2 = Number(document.getElementById("num2").value)
     let result = num1 + num2

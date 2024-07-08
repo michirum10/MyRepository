@@ -82,7 +82,7 @@ while True:
         break
     elif len(arr01) == 1:
         print(arr01.pop(0))
-    # else:
-    #     # 最後の「,」を出さないようにする
-    #     print(arr01.pop(0),end=",")
+    else:
+        # 最後の「,」を出さないようにする
+        print(arr01.pop(0),end=",")
 

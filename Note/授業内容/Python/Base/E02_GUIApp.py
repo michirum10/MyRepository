@@ -32,7 +32,7 @@ e.pack(anchor=tkinter.NW)
 # ボタンのクリックイベント時の処理
 def push_button():
     # 変えたい時はconfigure
-    # e(入力フォーム)の中身を取得
+    # get(入力フォーム)の中身を取得
     lb.configure(text=f"私の名前は{e.get()}です。")
 
 # ボタンのインスタンス化と同時にコールバック関数の設定

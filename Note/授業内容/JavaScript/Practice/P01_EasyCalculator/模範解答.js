@@ -1,6 +1,7 @@
 // 一番上に書いたほうがいい
 
-// HTML　num1,num2,resultを取得
+// 外にまとめて書く
+// HTMLのnum1,num2,resultを取得
 let num1 = document.getElementById("num1")
 let num2 = document.getElementById("num2")
 let result = document.getElementById("result")
