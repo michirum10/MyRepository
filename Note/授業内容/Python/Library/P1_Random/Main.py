@@ -21,12 +21,12 @@ picked_file = "picked_names_data.csv"  # 選ばれた名前データを保存す
 # Tkinterの設定
 root = tk.Tk()  # メインウィンドウの作成
 root.title("ランダム名前選択アプリ")  # ウィンドウのタイトルを設定
-root.geometry("400x300")  # ウィンドウのサイズを設定
+root.geometry("400x400")  # ウィンドウのサイズを設定
 
 # フレームの作成
 input_frame = tk.Frame(root)  # 入力用フレーム
 button_frame = tk.Frame(root)  # ボタン用フレーム
-result_frame = tk.Frame(root)  # 結果表示用のフレーム
+status_frame = tk.Frame(root)  # 結果表示用のフレーム
 list_frame = tk.Frame(root)  # 名前リスト用のフレーム
 
 # ラベル
@@ -162,14 +162,14 @@ register_button = tk.Button(button_frame, text="登録", command=register_name)
 # リセットボタン
 reset_button = tk.Button(button_frame, text="リセット", command=reset_picked_names)
 # ステータス表示用ラベル
-status_label = tk.Label(root, text="")
+status_label = tk.Label(status_frame, text="")
 # 削除ボタン
-delete_button = tk.Button(button_frame, text="削除", command=delete_selected_name)  # 削除ボタンを追加
+delete_button = tk.Button(list_frame, text="削除", command=delete_selected_name)  # 削除ボタンを追加
 
 # フレームの配置
 input_frame.pack(pady=10)  # 入力フレームを配置、縦の余白を追加
-button_frame.pack()  # ボタンフレームを配置
-status_frame = tk.Frame(root)  # 結果表示用のフレーム
+button_frame.pack(pady=10)  # ボタンフレームを配置
+status_frame.pack(pady=10)# 結果表示用のフレーム
 list_frame.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)  # リストフレームを配置
 
 # ウィジェットの配置
@@ -179,9 +179,9 @@ entry.bind("<Return>", register_name)  # Enterキーで」登録できる
 choose_button.pack(side=tk.LEFT,padx=10)  # 左寄せで配置、横の余白を追加
 register_button.pack(side=tk.LEFT,padx=10)
 reset_button.pack(side=tk.LEFT,padx=10)
-delete_button.pack(side=tk.LEFT, padx=5)  # 削除ボタンを配置
+delete_button.pack(side=tk.RIGHT, padx=5)  # 削除ボタンをリストの右側に配置
 # ランダム表示
-status_label.pack(pady=10)
+status_label.pack()
 # 名前一覧表示
 name_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
