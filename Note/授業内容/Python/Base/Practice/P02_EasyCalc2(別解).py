@@ -41,9 +41,9 @@ MUL = '*'
 DIV = '/'
 MOD = '%'
 
-# ボタンのクリックイベント時の処理
+# ボタンのクリックイベント時の処理(閉鎖関数)
 # swichの代わりにif-elif
-def calc(op):
+def calc(op):  # opは変化しない変数？
     def calcProc():
         # 初期化
         # get(入力フォーム)の中身を取得
@@ -67,7 +67,7 @@ def calc(op):
 
 # ボタンを作る
 # command=関数名
-bt1 = tkinter.Button(button_frame, text="加算", command=calc(ADD))
+bt1 = tkinter.Button(button_frame, text="加算", command=calc(ADD))  # bt1のCommandのopが確定する
 bt2 = tkinter.Button(button_frame, text="減算", command=calc(SUB))
 bt3 = tkinter.Button(button_frame, text="乗算", command=calc(MUL))
 bt4 = tkinter.Button(button_frame, text="除算", command=calc(DIV))

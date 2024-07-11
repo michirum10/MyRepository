@@ -8,7 +8,7 @@
 # アトリビュート=JSのプロパティ
 class Car:
     # クラス変数の宣言(なくても良い)
-    # クラス変数の中のspeed,number
+    # クラス変数の中のspeed,numberはアトリビュートと同じ名前でも別モノ
     # アクセスは.でつなぐ
     # あまり使わない。大規模なシステムを扱う際に使われるイメージ
     speed = 0
@@ -76,6 +76,8 @@ class CarEx(Car):
         super().disp()
         
 carEx01 = CarEx()
+# 引数のセルフいらない
+# 左側がそのクラスのインスタンスであること
 carEx01.disp()
 carEx01.accel(5)
 carEx01.disp()
@@ -98,6 +100,7 @@ class Vehicle(CarEx,Mobile):
     def __init__(self, speed=0, number=0,driver="名無しさん"):
         # 親が２ついる場合はsuper()は使えない
         # selfを忘れないように
+        # メッソドを呼び出せる
         CarEx.__init__(self,speed, number)
         Mobile.__init__(self,driver)
 
@@ -117,12 +120,50 @@ vehicle02 = Vehicle(driver="木内")
 vehicle02.disp()
 vehicle02.accel(15)
 vehicle02.disp()
+# 呼び出せる
+Vehicle.disp(vehicle02)
 
 # プロトタイプベース
+# あまりこの書き方はしない
 class Robot:
     pass
 
 robot01 = Robot()
 robot01.name = "一号機"
-robot01.disp = lambda self: print(self.name)
-robot01.disp()
+
+def disp(self):
+    print(self.name)
+
+robot01.disp = disp
+robot01.disp2 = lambda self: print(self.name)
+
+# self認識しないので自分を入れないと実行できない
+robot01.disp(robot01)
+robot01.disp2(robot01)
+
+# プロトタイプベース
+# メソッド、ライブラリをカスタマイズできる点がメリット
+class Robot:
+    pass
+
+robot01 = Robot()
+robot01.name = "一号機"
+
+def disp(self):
+    print(self.name)
+
+robot01.disp = disp
+# ラムダ関数
+robot01.disp2 = lambda self: print(self.name)
+
+robot01.disp(robot01)
+robot01.disp2(robot01)
+
+# 書き換え方
+robot02 = Robot()
+robot02.name = "二号機"
+
+robot01.disp2(robot02)
+# robot02.dispは定義していないのでエラー
+# robot02.disp(robot02)
+
