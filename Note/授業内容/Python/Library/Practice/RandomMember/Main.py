@@ -18,37 +18,13 @@ import csv
 data_file = "names_data.csv"  # 名前を保存するCSVファイル
 picked_file = "picked_names_data.csv"  # 選ばれた名前データを保存するCSVファイル
 
-# Tkinterの設定
-root = tk.Tk()  # メインウィンドウの作成
-root.title("ランダム名前選択アプリ")  # ウィンドウのタイトルを設定
-root.geometry("400x400")  # ウィンドウのサイズを設定
-
-# フレームの作成
-input_frame = tk.Frame(root)  # 入力用フレーム
-button_frame = tk.Frame(root)  # ボタン用フレーム
-status_frame = tk.Frame(root)  # 結果表示用のフレーム
-list_frame = tk.Frame(root)  # 名前リスト用のフレーム
-
-# ラベル
-label = tk.Label(input_frame,text="名前を登録してください:")
-
-# 名前入力フォーム
-entry = tk.Entry(input_frame)
-
-# 名前リストボックス
-name_listbox = tk.Listbox(list_frame, height=10, width=30)
-
-# スクロールバー
-scrollbar = tk.Scrollbar(list_frame, orient=tk.VERTICAL, command=name_listbox.yview)
-name_listbox.config(yscrollcommand=scrollbar.set)
-
 # 名前を格納するリスト(2つ用意)
 names = []  # 登録された名前を格納するリスト
 picked_names = []  # ランダムに選ばれた名前を格納するリスト
 
-# picked_namesリストをCSVファイルに保存する関数
+# 選択された名前(picked_names)リストをCSVファイルに保存する関数
 def save_picked_data():
-    # picked_namesリストのデータをCSVファイルに保存する
+    # picked_namesリストのデータをCSVファイルに保存
     # open()関数でpicked_fileファイルを書き込みモード(mode='w')で開く
     with open(picked_file, mode='w', newline='', encoding='utf-8-sig') as f:  #encoding='utf-8-sig':文字化けなおす
         writer = csv.writer(f)  # csv.writer()関数でデータを書き込むためのwriterオブジェクトを作る
@@ -57,7 +33,7 @@ def save_picked_data():
             writer.writerow([name])  # 一行ずつ書き込む
     print(f"データを {picked_file} に保存しました。")
 
-# csvデータを読み込む関数
+# csvデータを読み込む関数(data_file,picked_file両方読み込む)
 def load_data():
     global names, picked_names  # グローバル変数として宣言、変更が関数外にも反映
     names = []  # 初期化
@@ -88,9 +64,10 @@ def load_data():
         print(f"{picked_file} が見つかりませんでした。新しいファイルを作成します。")
 
 # ランダムに1人選ぶ関数
+# ウィンドウを閉じて再度実行しても一度選ばれた名前は選ばれないように
 def pick_random_name():
-    # 選ばれていない名前のリストを作成する
-    # namesリストに含まれる名前のうち、picked_namesリストに含まれていない名前のリストを作成
+    # 選ばれていない名前のリストを作成
+    # names[]リストに含まれる名前のうち、picked_names[]リストに含まれていない名前のリストを作成
     remaining_names = [name for name in names if name not in picked_names]
     # ないとき
     if not remaining_names:
@@ -106,7 +83,7 @@ def choose_random_name():
     status_label.config(text=result)  # ステータスラベルを更新
 
 # 登録ボタンが押されたときの処理
-def register_name(event=None):# event=Noneを追加してEnterキーでも呼び出せるように
+def register_name(event=None):# event=Noneを追加してEnterキーでも呼び出せるように(.bind("<Return>")をエントリボタンに書き込む)
     name = entry.get()  # get(入力フォーム)の中身を取得
     if name and name not in names:  # 名前が入力されていて、かつ重複していない場合？？
         names.append(name)  # 名前をnamesリストに追加
@@ -118,10 +95,9 @@ def register_name(event=None):# event=Noneを追加してEnterキーでも呼び
                 writer.writerow([n])  # 一行ずつ書き込む
         entry.delete(0, tk.END)  # 入力フォームのクリア
         status_label.config(text=f"{name} を登録しました")  # ステータスラベルを更新
-    else:
+    else:  # 重複で分岐
         status_label.config(text="名前が入力されていないか、既に登録されています")  # エラーメッセージ
     update_name_list()
-
 
 # リセットボタンが押されたときの処理
 def reset_picked_names():
@@ -130,59 +106,84 @@ def reset_picked_names():
     save_picked_data()  # データを保存
     status_label.config(text="選択履歴をリセットしました")
 
-# 登録された名前一覧
+# 登録された名前一覧を更新
 def update_name_list():
-    name_listbox.delete(0, tk.END)
+    name_listbox.delete(0, tk.END)  # リストボックスの内容を全て削除
+    # namesリストの全ての名前をリストボックスに挿入
     for name in names:
         name_listbox.insert(tk.END, name)
 
-# 一個ずつ消せるように
+# 一個ずつ選んで消せるように
 def delete_selected_name():
-    selected = name_listbox.curselection()
+    selected = name_listbox.curselection()  # リストボックスで選択された項目を取得
+    # 選択された項目がある場合
     if selected:
-        name = name_listbox.get(selected[0])
-        names.remove(name)
-        if name in picked_names:
+        name = name_listbox.get(selected[0])  # 選択された名前を取得
+        names.remove(name)  # namesリストから名前を削除
+        if name in picked_names: # さらにその名前がpicked_namesリストにある場合は削除
             picked_names.remove(name)
+        # namesリストをCSVファイルに保存
         with open(data_file, mode='w', newline='', encoding='utf-8-sig') as f:
             writer = csv.writer(f)
             for n in names:
                 writer.writerow([n])
-        save_picked_data()
-        update_name_list()
-        status_label.config(text=f"{name} を削除しました")
+        save_picked_data()  # picked_namesリストを保存
+        update_name_list()  # リストボックスを更新
+        status_label.config(text=f"{name} を削除しました") # ステータスラベルを更新
     else:
+        # 選択された項目がない場合、エラーメッセージを表示
         status_label.config(text="削除する名前を選択してください")
-    update_name_list()
+    update_name_list()  # リストボックスを更新
 
-# ランダム選択ボタン
-choose_button = tk.Button(button_frame, text="ランダム選択", command=choose_random_name)
-# 登録ボタン
-register_button = tk.Button(button_frame, text="登録", command=register_name)
-# リセットボタン
-reset_button = tk.Button(button_frame, text="リセット", command=reset_picked_names)
-# ステータス表示用ラベル
-status_label = tk.Label(status_frame, text="")
-# 削除ボタン
-delete_button = tk.Button(list_frame, text="削除", command=delete_selected_name)  # 削除ボタンを追加
+# Tkinterの設定
+
+# tkitterのウィジェットの作成
+root = tk.Tk()  # メインウィンドウの作成
+root.title("ランダム名前選択アプリ")  # ウィンドウのタイトルを設定
+root.geometry("400x400")  # ウィンドウのサイズを設定
+
+# フレームの作成
+input_frame = tk.Frame()  # 入力用フレーム
+button_frame = tk.Frame()  # ボタン用フレーム
+status_frame = tk.Frame()  # 結果表示用のフレーム
+list_frame = tk.Frame()  # 名前リスト用のフレーム
+
+# ラベルとフォームの作成
+# 「名前を登録してください:」と表示するラベル
+label = tk.Label(input_frame,text="名前を登録してください:")
+entry = tk.Entry(input_frame)  # 名前入力フォーム
+status_label = tk.Label(status_frame, text="")  # ランダム表示用ラベル
+list_label = tk.Label(list_frame, text="登録済みの名前:")  # 名前リストボックスのラベル
+name_listbox = tk.Listbox(list_frame, height=10, width=30)  # 名前リストボックス
+scrollbar = tk.Scrollbar(list_frame, orient=tk.VERTICAL, command=name_listbox.yview)# スクロールバー
+name_listbox.config(yscrollcommand=scrollbar.set)  # ボックスとスクロールバーを関連付ける
+
+# ボタンの作成
+choose_button = tk.Button(button_frame, text="ランダム選択", command=choose_random_name)  # ランダム選択ボタン
+register_button = tk.Button(button_frame, text="登録", command=register_name)  # 登録ボタン
+reset_button = tk.Button(button_frame, text="リセット", command=reset_picked_names)  # リセットボタン
+delete_button = tk.Button(list_frame, text="削除", command=delete_selected_name)  # 削除ボタン
+
+# 配置
 
 # フレームの配置
 input_frame.pack(pady=10)  # 入力フレームを配置、縦の余白を追加
 button_frame.pack(pady=10)  # ボタンフレームを配置
 status_frame.pack(pady=10)# 結果表示用のフレーム
 list_frame.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)  # リストフレームを配置
-
 # ウィジェットの配置
 label.pack()
-entry.pack()
-entry.bind("<Return>", register_name)  # Enterキーで」登録できる
-choose_button.pack(side=tk.LEFT,padx=10)  # 左寄せで配置、横の余白を追加
-register_button.pack(side=tk.LEFT,padx=10)
-reset_button.pack(side=tk.LEFT,padx=10)
-delete_button.pack(side=tk.RIGHT, padx=5)  # 削除ボタンをリストの右側に配置
-# ランダム表示
+entry.pack()  # 名前入力フォーム
+entry.bind("<Return>", register_name)  # Enterキーで登録できるように
+# ボタンの配置
+choose_button.pack(side=tk.LEFT,padx=10)  # ランダムボタン(左寄せで配置、横の余白を追加)
+register_button.pack(side=tk.LEFT,padx=10)  # 登録ボタン
+reset_button.pack(side=tk.LEFT,padx=10)  # リセットボタン
+delete_button.pack(side=tk.BOTTOM,pady=10 )  # 削除ボタンをリストの下に配置(上下の余白を追加)
+# ランダム結果表示
 status_label.pack()
 # 名前一覧表示
+list_label.pack()
 name_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
