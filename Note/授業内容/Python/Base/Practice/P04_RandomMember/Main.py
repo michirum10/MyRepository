@@ -45,12 +45,13 @@ def load_data():
             reader = csv.reader(f)  # 読み込み
             # ループ
             for row in reader:
-                names.append(row[0])  # 最初の要素を行に追加
+                names.append(row[0])  # 最初の要素を行に追加(rowは行)
         print(f"データを {data_file} から読み込みました。")
     except FileNotFoundError:
         # ファイルが見つからない場合、新しいファイルを作成する
+        with open(data_file, mode='w', newline='', encoding='utf-8-sig') as f:
+            pass
         print(f"{data_file} が見つかりませんでした。新しいファイルを作成します。")
-    
     try:
         # picked_namesリストのデータをCSVファイルから読み込む
         with open(picked_file, mode='r', encoding='utf-8-sig') as f:
@@ -61,13 +62,15 @@ def load_data():
         print(f"データを {picked_file} から読み込みました。")
     except FileNotFoundError:
         # ファイルが見つからない場合、新しいファイルを作成する
+        with open(picked_file, mode='w', newline='', encoding='utf-8-sig') as f:
+            pass
         print(f"{picked_file} が見つかりませんでした。新しいファイルを作成します。")
 
 # ランダムに1人選ぶ関数
 # ウィンドウを閉じて再度実行しても一度選ばれた名前は選ばれないように
 def pick_random_name():
     # 選ばれていない名前のリストを作成
-    # names[]リストに含まれる名前のうち、picked_names[]リストに含まれていない名前のリストを作成
+    # names[]リストに含まれる名前のうち、picked_names[]リストに含まれていない名前のリストを作成？？？
     remaining_names = [name for name in names if name not in picked_names]
     # ないとき
     if not remaining_names:
@@ -194,36 +197,37 @@ load_data()
 root.mainloop()
 
 # コンソールアプリ(３段階目まで)
-# # 名前の登録
-# print("プログラムを開始します")
-# endFlag = False
-# # 名前を格納するリスト1
-# names = []
-# picked_names = []
-# while not endFlag:
-#     print("選択してください。")
-#     print("[1] 名前を登録する [2] ランダムに選ぶ [0] 終了")
-#     cmd = input()
-#     # 名前の登録
-#     if cmd == "1":
-#         name = input("名前を入力してください: ")
-#         names.append(name)
-#         print(f"{name} を登録しました")
-#     # ランダムに選ぶ
-#     elif cmd == "2":
-#         # namelistが空かどうかを確認
-#         if not names:
-#             print("まだ誰も登録されていません")
-#         else:
-#             random_name = random.choice(names)
-#             names.remove(random_name)  # 選ばれた名前をリストから削除
-#             print(f"ランダムに選ばれた人: {random_name}")
-#     # 終了
-#     elif cmd == "0":
-#         print("終了が選択されました。")
-#         endFlag = True
-#     else:
-#         print("正しいコマンドを入力してください。")
+# # テストコード
+# if __name__ == "__main__":
+    # print("プログラムを開始します")
+    # endFlag = False
+    # # 名前を格納するリスト1
+    # names = []
+    # picked_names = []
+    # while not endFlag:
+    #     print("選択してください。")
+    #     print("[1] 名前を登録する [2] ランダムに選ぶ [0] 終了\n>")
+    #     cmd = input()
+    #     # 名前の登録
+    #     if cmd == "1":
+    #         name = input("名前を入力してください: ")
+    #         names.append(name)
+    #         print(f"{name} を登録しました")
+    #     # ランダムに選ぶ
+    #     elif cmd == "2":
+    #         # namelistが空かどうかを確認
+    #         if not names:
+    #             print("まだ誰も登録されていません")
+    #         else:
+    #             random_name = random.choice(names)
+    #             names.remove(random_name)  # 選ばれた名前をリストから削除
+    #             print(f"ランダムに選ばれた人: {random_name}")
+    #     # 終了
+    #     elif cmd == "0":
+    #         print("終了が選択されました。")
+    #         endFlag = True
+    #     else:
+    #         print("正しいコマンドを入力してください。")
 # print("プログラムを終了します。")
 
 # サンプルコード

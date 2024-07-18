@@ -100,7 +100,6 @@ if __name__ == "__main__":
 # 取得したデータをそのまま書き換えてコミットする
     print("データの更新")
     print("idを指定して内容を書き換える")
-    
     inputNo = input("IDを指定してください>")  # ターミナルに入力
     # １件データ取得
     p6 = ses.get(Person,inputNo)  # ターミナルに入力したIDを取得。(第１引数はテーブル、第２引数はどこを取得するか)
@@ -117,3 +116,9 @@ if __name__ == "__main__":
     print("データの削除")
     ses.query(Person).filter(Person.name == "木之内").delete()
     ses.commit()
+    
+    # １件取得して書き換える
+    # p6 = ses.get(Person,inputNo)  # ターミナルに入力したIDを取得。(第１引数はテーブル、第２引数はどこを取得するか)
+    # p6.name = "木之内"
+    # コミット(更新)
+    # ses.commit()
