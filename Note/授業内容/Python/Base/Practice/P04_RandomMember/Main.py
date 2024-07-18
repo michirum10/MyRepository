@@ -190,10 +190,10 @@ scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 # データを読み込む
 load_data()
 
-# 実行
+# 表示開始
 root.mainloop()
 
-
+# コンソールアプリ(３段階目まで)
 # # 名前の登録
 # print("プログラムを開始します")
 # endFlag = False

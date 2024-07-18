@@ -87,43 +87,38 @@ def transGenderNumToStr(genderNum):
 
 # 更新機能
 def update(scoped_ses: scoped_session):
-    
-    # レコードの一覧を表示
+    # 現在の全レコードを表示
     session = scoped_ses()
     res = session.query(Person).all()
     for record in res:
         print("----------------")
         dispRecord(record)
     print("----------------")
-    # 表示したら一旦閉じる
     session.close()
     
-    # IDを入力
+    # IDを入力(整数のみ受付)
     id = numberInput("更新するレコードのIDを入力してください")
-    # セッション開始
     session = scoped_ses()
-    # １件データ取得
     record = session.get(Person, id)
-    
-    # 更新する情報を入力
+
     if record:
         new_name = input("新しい名前を入力してください（変更しない場合は空白のままにしてください）:\n>")
         if new_name:
             record.name = new_name
-        new_gender = input("新しい性別を入力してください（1:男、2:女、3:その他、変更しない場合は空白のままにしてください）:\n>")
-        if new_gender:
-            record.gender = numberRangeInput("性別を入力してください。\n[1]男[2]女[3]その他", 1, 3)
-        new_age = input("新しい年齢を入力してください（変更しない場合は空白のままにしてください）:\n>")
-        if new_age:
-            record.age = numberRangeInput("年齢を入力してください。", 0, 150)
-        # コミット(更新)
+        if confirm("性別を変更しますか？"):
+            new_gender = numberRangeInput("新しい性別を入力してください（1:男、2:女、3:その他）:", 1, 3)  # (msg, min, max)
+            new_gender_str = transGenderNumToStr(new_gender)
+            record.gender = new_gender
+        if confirm("年齢を変更しますか？"):
+            new_age = numberRangeInput("新しい年齢を入力してください:", 0, 150) # (msg, min, max)
+            record.age = new_age
+        
         session.commit()
-        # 表示
         print("データが更新されました。")
         dispRecord(record)
     else:
         print(f"ID {id} のレコードが見つかりません。")
-    # 閉じる
+
     session.close()
 
 # 削除機能(物理削除)
@@ -144,9 +139,12 @@ def delete(scoped_ses: scoped_session):
     record = session.get(Person, id)
     
     if record:
-        session.delete(record)
-        session.commit()
-        print(f"ID {id} のレコードが削除されました。")
+        if confirm(f"本当にID {id} のレコードを削除してもよろしいですか？:\n>"):
+            session.delete(record)
+            session.commit()
+            print(f"ID {id} のレコードが削除されました。")
+        else:
+            print("削除がキャンセルされました。")
     else:
         print(f"ID {id} のレコードが見つかりません。")
     # 閉じる

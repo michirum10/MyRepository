@@ -18,7 +18,7 @@ print("DBシステムを開始しました。")
 # 無限ループ
 while True:
     cmd = input("[1]追加[2]確認[3]更新[4]削除[q]終了\n>")
-    if cmd == "1":# データの追加
+    if cmd == "1":# データの追加3
         print("データを追加します。")
         Logic.add(ses)
     elif cmd == "2":# データの確認
