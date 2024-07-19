@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PEGE</title>
+</head>
+<body>
+    <h1>サブページ</h1>
+    <!-- idを展開する -->
+    <p>id:{{id}}</p>
+    <ul>
+        <!-- HTMLテンプレート上でURLを書く時はurl_for関数を利用する。 -->
+        <!-- {マスタッシュ(口ひげのこと)} --><!-- {{二重に書く}} -->
+        <!-- リンクに関数を呼び出せる。メッソドを書く -->
+        <li><a href="{{url_for('page')}}">ページへ</a></li>
+        <!-- 第一引数にメソッド名 -->
+        <!-- 第2引数にダイナミックルーティングの引数を渡す -->
+        <li><a href="{{url_for('pages',id=100)}}">ページス</a></li>
+        "<li><a href="{{url_for('get',id=100)}}">ゲット</a></li>"
+    </ul>
+    <!-- ホームにもどる -->
+    <!-- 第一引数に関数名 'hello_world'-->
+    <li><a href="{{url_for('hello_world')}}">ホームへ戻る</a></li>
+</body>
+</html>

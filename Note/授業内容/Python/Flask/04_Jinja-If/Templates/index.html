@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jinja2-if</title>
+</head>
+<!-- if文 -->
+<body>
+    <!-- 変数title -->
+    <h1>{{title}}</h1>
+    
+    <!-- 分岐 -->
+    <!-- 制御構文 -->
+    <!-- 値がないときはfalseになる -->
+    {% if msg %}
+        <div>
+            {{msg}}
+        </div>
+    {% endif %}
+
+    <!-- ある時「msgが空です。」と表示 -->
+    {% if msg %}
+        <div>
+            {{msg}}
+        </div>
+    {% else %}
+        <div>
+            msgが空です。
+        </div>
+    {% endif %}
+
+    <a href="{{url_for('index')}}">ホームへ</a>
+    <a href="{{url_for('next',var='メッセージ')}}">nextへ</a>
+
+</body>
+</html>

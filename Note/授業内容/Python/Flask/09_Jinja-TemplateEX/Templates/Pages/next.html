@@ -1,0 +1,29 @@
+<!-- こっちに実際の中身書く -->
+<!-- F12で確認すると、それぞれ書かれている場所わかる -->
+
+{% set title = "テンプレート サンプル" %}
+{% set subTitle = "MAIN MENU" %}
+{% set title = "Template Sample" %}
+{% set subTitle = "ネクストページ" %}
+{% extends 'layouts/layout.html' %}
+
+{% block head %}{% endblock %}
+
+{% block header %}
+{% include 'blocks/header.html' %}
+{% endblock %}
+{% block contents %}
+    <h2>ネクストコンテンツ</h2>
+    <p>ネクストメッセージを書いています。</p>
+{% endblock %}
+{% block footer %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% include 'blocks/footer.html' %}
+{% endblock %}
+<!-- チームで開発するとき、みんなで同じファイルを触ると大変なので分割する -->
