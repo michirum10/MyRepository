@@ -1,0 +1,27 @@
+<!-- こっちに実際の中身書く -->
+<!-- F12で確認すると、それぞれ書かれている場所わかる -->
+
+{% set title = "テンプレート サンプル" %}
+{% set subTitle = "MAIN MENU" %}
+
+<!-- extends拡張機能 -->
+{% extends 'layouts/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- 別のファイルを呼び出す -->
+{% block header %}
+{% include 'Blocks/header.html'   %}
+{% endblock %}
+
+{% block contents %}
+<h2>メインコンテンツ</h2>
+<p>メッセージを書いています。</p>
+{% endblock %}
+
+<!-- 別のファイルを呼び出す -->
+{% block footer %}
+{% include 'Blocks/footer.html'   %}
+{% endblock %}
+
+<!-- チームで開発するとき、みんなで同じファイルを触ると大変なので分割する -->

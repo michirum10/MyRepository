@@ -16,8 +16,9 @@ def index():
     # レンダーテンプレート
     return render_template("/index.html",title="ホーム")
 
-# 足し算の結果を表示
+# 足し算関数
 @app.route("/result", methods=["GET"])
+# methods=["GET"]は省略できるが書いた方が良い
 def result():
     try:
         e1 = int(request.args.get("e1"))
@@ -33,3 +34,11 @@ if __name__ == "__main__":
     # ホストとポートの指定
     # WEBサーバー実行
     app.run(host="0.0.0.0",port=8080)
+    
+#     # GETパラメータ(おまけ)
+# # http://localhost:5000/get?id=100
+# @app.route("/get")
+# def get():
+#     id = request.args.get("id")
+#     return f'ページ{id}<a href="/">ホームへ戻る</a>'
+
