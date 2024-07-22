@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     # レンダーテンプレート
-    return render_template("/index.html",title="ホーム")
+    return render_template("/index.html",title="足し算します")
 
 # 足し算関数
 @app.route("/result", methods=["GET"])

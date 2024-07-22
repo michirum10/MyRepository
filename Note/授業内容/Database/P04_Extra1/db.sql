@@ -12,7 +12,7 @@ CREATE TABLE
         score INTEGER
     );
     
-  
+
 INSERT INTO student_data VALUES('001', '長岡 一馬','男');
 INSERT INTO student_data VALUES('002', '中本 知佳','女');
 INSERT INTO student_data VALUES('003', '松本 義文','男');
