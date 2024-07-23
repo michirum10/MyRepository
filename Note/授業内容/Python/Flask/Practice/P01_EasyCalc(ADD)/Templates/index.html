@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jinja2-for</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-    <h1>簡易電卓</h1>
+    <h1>{{ title }}</h1>
+    <!-- formタグで情報を渡す -->
     <form action="/result" method="get">
         <label for="e1">数値1:</label>
-        <input type="number" id="e1" name="e1" required>
-        <!-- requiredは送信(SUBMIT)時に入力必須チェックする -->
+        <input type="number" id="e1" name="e1" required><!-- requiredは送信(SUBMIT)時に入力必須チェックする -->
         <br>
         <label for="e2">数値2:</label>
         <input type="number" id="e2" name="e2" required>
         <br>
-        <button type="submit">計算する</button>
+        <button type="submit">足し算する</button>
     </form>
-    <a href="{{url_for('index')}}">ホームへ</a>
-    <a href="{{url_for('result',e1='',e2='')}}">結果</a>
+    <a href="{{url_for('index')}}">クリア</a>
 </body>
 </html>
 
+<!-- <form action="/result" method="get"></form>で情報を渡す -->
+<!-- 12_Form.htmlを参照 -->

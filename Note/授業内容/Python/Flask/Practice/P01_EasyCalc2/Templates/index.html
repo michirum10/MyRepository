@@ -8,7 +8,7 @@
 <body>
     <h1>{{ title }}</h1>
     <!-- formタグで情報を渡す -->
-    <form action="/result" method="get">
+    <form action="{{ url_for('result') }}" method="get">
         <label for="e1">数値1:</label>
         <input type="number" id="e1" name="e1" value="{{ e1 }}" required><!-- requiredは送信(SUBMIT)時に入力必須チェックする -->
         <!-- value="{{ e1 }}"これしておくとブラウザバックしても値そのまま -->
@@ -17,11 +17,25 @@
         <label for="e2">数値2:</label>
         <input type="number" id="e2" name="e2" value="{{ e2 }}" required>
         <br>
-        <!-- valueで分岐 -->
-        <button type="submit" name="op" value="add">加算</button>
-        <button type="submit" name="op" value="sub">減算</button>
-        <button type="submit" name="op" value="mul">乗算</button>
-        <button type="submit" name="op" value="div">除算</button>
+        <div>
+            <!-- valueで分岐 -->
+            <button type="submit" name="op" value="add">加算</button>
+            <button type="submit" name="op" value="sub">減算</button>
+            <button type="submit" name="op" value="mul">乗算</button>
+            <button type="submit" name="op" value="div">除算</button>
+        </div>
+        <!-- エラーチェック -->
+        {% if errid %}
+            <div style="color: red;">
+                {% if errid == "E001" %}
+                    入力エラー：整数を入れてください。
+                {% elif errid == "E002" %}
+                    演算エラー：0で割れません。
+                {% elif errid == "E003" %}
+                    演算子エラー
+                {% endif %}
+            </div>
+        {% endif %}
     </form>
     <a href="{{url_for('index')}}">クリア</a>
 </body>

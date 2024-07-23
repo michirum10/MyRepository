@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>フォーム</title>
+</head>
+<body>
+    <!-- 入力 -->
+    <form action="{{ url_for('index') }}">
+        <input type="text" name ="msg">
+        <button type="submit">送信</button>
+    </form>
+    <!-- 出力 -->
+    <!-- msgがあれば、msgを表示 -->
+    {% if msg %}
+        {{msg}}
+    {% endif %}
+</body>
+</html>

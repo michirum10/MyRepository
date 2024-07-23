@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
+    <title>Static Folder</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
 </head>
 <body>
-    <h1>計算結果</h1>
-    <p>{{ result }}</p><!-- result関数の結果を表示 -->
-    <a href="/">戻る</a>
 </body>
 </html>

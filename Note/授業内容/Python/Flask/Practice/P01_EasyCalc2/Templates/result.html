@@ -7,9 +7,6 @@
 </head>
 <body>
     <h1>{{ title }}</h1>
-    {% if result == "無効な入力です" or result == "ゼロで除算はできません" or result == "無効な操作です" %}
-        <p>{{ result }}</p>
-    {% else %}
     <p>
         {% if op == 'add' %}
             {{ e1 }} + {{ e2 }} = {{ result }}
@@ -21,7 +18,6 @@
             {{ e1 }} ÷ {{ e2 }} = {{ result }}
         {% endif %}
     </p>
-    {% endif %}
     <a href="/">戻る</a>
 </body>
 </html>

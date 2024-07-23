@@ -35,6 +35,8 @@ if __name__ == "__main__":
     # WEBサーバー実行
     app.run(host="0.0.0.0",port=8080)
     
+    # host="0.0.0.0"は公開するため
+
 #     # GETパラメータ(おまけ)
 # # http://localhost:5000/get?id=100
 # @app.route("/get")
