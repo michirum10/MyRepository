@@ -5,21 +5,23 @@
 {% set subTitle = "MAIN MENU" %}
 
 <!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
 {% extends 'layouts/layout.html' %}
 
 {% block head %}{% endblock %}
 
-<!-- 別のファイルを呼び出す -->
+<!-- headerファイルを呼び出す -->
 {% block header %}
 {% include 'Blocks/header.html'   %}
 {% endblock %}
 
 {% block contents %}
-<h2>メインコンテンツ</h2>
-<p>メッセージを書いています。</p>
+<div class="alert alert-primary" role="alert">
+    Boot Strap!!!
+</div>
 {% endblock %}
 
-<!-- 別のファイルを呼び出す -->
+<!-- footerファイルを呼び出す -->
 {% block footer %}
 {% include 'Blocks/footer.html'   %}
 {% endblock %}

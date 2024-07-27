@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueprint</title>
+</head>
+<body>
+    <p>{{msg}}</p>
+    <h2>本体</h2>
+    <a href="{{url_for('index')}}">ホーム</a>
+    <a href="{{url_for('next')}}">ネクスト</a>
+    <h2>Blueprint</h2>
+    <a href="{{url_for('APP2.index')}}">APP2ホーム</a>
+    <a href="{{url_for('APP2.next')}}">APP2ネクスト</a>
+
+</body>
+</html>
+
+<!-- Blueprintを使うことで、二つの.pyを同じhtmlで簡単に表示できる -->
+<!-- コードはなるべく分割するのが良いらしい -->
