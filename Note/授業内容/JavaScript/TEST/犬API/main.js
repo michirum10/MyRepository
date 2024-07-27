@@ -22,19 +22,26 @@ function capture() {
             return response.json();
         })
         .then(json => {
-            // コンソールログに表示
             console.log(json);
-            // ここに出力する内容
-            output.src = json.message; // 画像のURLを取得
+            output.src = json.message;
             output.alt = "犬の画像取得完了";
-            output.style.display = "block"; // 画像を表示
+            
+            // 画像の読み込みイベントを追加
+            output.onload = function() {
+                this.style.display = "block";
+                loadingIndicator.style.display = "none";
+            };
+            output.onerror = function() {
+                console.error('画像の読み込みに失敗しました');
+                this.alt = "画像の読み込みに失敗しました";
+                loadingIndicator.style.display = "none";
+            };
         })
         .catch(error => {
             console.error('エラーが発生しました:', error);
             output.alt = "画像の取得に失敗しました";
-        })
-        .finally(() => {
-            loadingIndicator.style.display = "none"; // ローディングインジケータを非表示
+            output.style.display = "none";
+            loadingIndicator.style.display = "none";
         });
 }
 
