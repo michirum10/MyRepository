@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebAPI(犬の画像)</title>
+    <link rel="stylesheet" href="styles.css"> <!-- CSSファイルをリンク -->
 </head>
-
 <body>
     <div>
-        <!-- onclick="capture()"でクリックされたら実行 -->
-        <input type="button" value="取得" onclick="capture()">
+        <button id="fetchButton">取得</button>
     </div>
-    <img alt="画像" id="output">
+    <img alt="ここに犬の画像が表示されます" id="output">
     <script src="./main.js"></script>
 </body>
-
 </html>
