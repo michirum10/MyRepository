@@ -17,7 +17,7 @@ app.register_blueprint(app2)
 # indexの表示
 @app.route("/")
 def index():
-    return render_template("pages/index.html")
+    return render_template("pages/index.html", msg="WELCOME！")
 
 if __name__ == "__main__":
     # デバッグモード

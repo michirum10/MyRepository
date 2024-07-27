@@ -17,8 +17,11 @@
 
 {% block contents %}
 <h1>{{msg}}</h1>
+<br>
     <!-- login画面に遷移 -->
-    <a href="{{url_for('APP2.login')}}">ログインページへ</a>
+    <a href="{{ url_for('APP2.login') }}" class="btn btn-primary">
+        <i class="fas fa-sign-in-alt"></i> ログインページへ
+    </a>
 {% endblock %}
 
 <!-- footerファイルを呼び出す -->

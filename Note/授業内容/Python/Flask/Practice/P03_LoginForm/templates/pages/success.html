@@ -16,14 +16,33 @@
 {% endblock %}
 
 {% block contents %}
-    <ul>
-        <li>ID:{{id}}</li>
-        <li>PASS:{{pw}}</li>
-    </ul>
+<div class="container text-center">
+    <!-- 成功メッセージとアイコン -->
+    <div class="my-5">
+        <!-- Font Awesomeを使用した大きなチェックマークアイコン -->
+        <i class="fas fa-check-circle text-success" style="font-size: 5rem;"></i>
+        <!-- 成功メッセージ -->
+        <h2 class="mt-3">{{msg}}</h2>
+    </div>
 
-    <a href="/">ホームへ</a>
+    <!-- ユーザー情報を表示するカード -->
+    <div class="card mx-auto" style="max-width: 300px;">
+        <div class="card-body">
+            <h5 class="card-title">ユーザー情報</h5>
+            <!-- ユーザーID -->
+            <p class="card-text"><strong>ID:</strong> {{id}}</p>
+            <!-- パスワード（セキュリティのため隠蔽） -->
+            <p class="card-text"><strong>PASS:</strong> ••••••••</p>
+        </div>
+    </div>
+
+    <!-- ホームページへ戻るボタン -->
+    <a href="/" class="btn btn-primary btn-lg mt-4">
+        <!-- ホームアイコン -->
+        <i class="fas fa-home"></i> ホームへ戻る
+    </a>
+</div>
 {% endblock %}
-
 <!-- footerファイルを呼び出す -->
 {% block footer %}
 {% include 'Blocks/footer.html'   %}

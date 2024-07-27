@@ -2,13 +2,14 @@
 
 from flask import Blueprint, redirect, render_template, request, session
 from flask.views import MethodView
+import bcrypt
 
 # Blueprintの名称：APP2
 # モジュール名：app2
 # URL：/APP2
 app2 = Blueprint("APP2", __name__, url_prefix="/APP2")
-# セッションを使うための鍵
-app2.secret_key = b"hit"
+# # セッションを使うための鍵
+# app2.secret_key = b"hit"
 
 
 # # flask-loginからLoginManagerをimport
@@ -29,14 +30,17 @@ class LoginSystem(MethodView):
     # postでのアクセス時
     def post(self):
         id = request.form.get("id")
-        pw = request.form.get("pw")
+        pw = request.form.get("pw").encode('utf-8')  # パスワードをバイト列にエンコード
+        
         
         global name_list
         
         #idが既にあるかどうかを確認する
         if id in name_list:
-            #IDとpasswordが一致しているかを確認する。
-            if pw == name_list[id]:
+            # パスワードのハッシュを取得
+            hashed_pw = name_list[id]
+            # IDとパスワードが一致しているかを確認する
+            if bcrypt.checkpw(pw, hashed_pw):
                 #ログイン可能な状態にする
                 session['flag'] = True
             #IDとpasspwrdが一致しない場合は
@@ -44,14 +48,16 @@ class LoginSystem(MethodView):
                 session['flag'] = False
         #idの新規登録の場合
         else:
-            name_list[id] = pw
+            hashed_pw = bcrypt.hashpw(pw, bcrypt.gensalt())
+            name_list[id] = hashed_pw
             session['flag'] = True #ログイン可能な状態にする
             
         session['id'] = id
         user_id = session.get("id")
         #idとpasseprdが一致するかどうかの確認
         if session['flag']: #一致した場合
-            return render_template("pages/success.html",id=id,pw=pw)
+            msg = 'ログインに成功しました！'
+            return render_template("pages/success.html",id=id,pw=pw,msg=msg)
         else: #一致しなかった場合
             msg = 'エラー：パスワードが間違っています！'
             return render_template('pages/login.html',msg=msg)
