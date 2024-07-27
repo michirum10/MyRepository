@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebAPI(犬の画像)</title>
-    <link rel="stylesheet" href="styles.css"> <!-- CSSファイルをリンク -->
+    <title>ランダム犬画像ジェネレーター</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <button id="fetchButton">取得</button>
+    <div class="container">
+        <h1>ランダムに犬を表示</h1>
+        <button id="fetchButton">Bow！</button>
+        <div class="image-container">
+            <img alt="ここに犬の画像が表示されます" id="output" style="display: none;"> <!-- 最初は非表示 -->
+        </div>
+        <div class="loading" style="display: none;">画像を読み込み中</div> <!-- 最初は非表示 -->
     </div>
-    <img alt="ここに犬の画像が表示されます" id="output">
-    <script src="./main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

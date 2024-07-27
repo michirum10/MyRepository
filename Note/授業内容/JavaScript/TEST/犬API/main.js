@@ -1,13 +1,17 @@
 // main.js
+
 // 出力準備
 let output = document.getElementById('output');
 let fetchButton = document.getElementById('fetchButton');
+let loadingIndicator = document.querySelector('.loading');
 
 // 実行する関数(capture)を宣言
 function capture() {
-    // jsonデータ取得前に表示
+    // 画像取得前に表示
     output.alt = "画像取得中";
     output.src = ""; // 画像をクリア
+    output.style.display = "none"; // 画像を非表示
+    loadingIndicator.style.display = "block"; // ローディングインジケータを表示
 
     // fetchはデータの取得(非同期通信)
     fetch('https://dog.ceo/api/breeds/image/random')
@@ -21,17 +25,18 @@ function capture() {
             // コンソールログに表示
             console.log(json);
             // ここに出力する内容
-            output.src = json.message;
-            output.alt = "画像取得完了";
+            output.src = json.message; // 画像のURLを取得
+            output.alt = "犬の画像取得完了";
+            output.style.display = "block"; // 画像を表示
         })
         .catch(error => {
             console.error('エラーが発生しました:', error);
             output.alt = "画像の取得に失敗しました";
+        })
+        .finally(() => {
+            loadingIndicator.style.display = "none"; // ローディングインジケータを非表示
         });
 }
 
 // ボタンクリック時に犬画像を取得
 fetchButton.addEventListener('click', capture);
-
-// ページ読み込み時に初期画像を取得
-document.addEventListener('DOMContentLoaded', capture);
