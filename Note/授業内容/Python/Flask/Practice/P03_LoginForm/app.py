@@ -1,24 +1,23 @@
-from flask import Flask,render_template, request
-from flask.views import MethodView
-# flask-loginからLoginManagerをimport
-from flask_login import LoginManager
+# app.py
+
+from flask import Flask,render_template
+
+from config import DevelopmentConfig
 
 # インスタンス生成(appを初期化)
 app = Flask(__name__)
-# LoginManagerの起動
-login = LoginManager(app) #extensionを起動させる際の標準的な記述
-class LoginSystem(MethodView):
-    # getでのアクセス時
-    def get(self):
-        return render_template("index.html")
-    
-    # postでのアクセス時
-    def post(self):
-        id = request.form.get("id")
-        pw = request.form.get("pw")
-        return render_template("success.html",id=id,pw=pw)
+print("Before importing config")
+app.config.from_object(DevelopmentConfig)
+print("After importing config")
 
-app.add_url_rule("/",view_func=LoginSystem.as_view("login"))
+# Blueprintの登録
+from app2 import app2
+app.register_blueprint(app2)
+
+# indexの表示
+@app.route("/")
+def index():
+    return render_template("pages/index.html")
 
 if __name__ == "__main__":
     # デバッグモード

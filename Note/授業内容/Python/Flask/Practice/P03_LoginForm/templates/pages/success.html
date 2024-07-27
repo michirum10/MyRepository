@@ -1,8 +1,8 @@
 <!-- こっちに実際の中身書く -->
 <!-- F12で確認すると、それぞれ書かれている場所わかる -->
 
-{% set title = "テンプレート サンプル" %}
-{% set subTitle = "MAIN MENU" %}
+{% set title = "ログイン成功！" %}
+
 
 <!-- extends拡張機能 -->
 <!-- layoutファイルを反映 -->
@@ -16,9 +16,12 @@
 {% endblock %}
 
 {% block contents %}
-<div class="alert alert-primary" role="alert">
-    Boot Strap!!!
-</div>
+    <ul>
+        <li>ID:{{id}}</li>
+        <li>PASS:{{pw}}</li>
+    </ul>
+
+    <a href="/">ホームへ</a>
 {% endblock %}
 
 <!-- footerファイルを呼び出す -->
