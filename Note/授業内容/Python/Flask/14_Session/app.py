@@ -2,7 +2,9 @@ from flask import Flask, render_template,request,session
 
 # インスタンス生成
 app = Flask(__name__)
-
+# セッションを使うための鍵
+# bはバイト列？
+app.secret_key = b"hit"
 
 @app.route("/",methods=["GET","POST"])
 def index():
