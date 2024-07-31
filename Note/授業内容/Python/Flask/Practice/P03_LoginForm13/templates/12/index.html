@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- 文字エンコーディングを指定 -->
+    <meta charset="UTF-8">
+    <!-- ビューポートの設定：レスポンシブデザイン対応 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ページタイトル -->
+    <title>ログイン画面</title>
+    <!-- BootstrapのCSSを読み込み -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static',filename='style12.css')}}">
+</head>
+
+<body>
+    <!-- ヘッダーセクション -->
+    <header>
+        <!-- ナビゲーションバーの設定 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <!-- ナビゲーションバーのブランドリンク -->
+                <a class="navbar-brand" href="/">ホーム</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- ナビゲーションバーのリンク -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login_system.login') }}">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- メインコンテンツセクション -->
+    <main class="container">
+        <h1>ログインページ</h1>
+        <ul>
+            <a href="{{ url_for('login_system.login') }}">LoginPage</a>
+        </ul>
+    </main>
+    <!-- BootstrapのJavaScriptを読み込み -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <br>
+    <footer>
+        <div id="footer">
+            <p class="copyright">Copyright 2024 Login System All Rights Reserved.</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>

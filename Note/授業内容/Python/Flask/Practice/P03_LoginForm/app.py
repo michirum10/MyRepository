@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 # configの設定をロード(SQL,secret_key)
 app.config.from_object(DevelopmentConfig)
+app.config['SECRET_KEY'] = 'your_secret_key_here'
 
 # Blueprintの登録
 app.register_blueprint(login_bp, url_prefix='/LoginSystem')
@@ -27,3 +28,21 @@ if __name__ == "__main__":
     # ホストとポートの指定
     # WEBサーバー実行
     app.run(host="0.0.0.0",port=8080)
+
+#     --helpers
+#     |--_formhelpers.html
+#     --static
+#     |--css
+#         |--style.css
+#     --templates
+#     |--Blocks
+#         |--header.html
+#         |--footer.html
+#     |--layout
+#         |--layout.html
+#     |--pages
+#         |--index.html
+#         |--login.html
+#         |--success.html
+# app.py
+# LoginSystem.py

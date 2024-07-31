@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoginForm</title>
+</head>
+<body>
+    <h1>ログイン画面</h1>
+
+    {% if msg %}
+    <p style="color: red;">{{ msg }}</p>
+    {% endif %}
+
+    <form action="{{ url_for('LOGIN.login') }}" method="post">
+        <label for="ID">your ID：</label>
+            <input type="text" name="id" id="">
+        <label for="PW">パスワード：</label>
+            <input type="password" name="pw" id="">
+        <button type="submit">ログイン</button>
+    </form>
+
+
+    <ul>
+        <li>ID 1234</li>
+        <li>PASS 1111</li>
+    </ul>
+</body>
+</html>

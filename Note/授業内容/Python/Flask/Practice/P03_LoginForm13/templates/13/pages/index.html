@@ -1,0 +1,38 @@
+<!-- こっちに実際の中身書く -->
+<!-- F12で確認すると、それぞれ書かれている場所わかる -->
+
+{% set title = "MAIN MENU" %}
+
+<!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
+{% extends '13/layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- headerファイルを呼び出す -->
+{% block header %}
+{% include '13/Blocks/header.html'   %}
+{% endblock %}
+
+{% block contents %}
+<h1>{{msg}}</h1>
+<div>
+    <!-- login画面に遷移(Blueprint) -->
+    <!-- bootstrapのプライマリボタン(大) -->
+    <a href="{{ url_for('LoginSystem13.login') }}" class="btn btn-primary btn-lg">
+        <!-- ログインアイコン -->
+        <i class="fas fa-sign-in-alt"></i> ログインページへ
+    </a>
+    <ul>
+        <li><a href="{{ url_for('LOGIN.login' ) }}">中村さんログインページ</a></li>
+        <li><a href="{{ url_for('login_system.login') }}">三田さんログインページ</a></li>
+    </ul>
+</div>
+{% endblock %}
+
+<!-- footerファイルを呼び出す -->
+{% block footer %}
+{% include '13/Blocks/footer.html'   %}
+{% endblock %}
+
+<!-- チームで開発するとき、みんなで同じファイルを触ると大変なので分割する -->

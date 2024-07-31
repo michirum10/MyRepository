@@ -5,7 +5,7 @@
 		},
 		{
 			"name": "portfolio",
-			"path": "../../Desktop/portfolio/portfolio"
+			"path": "../Portfolio/portfolio"
 		}
 	],
 	"settings": {
