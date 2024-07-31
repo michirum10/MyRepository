@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社員管理システム -- リスト --</title>
+</head>
+<body>
+    <div>
+        <ul>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for msg in messages %}
+                        <li>{{msg}}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+            {% endif %}
+        {% endwith %}
+        </ul>
+    </div>
+    <div>
+        <a href="{{url_for('eCreate')}}">新規登録</a>
+    </div>
+    {% if datas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>氏名</th>
+                    <th>部署名</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                    <tr>
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.dept.name}}</td>
+                        <td><a href="{{url_for('detail',id=data.id)}}">更新[詳細]</a></td>
+                        <td><a href="{{url_for('delete',id=data.id)}}">削除</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        データがありません。
+    {% endif %}
+</body>
+</html>

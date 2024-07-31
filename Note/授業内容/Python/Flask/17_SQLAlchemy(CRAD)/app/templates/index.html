@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo -- リスト --</title>
+</head>
+<body>
+    <form action="{{url_for('create')}}" method="POST">
+        <label for="text">text:</label>
+        <input type="text" name="text">
+        <button type="submit">新規作成</button>
+    </form>
+    <form action="{{url_for('update')}}" method="POST">
+        <label for="id">id:</label>
+        <input type="number" name="id">
+        <label for="text">text:</label>
+        <input type="text" name="text">
+        <button type="submit">更新</button>
+    </form>
+    <div>
+        <ul>
+            {% with messages = get_flashed_messages()  %}
+            <!-- messages存在したらリスト型で表示 -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </ul>
+    </div>
+    {% if datas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>text</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                    <tr>
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.text }}</td>
+                        <!-- 削除リンク -->
+                         <!-- getを送る -->
+                        <td><a href="{{url_for('delete')}}?id={{data.id}}">削除</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        データがありません。
+    {% endif %}
+</body>
+</html>

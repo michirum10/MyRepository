@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if mode == 1 %}
+        <title>社員管理システム -- 新規登録 --</title>
+    {% elif mode == 2 %}
+        <title>社員管理システム -- 詳細[{{data.name}}] --</title>
+    {% elif mode == 3 %}
+        <title>社員管理システム -- 更新[{{data.name}}] --</title>
+    {% endif %}
+</head>
+<body>
+    {% if data %}
+        {% set name = data.name %}
+        {% set age = data.age %}
+        {% set gender = data.gender %}
+        {% set dept_id = data.dept_id %}
+        {% set btnName = '更新' %}
+    {% else %}
+        {% set name = '' %}
+        {% set age = '' %}
+        {% set gender = '' %}
+        {% set dept_id = '' %}
+        {% set btnName = '新規登録' %}
+    {% endif %}
+    {% if mode == 1 %}
+        {% set readonly = ''%}
+        <form action="" method="post">
+    {% elif mode == 2 %}
+        {% set readonly = 'readonly'%}
+        <form>
+    {% elif mode == 3 %}
+        {% set readonly = ''%}
+        <form action="" method="post">
+    {% endif %}
+        <label for="name">氏名：</label>
+        <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
+        <label for="age">年齢：</label>
+        <input type="number" name="age" id="age" value="{{age}}" {{readonly}}>
+        <label for="gender">性別：</label>
+        <input type="number" name="gender" id="gender" value="{{gender}}" {{readonly}}>
+        <label for="dept_id">部署ID：</label>
+        <input type="number" name="dept_id" id="dept_id" value="{{dept_id}}" {{readonly}}>
+        {% if mode == 2 %}
+            <a href="{{url_for('eUpdate',id=data.id)}}">更新</a>
+        {% else %}
+            <button type="submit">{{btnName}}</button>
+        {% endif %}
+    </form>
+    <!-- もどるボタン -->
+    <a href="{{url_for('index')}}">戻る</a>
+</body>
+</html>
