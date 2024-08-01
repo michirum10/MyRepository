@@ -1,4 +1,9 @@
+# GoogleDrive
 .tmp.drivedownload/
 .tmp.driveupload/
-__pycache__
+
+# 環境設定
 .env
+
+# Python
+__pycache__/

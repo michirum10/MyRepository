@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if mode == 1 %}
+        <title>社員管理システム -- 新規登録 --</title>
+    {% elif mode == 2 %}
+        <title>社員管理システム -- 詳細[{{dept.name}}] --</title>
+    {% elif mode == 3 %}
+        <title>社員管理システム -- 更新[{{dept.name}}] --</title>
+    {% endif %}
+</head>
+<body>
+    {% if data %}
+        {% set name = dept.name %}
+        {% set btnName = '更新' %}
+    {% else %}
+        {% set name = '' %}
+        {# deptSelectはmain.pyから送られてくる。 #}
+        {% set btnName = '新規登録' %}
+    {% endif %}
+    {% if mode == 1 %}
+        <form action="" method="post">
+    {% elif mode == 2 %}
+        <form>
+    {% elif mode == 3 %}
+        <form action="" method="post">
+    {% endif %}
+        <label for="dept_id">部署名：</label>
+        <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
+        {% if mode == 2 %}
+            <a href="{{url_for('dUpdate',id=dept.id)}}">更新</a>
+        {% else %}
+            <button type="submit">{{btnName}}</button>
+        {% endif %}
+    </form>
+    <!-- もどるボタン -->
+    <a href="{{url_for('index')}}">戻る</a>
+</body>
+</html>

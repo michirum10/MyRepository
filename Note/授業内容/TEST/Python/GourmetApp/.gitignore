@@ -1,0 +1,16 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Node.js
+node_modules/
+dist/
+
+# 環境設定
+.env
+
+# IDE 設定
+.vscode/
+.idea/

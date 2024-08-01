@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>社員管理システム -- リスト --</title>
+    <title>社員管理システム -- 部署一覧 --</title>
 </head>
 <body>
     <div>
@@ -21,34 +21,35 @@
         </ul>
     </div>
     <div>
-        <a href="{{url_for('eCreate')}}">新規登録</a>
+        <a href="{{url_for('Create')}}">新規部署登録</a>
     </div>
-    {% if datas %}
+    <div>
+        <a href="{{url_for('index')}}">社員一覧に戻る</a>
+    </div>
+
+    {% if depts %}
         <table>
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>氏名</th>
                     <th>部署名</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {% for data in datas %}
+                {% for dept in depts %}
                     <tr>
-                        <td>{{data.id}}</td>
-                        <td>{{data.name}}</td>
-                        <td>{{data.dept.name}}</td>
-                        <td><a href="{{url_for('detail',id=data.id)}}">更新[詳細]</a></td>
-                        <td><a href="{{url_for('delete',id=data.id)}}">削除</a></td>
+                        <td>{{dept.id}}</td>
+                        <td>{{dept.name}}</td>
+                        <td><a href="{{url_for('Update', id=dept.id)}}">更新</a></td>
+                        <td><a href="{{url_for('dept_delete', id=dept.id)}}">削除</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        データがありません。
+        部署データがありません。
     {% endif %}
-    
 </body>
 </html>

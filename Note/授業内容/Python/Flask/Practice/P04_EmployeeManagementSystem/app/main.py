@@ -1,7 +1,11 @@
+# main.py
 from flask import flash, redirect, render_template, request, url_for
 from app import app,db,Employee,Department
 from flask.views import MethodView
 
+# Blueprintの登録
+from app.DeptManager import dept_list
+app.register_blueprint(dept_list)
 
 
 # データ一覧の表示ページ
@@ -150,3 +154,4 @@ def delete(id):
         flash("データの削除に成功しました。")
         # 全件表示のページへリダイレクト
         return redirect(url_for('index')) 
+

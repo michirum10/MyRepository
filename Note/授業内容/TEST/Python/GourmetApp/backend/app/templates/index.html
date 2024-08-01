@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - GourmetApp{% endblock %}
+
+{% block content %}
+    <h2>Welcome to GourmetApp!</h2>
+    <p>Find the best restaurants near you.</p>
+    <!-- login画面に遷移(Blueprint) -->
+    <!-- bootstrapのプライマリボタン(大) -->
+    <a href="{{ url_for('LoginSystem13.login') }}" class="btn btn-primary btn-lg">
+        <!-- ログインアイコン -->
+        <i class="fas fa-sign-in-alt"></i> ログインページへ
+    </a>
+    <!-- コンテンツの追加 -->
+    <div id="restaurant-list">
+        <!-- Vue.js コンポーネントがここにレンダリングされる -->
+    </div>
+{% endblock %}

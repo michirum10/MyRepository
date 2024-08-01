@@ -1,0 +1,12 @@
+#  Flask アプリケーションに必要な Python ライブラリをリストするファイル
+# pip install -r requirements.txt コマンドでインストール
+
+Flask==2.0.3
+Flask-SQLAlchemy==2.5.1
+Flask-Migrate==3.1.0
+gunicorn==20.1.0  # Heroku での実行用
+
+#Flask: Web フレームワーク
+# Flask-SQLAlchemy: SQLAlchemy との統合ライブラリ
+# Flask-Migrate: データベースのマイグレーション管理
+# gunicorn: WSGI HTTP サーバー (Heroku でのデプロイ用)
