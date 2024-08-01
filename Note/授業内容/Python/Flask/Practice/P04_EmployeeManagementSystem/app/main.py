@@ -1,12 +1,13 @@
 # main.py
+# 社員管理システム
+
 from flask import flash, redirect, render_template, request, url_for
-from app import app,db,Employee,Department
+from app import app, db, Employee, Department
 from flask.views import MethodView
 
 # Blueprintの登録
 from app.DeptManager import dept_list
 app.register_blueprint(dept_list)
-
 
 # データ一覧の表示ページ
 @app.route("/")
@@ -15,8 +16,7 @@ def index():
     dbses = db.session
     # 全件取得処理
     res = dbses.query(Employee).filter(Employee.del_flag == 0).all()
-    # dbses.close()があるとhtmlでエラーになるので書かない
-    return render_template("index.html",datas = res)
+    return render_template("index.html", datas=res)
 
 class EmployeeCreate(MethodView):
     def get(self):
@@ -52,8 +52,9 @@ class EmployeeCreate(MethodView):
         flash("データの作成に成功しました。")
         # 全件表示のページへリダイレクト
         return redirect(url_for('index'))
+
 # 関連づけ
-app.add_url_rule("/eCreate",view_func=EmployeeCreate.as_view("eCreate"))
+app.add_url_rule("/eCreate", view_func=EmployeeCreate.as_view("eCreate"))
 
 @app.route("/detail/<id>")
 def detail(id):
@@ -78,19 +79,17 @@ def detail(id):
         res.deptSelect[res.dept_id]['selected'] = 'selected'
     except KeyError:
         pass
-    print(res.deptSelect)
 
-    
     # 詳細モードでEmployeeDetail.htmlを呼び出す
     return render_template("EmployeeDetail.html",data=res,mode=2)
 
 class EmployeeUpdate(MethodView):
-    def get(self,id):
+    def get(self, id):
         dbses = db.session
         # 一覧を取得
         res = dbses.query(Employee).get(id)
         
-        # 性別のSelected処理（同じことを書くときはメソッド化する方が良い）
+        # 性別のSelected処理
         res.genderSelect = ['', '', '']
         try:
             res.genderSelect[res.gender] = 'selected'
@@ -106,22 +105,20 @@ class EmployeeUpdate(MethodView):
             res.deptSelect[res.dept_id]['selected'] = 'selected'
         except KeyError:
             pass
-        print(res.deptSelect)
         
         # 更新モードでEmployeeDetail.htmlを呼び出す
-        return render_template("EmployeeDetail.html",data=res,mode=3)
+        return render_template("EmployeeDetail.html", data=res, mode=3)
 
-    def post(self,id):
+    def post(self, id):
         name = request.form.get("name")
         age = request.form.get("age")
         gender = request.form.get("gender")
         dept_id = request.form.get("dept_id")
-        data = Employee(name=name,age=age,gender=gender,dept_id=dept_id)
         # セッション開始
         dbses = db.session
         # １件取得
         res = dbses.query(Employee).get(id)
-        if res == None:
+        if res is None:
             # idが存在しない時
             flash("指定されたIDが存在しないので失敗しました。")
             return redirect(url_for('index'))
@@ -135,15 +132,15 @@ class EmployeeUpdate(MethodView):
             flash("データの更新に成功しました。")
             # 全件表示のページへリダイレクト
             return redirect(url_for('index'))
-    
-app.add_url_rule("/update/<id>",view_func=EmployeeUpdate.as_view("eUpdate"))
 
+# 関連づけ
+app.add_url_rule("/eupdate/<id>", view_func=EmployeeUpdate.as_view("eUpdate"))
 
 @app.route("/delete/<id>")
 def delete(id):
     dbses = db.session
     res = dbses.query(Employee).get(id)
-    if res == None:
+    if res is None:
         # idが存在しない時
         flash("指定されたIDが存在しないので失敗しました。")
         return redirect(url_for('index'))
@@ -153,5 +150,4 @@ def delete(id):
         dbses.commit()
         flash("データの削除に成功しました。")
         # 全件表示のページへリダイレクト
-        return redirect(url_for('index')) 
-
+        return redirect(url_for('index'))

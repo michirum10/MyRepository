@@ -59,7 +59,7 @@
 
         {# <input type="number" name="dept_id" id="dept_id" value="{{dept_id}}" {{readonly}}> #}
         {% if mode == 2 %}
-            <a href="{{url_for('eUpdate',id=data.id)}}">更新</a>
+            <a href="{{url_for('eUpdate', id=data.id)}}">更新</a>
         {% else %}
             <button type="submit">{{btnName}}</button>
         {% endif %}

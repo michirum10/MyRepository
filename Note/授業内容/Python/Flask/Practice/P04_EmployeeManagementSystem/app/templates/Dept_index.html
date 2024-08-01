@@ -21,10 +21,8 @@
         </ul>
     </div>
     <div>
-        <a href="{{url_for('Create')}}">新規部署登録</a>
-    </div>
-    <div>
         <a href="{{url_for('index')}}">社員一覧に戻る</a>
+        <a href="{{url_for('dCreate')}}">新規部署登録</a>
     </div>
 
     {% if depts %}
@@ -42,8 +40,9 @@
                     <tr>
                         <td>{{dept.id}}</td>
                         <td>{{dept.name}}</td>
-                        <td><a href="{{url_for('Update', id=dept.id)}}">更新</a></td>
-                        <td><a href="{{url_for('dept_delete', id=dept.id)}}">削除</a></td>
+                        <td><a href="{{ url_for('dUpdate', id=dept.id) }}">更新</a></td>
+                        <td><a href="#" onclick="confirmDelete('{{ url_for('dept_list.dept_delete', id=dept.id) }}')">削除</a></td>
+
                     </tr>
                 {% endfor %}
             </tbody>
@@ -52,4 +51,13 @@
         部署データがありません。
     {% endif %}
 </body>
+<script>
+    function confirmDelete(url) {
+        console.log('confirmDelete called with URL:', url);  // 追加
+        if (confirm("本当に削除してよろしいですか？")) {
+            window.location.href = url;
+        }
+    }
+</script>
+
 </html>

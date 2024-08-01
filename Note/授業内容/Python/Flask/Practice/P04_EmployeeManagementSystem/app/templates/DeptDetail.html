@@ -4,38 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if mode == 1 %}
-        <title>社員管理システム -- 新規登録 --</title>
+        <title>部署管理システム -- 新規登録 --</title>
     {% elif mode == 2 %}
-        <title>社員管理システム -- 詳細[{{dept.name}}] --</title>
+        <title>部署管理システム -- 詳細[{{dept.name}}] --</title>
     {% elif mode == 3 %}
-        <title>社員管理システム -- 更新[{{dept.name}}] --</title>
+        <title>部署管理システム -- 更新[{{dept.name}}] --</title>
     {% endif %}
 </head>
 <body>
-    {% if data %}
+    {% if mode == 1 %}
+        {% set name = '' %}
+        {% set btnName = '新規登録' %}
+    {% elif mode == 2 %}
         {% set name = dept.name %}
         {% set btnName = '更新' %}
-    {% else %}
-        {% set name = '' %}
-        {# deptSelectはmain.pyから送られてくる。 #}
-        {% set btnName = '新規登録' %}
-    {% endif %}
-    {% if mode == 1 %}
-        <form action="" method="post">
-    {% elif mode == 2 %}
-        <form>
     {% elif mode == 3 %}
-        <form action="" method="post">
+        {% set name = dept.name %}
+        {% set btnName = '更新' %}
     {% endif %}
-        <label for="dept_id">部署名：</label>
+    <form id="updateForm" action="{% if mode == 3 %}{{ url_for('dUpdate', id=dept.id) }}{% endif %}" method="post">
+        <label for="name">部署名：</label>
         <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
         {% if mode == 2 %}
-            <a href="{{url_for('dUpdate',id=dept.id)}}">更新</a>
+            <button type="button" onclick="confirmUpdate()">更新</button>
         {% else %}
             <button type="submit">{{btnName}}</button>
         {% endif %}
     </form>
     <!-- もどるボタン -->
-    <a href="{{url_for('index')}}">戻る</a>
+    <a href="{{url_for('dept_list.index')}}">戻る</a>
 </body>
+<script>
+    function confirmUpdate() {
+        if (confirm("本当に更新してよろしいですか？")) {
+            // フォームを送信
+            document.getElementById('updateForm').submit();
+        }
+    }
+</script>
 </html>
