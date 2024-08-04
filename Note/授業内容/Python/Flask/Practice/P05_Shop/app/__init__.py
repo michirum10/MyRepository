@@ -14,6 +14,8 @@ from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 # Flask-Loginモジュールをインポート
 from flask_login import LoginManager
+# Flask-Migrateをインポート
+from flask_migrate import Migrate
 # Configクラスをインポート
 from config import Config 
 
@@ -24,6 +26,8 @@ app.config.from_object(Config)
 
 # Flaskアプリケーションと連動するSQLAlchemyインスタンスを作成
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)  # Flask-Migrateのインスタンスを作成
+
 
 # Flask-Loginの設定
 login_manager = LoginManager()
@@ -51,4 +55,4 @@ app.register_blueprint(Login.bp, url_prefix='/auth')  # authブループリン�
 from app import main
 
 # sql3はDb.dbの統合ターミナル開いて実行
-# sqlite3.exe Db.db
+# sqlite3.exe DB.db

@@ -23,9 +23,8 @@ class LoginForm(FlaskForm):
     # カスタムバリデータ
     def validate_password(self, password):
         if not (any(c.isalpha() for c in password.data) and  # 英字が含まれているかチェック
-                any(c.isdigit() for c in password.data) and  # 数字が含まれているかチェック
-                any(c in '!@#$%^&*()' for c in password.data)):  # 特殊文字が含まれているかチェック
-            raise ValidationError('パスワードには【英数字と記号：!@#$%^&*()】を含める必要があります')  # バリデーションエラーメッセージ
+                any(c.isdigit() for c in password.data)):  # 数字が含まれているかチェック
+            raise ValidationError('パスワードには【英数字を含める必要があります')  # バリデーションエラーメッセージ
 
 # サインアップ用入力クラス
 class SignUpForm(LoginForm):  # LoginFormを継承してSignUpFormを作成
