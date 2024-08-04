@@ -1,0 +1,101 @@
+/* index.css */
+
+/* ヘッダーのスタイル */
+header {
+    background-color: #fddbdb; /* ヘッダーの背景色を淡いピンクに設定 */
+    padding: 20px 15px; /* 左右のパディングも追加 */
+    text-align: center; /* テキストを中央揃えに */
+    border-bottom: 1px solid #ccc; /* 下部に薄いグレーの境界線を追加 */
+}
+
+body {
+    background-color: #f8f9fa; /* ボディの背景色を淡いグレーに設定 */
+    margin: 0; /* ボディのマージンを0に設定 */
+}
+
+main {
+    position: relative; /* 子要素の絶対位置指定の基準点として設定 */
+    padding-top: 20px; /* 上部に20pxのパディングを追加 */
+}
+
+.container {
+    max-width: 1200px; /* コンテナの最大幅を1200pxに設定 */
+    margin: 0 auto; /* 左右のマージンを自動で中央揃え */
+    padding: 0 15px; /* 左右に15pxのパディングを追加 */
+}
+
+.card {
+    height: 100%;
+    margin: 0; /* マージンを0に設定 */
+    transition: transform 0.3s ease-in-out; /* ホバーエフェクトのアニメーション設定 */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* ホバー時に5px上に移動 */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* ホバー時に影を追加 */
+}
+
+.card-img-top {
+    height: 200px; /* カード内の画像の高さを200pxに固定 */
+    object-fit: cover; /* 画像のアスペクト比を保持しつつ、要素を埋める */
+}
+/* カートボタン */
+.confirm-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+
+#confirm-button {
+    position: absolute; /* 絶対位置指定 */
+    top: 20px; /* 上端から20pxの位置に配置 */
+    right: 15px; /* 右端から15pxの位置に配置 */
+    z-index: 1000; /* 他の要素より前面に表示 */
+}
+
+/* 購入確認ボタンとカート数のスタイル */
+#cart-and-confirm {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+#count-item {
+    position: absolute; /* 絶対位置指定 */
+    top: 60px; /* 上端から60pxの位置に配置 */
+    right: 15px; /* 右端から15pxの位置に配置 */
+    margin-bottom: 10px; /* 下部に10pxのマージンを追加 */
+    padding: 5px 10px; /* 上下5px、左右10pxのパディングを追加 */
+    border-radius: 5px; /* 角を5px丸める */
+    z-index: 1000; /* 他の要素より前面に表示 */
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    #cart-and-confirm {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    #count-item, #confirm-button {
+        font-size: 0.8rem;
+    }
+}

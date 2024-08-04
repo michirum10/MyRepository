@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社員管理システム -- リスト --</title>
+</head>
+<body>
+    {% if searchData %}
+        {% set name = searchData.name %}
+        {% set gender = searchData.gender %}
+        {% set dept = searchData.dept %}
+    {% endif %}
+    <div>
+        <ul>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for msg in messages %}
+                        <li>{{msg}}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+            {% endif %}
+        {% endwith %}
+        </ul>
+    </div>
+    <div>
+        <button><a href="{{url_for('eCreate')}}">新規登録</a></button>
+        <button><a href="{{ url_for('DEPT_CRUD.index' ) }}">部署一覧</a></button>
+    </div>
+    <!-- 検索 -->
+    <details {% if searchData %}
+        open
+    {% endif %}><summary>検索</summary>
+        <form action="{{ url_for('search' ) }}" method="get">
+        <div>
+            <label for="name">氏名：</label>
+            <input type="search" name="name" id="name" value="{{name}}">
+        </div>
+        <div>
+            <label for="gender">性別：</label>
+            <select name="gender" id="gender">
+                <option value=""></option>
+                <option value="0" {% if gender == "0" %} selected {% endif %}>男</option>
+                <option value="1" {% if gender == "1" %} selected {% endif %}>女</option>
+                <option value="2" {% if gender == "2" %} selected {% endif %}>その他</option>
+            </select>
+        </div>
+        <div>
+            <label for="dept">部署名：</label>
+            <select name="dept" id="dept">
+                <option value=""></option>
+                {% for key in dept_datas.keys() %}
+                    {% set s = '' %}
+                    {% if key == dept %}
+                        {% set s = 'selected' %}
+                    {% endif %}
+                    <option value="{{key}}" {{s}}>
+                        {{dept_datas[key]['name']}}
+                        {% if dept_datas[key]['del_flag'] == 1 %}
+                            [削除済み]
+                        {% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+            <input type="radio" name="search_opt" value="and" checked>AND
+            <input type="radio" name="search_opt" value="or">OR
+            <button type="submit">検索</button>
+            {% if searchData %}
+            <button><a href="{{ url_for('index' ) }}">検索中止</a></button>
+            {% endif %}
+        </form>
+    </details>
+    {% if datas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>氏名</th>
+                    <th>部署名</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                    <tr>
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}</td>
+                        <td>{{data.dept.name}}
+                            {% if dept_datas[data.dept.id]['del_flag'] == 1 %}
+                                [削除済み]                                
+                            {% endif %}
+                        </td>
+                        <td><a href="{{url_for('detail',id=data.id)}}">更新[詳細]</a></td>
+                        <td><a href="{{url_for('delete',id=data.id)}}">削除</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        データがありません。
+    {% endif %}
+</body>
+</html>

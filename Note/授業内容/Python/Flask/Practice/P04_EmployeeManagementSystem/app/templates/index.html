@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- ページの文字エンコーディングをUTF-8に設定 -->
     <meta charset="UTF-8">
+    <!-- ページの表示領域をデバイスの幅に合わせ、初期ズームを1に設定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ページのタイトルを設定 -->
     <title>社員管理システム -- リスト --</title>
 </head>
 <body>
     <div>
         <ul>
+        <!-- フラッシュメッセージを表示するためのブロック -->
         {% with messages = get_flashed_messages() %}
+            <!-- メッセージが存在する場合に表示 -->
             {% if messages %}
                 <ul>
+                    <!-- 各メッセージをリストアイテムとして表示 -->
                     {% for msg in messages %}
                         <li>{{msg}}</li>
                     {% endfor %}
                 </ul>
-            {% else %}
             {% endif %}
         {% endwith %}
         </ul>
     </div>
+
     <div>
+        <!-- 部署一覧ページへのリンク -->
         <a href="{{url_for('dept_list.index')}}">部署一覧</a>
+        <!-- 新規登録ページへのリンク -->
         <a href="{{url_for('eCreate')}}">新規登録</a>
     </div>
-    
 
+    <!-- データが存在する場合にテーブルを表示 -->
     {% if datas %}
         <table>
             <thead>
+                <!-- テーブルのヘッダー -->
                 <tr>
                     <th>#</th>
                     <th>氏名</th>
@@ -38,19 +47,35 @@
                 </tr>
             </thead>
             <tbody>
+                <!-- 取得した各データをテーブルの行として表示 -->
                 {% for data in datas %}
                     <tr>
+                        <!-- 社員のIDを表示 -->
                         <td>{{data.id}}</td>
+                        <!-- 社員の名前を表示 -->
                         <td>{{data.name}}</td>
-                        <td>{{data.dept.name}}</td>
+                        <!-- 社員の部署名を表示 -->
+                        <td>{{data.dept_name}}</td>
+                        <!-- 詳細・更新ページへのリンク -->
                         <td><a href="{{url_for('detail',id=data.id)}}">更新[詳細]</a></td>
-                        <td><a href="{{url_for('delete',id=data.id)}}">削除</a></td>
+                        <!-- 削除リンク（削除確認ダイアログを表示するJavaScript関数を呼び出す） -->
+                        <td><a href="#" onclick="confirmDelete('{{url_for('delete',id=data.id)}}')">削除</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
+        <!-- データが存在しない場合に表示 -->
         データがありません。
     {% endif %}
 </body>
+<script>
+    // 削除の確認ダイアログを表示する関数
+    function confirmDelete(url) {
+        // 確認ダイアログを表示し、"OK"が押された場合のみ指定されたURLにリダイレクト
+        if (confirm("本当に削除してよろしいですか？")) {
+            window.location.href = url;
+        }
+    }
+</script>
 </html>

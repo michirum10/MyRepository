@@ -1,0 +1,37 @@
+{% set title = "新規会員登録" %}
+
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+{% block header %}
+{% include 'Blocks/header.html' %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">新規会員登録</h1>
+<form method="POST" action="{{ url_for('auth.signup') }}">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+        {{ form.username.label }}
+        {{ form.username(class="form-control", size=32) }}
+        {% for error in form.username.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        {{ form.password.label }}
+        {{ form.password(class="form-control", size=32) }}
+        {% for error in form.password.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+</form>
+    <!-- Bootstrap戻るボタン -->
+    <a href="/" class="btn btn-secondary mt-3">戻る</a>
+{% endblock %}
+
+{% block footer %}
+{% include 'Blocks/footer.html' %}
+{% endblock %}

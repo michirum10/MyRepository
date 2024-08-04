@@ -12,8 +12,9 @@ def index():
     # セッション開始
     dbses = db.session
     # 全件取得処理
+    # filter(Dept.del_flag == 0)で論理削除されたレコードを除外
     depts = dbses.query(Dept).filter(Dept.del_flag == 0).all()
-    return render_template("dept_index.html", depts=depts)
+    return render_template("Dept_index.html", depts=depts)
 
 class DeptCreate(MethodView):
     def get(self):
@@ -87,6 +88,7 @@ class DeptUpdate(MethodView):
 # 関連づけ
 app.add_url_rule("/dupdate/<id>", view_func=DeptUpdate.as_view("dUpdate"))
 
+# 削除のルート
 @dept_list.route("/delete/<id>")
 def dept_delete(id):
     dbses = db.session

@@ -1,0 +1,29 @@
+{% set title = "カート" %}
+
+<!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- headerファイルを呼び出す -->
+{% block header %}
+{% include 'Blocks/header.html'   %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">カートの中身</h1>
+<div class="cart-items" id="cartItems"></div>
+<p>合計個数: <span id="totalQuantity"></span></p>
+<p>合計金額: <span id="totalAmount"></span></p>
+<!-- Bootstrap購入ボタン -->
+<a href="{{ url_for('complete') }}" class="btn btn-primary mt-4" id="checkout-button">購入する</a>
+<!-- Bootstrap戻るボタン -->
+<a href="/" class="btn btn-secondary mt-3">戻る</a>
+{% endblock %}
+
+
+<!-- footerファイルを呼び出す -->
+{% block footer %}
+{% include 'Blocks/footer.html'   %}
+{% endblock %}

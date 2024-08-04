@@ -1,3 +1,10 @@
+# Employee.py
+# model
+
+# 社員データを管理
+# 社員の情報(ID,名前,年齢,性別,部署ID)をデータベースに保存
+# employeeテーブルを作成
+
 from app import db
 
 class Employee(db.Model):

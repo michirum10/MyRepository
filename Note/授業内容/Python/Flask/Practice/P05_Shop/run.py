@@ -1,7 +1,8 @@
 # run.pyを実行
 
-# 読み込むだけで実行できる
+# パッケージ化したappを読み込むだけで実行できる
 from app import app
+
 
 if __name__ == "__main__":
     # WEBサーバー実行

@@ -1,0 +1,24 @@
+{% set title = "商品詳細" %}
+
+<!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- headerファイルを呼び出す -->
+{% block header %}
+{% include 'Blocks/header.html'   %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">商品詳細</h1>
+<div class="product-detail" id="productDetail"></div>
+<a href="{{ url_for('cart') }}" class="btn btn-primary mt-4" id="add-to-cart-button">カートに入れる</a>
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-4">戻る</a>
+{% endblock %}
+
+<!-- footerファイルを呼び出す -->
+{% block footer %}
+{% include 'Blocks/footer.html'   %}
+{% endblock %}

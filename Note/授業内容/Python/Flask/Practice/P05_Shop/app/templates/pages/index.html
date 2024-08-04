@@ -1,0 +1,38 @@
+{% set title = "商品一覧" %}
+
+<!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- headerファイルを呼び出す -->
+{% block header %}
+{% include 'Blocks/header.html'   %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">商品一覧</h1>
+<div class="row" id="itemList">
+    <!-- 商品一覧を表示 -->
+</div>
+<a href="{{ url_for('cart') }}" class="btn btn-primary mt-4">カート確認</a>
+<!-- ブループリントログイン画面へ -->
+<a href="{{ url_for('auth.login') }}" class="btn btn-secondary mt-3">ログイン</a>
+<!-- 新規会員登録画面へ -->
+<a href="{{ url_for('auth.signup') }}" class="btn btn-secondary mt-3">新規会員登録</a>
+{% endblock %}
+
+<!-- footerファイルを呼び出す -->
+{% block footer %}
+{% include 'Blocks/footer.html'   %}
+{% endblock %}
+
+<!-- index -->
+<!-- 商品名と値段、画像を表示(ローカルのdata.jsonからデータを取得する)
+    それらをクリックすると商品詳細画面へ遷移(新しくウィンドウを開く)
+    購入ボタン⇛購入確認画面へ遷移 -->
+
+<!-- 商品をカートに保存したら閉じる -->
+<!-- オープナーモジュール -->
+<!-- window.opener関数名。関数名 -->

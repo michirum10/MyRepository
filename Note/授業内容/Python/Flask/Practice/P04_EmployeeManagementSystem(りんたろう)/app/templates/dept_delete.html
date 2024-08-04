@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部署管理システム -- 一括管理 --</title>
+</head>
+<body>
+    <div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for msg in messages %}
+                        <li>{{msg}}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    {% if datas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>部署名</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                    <tr>
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}
+                            {% if data.del_flag == 1 %}
+                                [削除済み]
+                            {% endif %}
+                        </td>
+                        <form action="" method="post">
+                        {% if data.del_flag == 0 %}
+                            <td><button type="submit" name="id" value="{{data.id}}">削除</button></td>
+                        {% else %}
+                            <td><button type="submit" name="id" value="{{data.id}}">削除取消</button></td>
+                        {% endif %}
+                        </form>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        データがありません。
+    {% endif %}
+    <div>
+        <button><a href="{{ url_for('DEPT_CRUD.index') }}">戻る</a></button>
+    </div>
+</body>
+</html>

@@ -22,11 +22,11 @@
         {% set name = dept.name %}
         {% set btnName = '更新' %}
     {% endif %}
-    <form id="updateForm" action="{% if mode == 3 %}{{ url_for('dUpdate', id=dept.id) }}{% endif %}" method="post">
+    <form action="{% if mode == 3 %}{{ url_for('dUpdate', id=dept.id) }}{% endif %}" method="post" onSubmit="return confirmUpdate()">
         <label for="name">部署名：</label>
         <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
         {% if mode == 2 %}
-            <button type="button" onclick="confirmUpdate()">更新</button>
+            <a href="{{url_for('eUpdate', id=data.id)}}">更新</a>
         {% else %}
             <button type="submit">{{btnName}}</button>
         {% endif %}
@@ -36,10 +36,13 @@
 </body>
 <script>
     function confirmUpdate() {
-        if (confirm("本当に更新してよろしいですか？")) {
-            // フォームを送信
-            document.getElementById('updateForm').submit();
+        if(window.confirm('送信してよろしいですか？')){ // 確認ダイアログを表示
+            return true; // 「OK」時は送信を実行
         }
+        else{ // 「キャンセル」時の処理
+            window.alert('キャンセルされました'); // 警告ダイアログを表示
+            return false; // 送信を中止
+            }
     }
 </script>
 </html>

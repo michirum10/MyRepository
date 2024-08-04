@@ -1,0 +1,19 @@
+{% set title = "ページが見つかりません" %}
+
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+{% block header %}
+{% include 'Blocks/header.html' %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">404 - ページが見つかりません</h1>
+<p>お探しのページは見つかりませんでした。</p>
+<a href="{{ url_for('index') }}" class="btn btn-primary mt-4">トップページへ戻る</a>
+{% endblock %}
+
+{% block footer %}
+{% include 'Blocks/footer.html' %}
+{% endblock %}

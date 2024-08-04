@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if mode == 1 %}
+        <title>部署管理システム -- 新規登録 --</title>
+    {% elif mode == 2 %}
+        <title>部署管理システム -- 更新[{{data.name}}] --</title>
+    {% endif %}
+</head>
+<body>
+    {% if data %}
+        {% set name = data.name %}
+        {% set del_flag = data.del_flag %}
+        {% set selected = 'selected' %}
+        {% set btnName = '更新' %}
+    {% else %}
+        {% set name = '' %}
+        {% set selected = '' %}
+        {% set btnName = '新規登録' %}
+    {% endif %}
+
+    <form action="" method="post">
+        <label for="name">部署名：</label>
+        <input type="text" name="name" id="name" value="{{name}}">
+        {% if data %}
+            <select name="del_flag" id="del_flag" >
+                <option value="0" {% if del_flag == 0 %} {{selected}} {% endif %}></option>
+                <option value="1" {% if del_flag == 1 %} {{selected}} {% endif %}>削除</option>
+            </select>
+        {% endif %}
+        <button type="submit">{{btnName}}</button>
+    </form>
+    <div>
+        <button><a href="{{ url_for('DEPT_CRUD.index') }}">戻る</a></button>
+    </div>
+</body>
+</html>

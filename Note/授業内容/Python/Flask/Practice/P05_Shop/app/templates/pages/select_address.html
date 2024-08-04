@@ -1,0 +1,33 @@
+{% set title = "配送先選択" %}
+
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+{% block header %}
+{% include 'Blocks/header.html' %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">配送先選択</h1>
+<form method="POST" action="{{ url_for('complete') }}">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="address1" name="address" value="address1">
+        <label class="form-check-label" for="address1">住所1</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="address2" name="address" value="address2">
+        <label class="form-check-label" for="address2">住所2</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" id="address3" name="address" value="address3">
+        <label class="form-check-label" for="address3">住所3</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-4">配送先を選択</button>
+</form>
+{% endblock %}
+
+
+{% block footer %}
+{% include 'Blocks/footer.html' %}
+{% endblock %}

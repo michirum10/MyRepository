@@ -1,0 +1,23 @@
+{% set title = "購入完了" %}
+
+<!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- headerファイルを呼び出す -->
+{% block header %}
+{% include 'Blocks/header.html'   %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">購入完了</h1>
+<p>ご購入ありがとうございました。</p>
+<a href="{{ url_for('index') }}" class="btn btn-primary mt-4">トップページへ戻る</a>
+{% endblock %}
+
+<!-- footerファイルを呼び出す -->
+{% block footer %}
+{% include 'Blocks/footer.html'   %}
+{% endblock %}

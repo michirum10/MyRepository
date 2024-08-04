@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if mode == 1 %}
+        <title>社員管理システム -- 新規登録 --</title>
+    {% elif mode == 2 %}
+        <title>社員管理システム -- 詳細[{{data.name}}] --</title>
+    {% elif mode == 3 %}
+        <title>社員管理システム -- 更新[{{data.name}}] --</title>
+    {% endif %}
+</head>
+<body>
+    {% if data %}
+        {% set name = data.name %}
+        {% set age = data.age %}
+        {% set genderSelect = data.genderSelect %}
+        {% set deptSelect = data.deptSelect %}
+        {% set btnName = '更新' %}
+    {% else %}
+        {% set name = '' %}
+        {% set age = '' %}
+        {% set genderSelect = ['','',''] %}
+        {# deptSelectはmain.pyから送られてくる。 #}
+        {% set btnName = '新規登録' %}
+    {% endif %}
+    {% if mode == 1 %}
+        {% set readonly = ''%}
+        {% set disabled = ''%}
+        <form action="" method="post">
+    {% elif mode == 2 %}
+        {% set readonly = 'readonly'%}
+        {% set disabled = 'disabled'%}
+        {% set selected = 'selected' %}
+        <form>
+    {% elif mode == 3 %}
+        {% set readonly = ''%}
+        {% set disabled = ''%}
+        {% set selected = 'selected' %}
+        <form action="" method="post">
+    {% endif %}
+        <label for="name">氏名：</label>
+        <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
+        <label for="age">年齢：</label>
+        <!-- <input type="number" name="age" id="age" value="{{age}}" {{readonly}}> -->
+        <select name="age" id="age" {{disabled}}>
+            {% for index in range(18,100) %}
+                <option value="{{index}}" 
+                    {% if index == age %}
+                        {{selected}}
+                    {% endif %}>{{index}}</option>
+            {% endfor %}
+        </select>
+        <label for="gender">性別：</label>
+        <select name="gender" id="gender" {{disabled}}>
+            <option value="0" {{genderSelect[0]}}>男</option>
+            <option value="1" {{genderSelect[1]}}>女</option>
+            <option value="2" {{genderSelect[2]}}>その他</option>
+        </select>
+        <label for="dept">部署名：</label>
+        <select name="dept" id="dept" {{disabled}}>
+            {% for key in deptSelect.keys() %}
+                <option value="{{key}}" {{deptSelect[key]['selected']}}>
+                    {{deptSelect[key]['name']}}
+                    {% if deptSelect[key]['del_flag'] == 1 %}
+                        [削除済み]
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+        {% if mode == 2 %}
+            <a href="{{url_for('eUpdate',id=data.id)}}">更新</a>
+        {% else %}
+            <button type="submit">{{btnName}}</button>
+        {% endif %}
+    </form>
+    <div>
+        <button><a href="{{ url_for('index') }}">戻る</a></button>
+    </div>
+</body>
+</html>

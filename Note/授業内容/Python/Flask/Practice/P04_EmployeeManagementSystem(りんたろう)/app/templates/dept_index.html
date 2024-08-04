@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>社員管理システム -- 部署一覧 --</title>
+    <title>部署管理システム -- リスト --</title>
 </head>
 <body>
     <div>
-        <ul>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul>
@@ -18,14 +17,12 @@
             {% else %}
             {% endif %}
         {% endwith %}
-        </ul>
     </div>
     <div>
-        <a href="{{url_for('index')}}">社員一覧に戻る</a>
-        <a href="{{url_for('dCreate')}}">新規部署登録</a>
+        <button><a href="{{url_for('DEPT_CRUD.dCreate')}}">部署登録</a></button>
+        <button><a href="{{url_for('DEPT_CRUD.dDelete')}}">一括管理</a></button>
     </div>
-
-    {% if depts %}
+    {% if datas %}
         <table>
             <thead>
                 <tr>
@@ -36,27 +33,25 @@
                 </tr>
             </thead>
             <tbody>
-                {% for dept in depts %}
+                {% for data in datas %}
                     <tr>
-                        <td>{{dept.id}}</td>
-                        <td>{{dept.name}}</td>
-                        <td><a href="{{ url_for('dUpdate', id=dept.id) }}">更新</a></td>
-                        <td><a href="#" onclick="confirmDelete('{{ url_for('dept_list.dept_delete', id=dept.id) }}')">削除</a></td>
+                        <td>{{data.id}}</td>
+                        <td>{{data.name}}
+                            {% if data.del_flag == 1 %}
+                                [削除済み]
+                            {% endif %}
+                        </td>
+                        <td><a href="{{url_for('DEPT_CRUD.dUpdate',id=data.id)}}">更新</a></td>
+                        <td><a href="{{url_for('DEPT_CRUD.delete',id=data.id)}}">削除</a></td> 
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        部署データがありません。
+        データがありません。
     {% endif %}
+    <div>
+        <button><a href="{{ url_for('index') }}">従業員一覧に戻る</a></button>
+    </div>
 </body>
-<script>
-    function confirmDelete(url) {
-        console.log('confirmDelete called with URL:', url);  // 追加
-        if (confirm("本当に削除してよろしいですか？")) {
-            window.location.href = url;
-        }
-    }
-</script>
-
 </html>
