@@ -9,10 +9,11 @@ from flask_wtf import FlaskForm  # Flask-WTFのフォームクラスをインポ
 from wtforms import StringField, PasswordField, SubmitField  # WTFormsのフィールドクラスをインポート
 from wtforms.validators import DataRequired, Length, ValidationError  # WTFormsのバリデータをインポート
 from app import db  # データベースインスタンスをインポート
-# モデルクラスをインポート
-from app.src.model.Model import User, PersonalInfo, Product, Cart, TransactionStatus
 
-bp = Blueprint('auth', __name__)  # 'auth'(認証)という名前のBlueprintを作成
+# モデルクラスをインポート(appから持ってくる)
+from app import User
+
+auth = Blueprint('auth', __name__)  # 'auth'(認証)という名前のBlueprintを作成
 
 # ログイン用入力クラス
 class LoginForm(FlaskForm):
@@ -36,38 +37,56 @@ class SignUpForm(LoginForm):  # LoginFormを継承してSignUpFormを作成
         if user:
             raise ValidationError('そのユーザー名は既に使用されています')  # バリデーションエラーメッセージ
 
-@bp.route('/login', methods=['GET', 'POST'])  # /loginルートを定義
+@auth.route('/login', methods=['GET', 'POST'])  # /loginルートを定義
+@login_required  # ログイン済みの場合のみ実行
 def login():
     form = LoginForm()  # LoginFormのインスタンスを作成
     if form.validate_on_submit():  # フォームが送信され、バリデーションが成功した場合
-        user = User.query.filter_by(username=form.username.data).first()  # 入力されたユーザー名でユーザーを検索
-        if user and user.check_password(form.password.data):  # ユーザーが存在し、パスワードが一致する場合
-            login_user(user)  # ユーザーをログイン
-            flash('ログインに成功しました。', 'success')  # 成功メッセージを表示
-            return redirect(url_for('main.index'))  # メインページにリダイレクト
-        else:
-            flash('ユーザー名またはパスワードが間違っています。', 'danger')  # エラーメッセージを表示
+        # データ入力取得
+        username = form.username.data
+        password = form.password.data
+        
+        user = User.query.filter_by(username=username).first()  # 入力されたユーザー名でユーザーを検索
+        # 認証判定
+        if user is not None and user.check_password(password):  # ユーザーが存在し、パスワードが一致する場合
+            # 成功
+            # 引数として渡されたuserオブジェクトを使用して、ユーザーをログイン状態にする
+            login_user(user)
+            # 画面遷移
+            return redirect(url_for("index"))
+        # 失敗
+        flash("認証不備です")
+    # GET時
+    # 画面遷移
     return render_template('pages/login.html', form=form)  # ログインページをレンダリング
 
-@bp.route('/signup', methods=['GET', 'POST'])  # /signupルートを定義
+@auth.route('/signup', methods=['GET', 'POST'])  # /signupルートを定義
+@login_required  # ログイン済みの場合のみ実行
 def signup():
     form = SignUpForm()  # SignUpFormのインスタンスを作成
     if form.validate_on_submit():  # フォームが送信され、バリデーションが成功した場合
-        user = User(username=form.username.data)  # 新しいユーザーを作成
-        user.set_password(form.password.data)  # パスワードを設定
+        # データ入力取得
+        username = form.username.data
+        password = form.password.data
+        # モデルを生成
+        user = User(username=username)  # 新しいユーザーを作成
+        # パスワードハッシュ化
+        user.set_password(password)  # パスワードを設定
+        # 登録処理
         db.session.add(user)  # ユーザーをデータベースに追加
         db.session.commit()  # 変更をコミット
+        # フラッシュメッセージ
         flash('アカウントが作成されました。', 'success')  # 成功メッセージを表示
         return redirect(url_for('auth.login'))  # ログインページにリダイレクト
     return render_template('pages/sign_up.html', form=form)  # サインアップページをレンダリング
 
-@bp.route('/logout')  # /logoutルートを定義
+@auth.route('/logout')  # /logoutルートを定義
 @login_required  # このルートはログインが必要
 def logout():
     logout_user()  # ユーザーをログアウト
     flash('ログアウトしました。', 'success')  # 成功メッセージを表示
     return redirect(url_for('main.index'))  # メインページにリダイレクト
 
-@bp.route('/')  # ルートページを定義
+@auth.route('/')  # ルートページを定義
 def index():
     return render_template('pages/index.html')  # インデックスページをレンダリング

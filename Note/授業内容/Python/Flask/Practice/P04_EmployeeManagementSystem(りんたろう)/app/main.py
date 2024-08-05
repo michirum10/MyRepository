@@ -157,7 +157,7 @@ class EmployeeUpdate(MethodView):
             flash("データの更新に成功しました。")
             # 全件表示のページへリダイレクト
             return redirect(url_for('index')) 
-   
+
 app.add_url_rule("/update/<id>",view_func=EmployeeUpdate.as_view("eUpdate"))
 
 @app.route("/delete/<id>")

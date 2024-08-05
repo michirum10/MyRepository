@@ -1,0 +1,56 @@
+{% set title = "商品一覧" %}
+
+<!-- layoutファイルを反映 -->
+{% extends 'layout/layout.html' %}
+
+{% block head %}{% endblock %}
+
+<!-- headerファイルを呼び出す -->
+{% block header %}
+{% include 'Blocks/header.html' %}
+{% endblock %}
+
+{% block contents %}
+<h1 class="my-4">商品一覧</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>商品名</th>
+            <th>画像</th>
+            <th>値段</th>
+            <th>詳細</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- データが存在する場合にテーブルを表示 -->
+        {% if products %}
+            <!-- 取得した各データをテーブルの行として表示 -->
+            {% for product in products %}
+                <tr>
+                    <!-- 商品のIDを表示 -->
+                    <td>{{ product.id }}</td>
+                    <!-- 商品の名前を表示 -->
+                    <td>{{ product.name }}</td>
+                    <!-- 商品の画像を表示 -->
+                    <td><img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}" style="width: 100px;"></td>
+                    <!-- 商品の値段を表示 -->
+                    <td>{{ product.price }}円</td>
+                    <!-- 詳細ページへのリンク -->
+                    <td><a href="{{ url_for('shop.detail', id=product.id) }}">詳細</a></td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <!-- データが存在しない場合に表示 -->
+            <tr>
+                <td colspan="5">データがありません。</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
+
+<!-- footerファイルを呼び出す -->
+{% block footer %}
+{% include 'Blocks/footer.html' %}
+{% endblock %}
