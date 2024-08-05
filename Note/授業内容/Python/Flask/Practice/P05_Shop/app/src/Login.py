@@ -37,8 +37,8 @@ class SignUpForm(LoginForm):  # LoginFormを継承してSignUpFormを作成
         if user:
             raise ValidationError('そのユーザー名は既に使用されています')  # バリデーションエラーメッセージ
 
-@auth.route('/login', methods=['GET', 'POST'])  # /loginルートを定義
-@login_required  # ログイン済みの場合のみ実行
+# /loginルート
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()  # LoginFormのインスタンスを作成
     if form.validate_on_submit():  # フォームが送信され、バリデーションが成功した場合
@@ -53,15 +53,15 @@ def login():
             # 引数として渡されたuserオブジェクトを使用して、ユーザーをログイン状態にする
             login_user(user)
             # 画面遷移
-            return redirect(url_for("index"))
+            return redirect(url_for("shop"))
         # 失敗
         flash("認証不備です")
     # GET時
     # 画面遷移
-    return render_template('pages/login.html', form=form)  # ログインページをレンダリング
+    return render_template('pages/shop.html', form=form)  # ログインページをレンダリング
 
-@auth.route('/signup', methods=['GET', 'POST'])  # /signupルートを定義
-@login_required  # ログイン済みの場合のみ実行
+# /signupルート
+@auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignUpForm()  # SignUpFormのインスタンスを作成
     if form.validate_on_submit():  # フォームが送信され、バリデーションが成功した場合
@@ -80,13 +80,10 @@ def signup():
         return redirect(url_for('auth.login'))  # ログインページにリダイレクト
     return render_template('pages/sign_up.html', form=form)  # サインアップページをレンダリング
 
-@auth.route('/logout')  # /logoutルートを定義
+# /logoutルート
+@auth.route('/logout')
 @login_required  # このルートはログインが必要
 def logout():
     logout_user()  # ユーザーをログアウト
     flash('ログアウトしました。', 'success')  # 成功メッセージを表示
-    return redirect(url_for('main.index'))  # メインページにリダイレクト
-
-@auth.route('/')  # ルートページを定義
-def index():
-    return render_template('pages/index.html')  # インデックスページをレンダリング
+    return redirect(url_for('index'))  # メインページにリダイレクト

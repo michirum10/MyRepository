@@ -7,3 +7,9 @@
 
 # Python
 __pycache__/
+
+# run.pyをショートカットで実行
+run.bat
+
+# vscodeの設定
+.vscode
