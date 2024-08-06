@@ -13,11 +13,13 @@
 
 {% block contents %}
 <h1 class="my-4">カートの中身</h1>
-<div class="cart-items" id="cartItems"></div>
+<div class="cart-items" id="cartItems">
+
+</div>
 <p>合計個数: <span id="totalQuantity"></span></p>
 <p>合計金額: <span id="totalAmount"></span></p>
-<!-- Bootstrap購入ボタン -->
-<a href="{{ url_for('complete') }}" class="btn btn-primary mt-4" id="checkout-button">購入する</a>
+<!-- 購入完了画面へ遷移 -->
+<a href="{{ url_for('cart.complete') }}" class="btn btn-primary mt-4" id="checkout-button">購入する</a>
 <!-- Bootstrap戻るボタン -->
 <a href="/" class="btn btn-secondary mt-4">戻る</a>
 {% endblock %}
@@ -27,3 +29,10 @@
 {% block footer %}
 {% include 'Blocks/footer.html'   %}
 {% endblock %}
+
+    <!-- 商品名 -->
+    <!-- <h1>{{ product.name }}</h1> -->
+    <!-- 商品画像 -->
+    <!-- <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}" style="width: 300px;"> -->
+    <!-- 商品価格 -->
+    <!-- <p>{{ product.price }}円</p> -->

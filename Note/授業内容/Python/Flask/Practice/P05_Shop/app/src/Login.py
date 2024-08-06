@@ -11,9 +11,9 @@ from wtforms.validators import DataRequired, Length, ValidationError  # WTForms�
 from app import db  # データベースインスタンスをインポート
 
 # モデルクラスをインポート(appから持ってくる)
-from app import User
+from app import *
 
-auth = Blueprint('auth', __name__)  # 'auth'(認証)という名前のBlueprintを作成
+auth_bp = Blueprint('auth', __name__)  # 'auth'(認証)という名前のBlueprintを作成
 
 # ログイン用入力クラス
 class LoginForm(FlaskForm):
@@ -25,20 +25,10 @@ class LoginForm(FlaskForm):
     def validate_password(self, password):
         if not (any(c.isalpha() for c in password.data) and  # 英字が含まれているかチェック
                 any(c.isdigit() for c in password.data)):  # 数字が含まれているかチェック
-            raise ValidationError('パスワードには【英数字を含める必要があります')  # バリデーションエラーメッセージ
-
-# サインアップ用入力クラス
-class SignUpForm(LoginForm):  # LoginFormを継承してSignUpFormを作成
-    submit = SubmitField('サインアップ')  # サインアップボタン
-
-    # カスタムバリデータ
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()  # ユーザー名が既に存在するかチェック
-        if user:
-            raise ValidationError('そのユーザー名は既に使用されています')  # バリデーションエラーメッセージ
+            raise ValidationError('パスワードには【英数字】を含める必要があります')  # バリデーションエラーメッセージ
 
 # /loginルート
-@auth.route('/login', methods=['GET', 'POST'])
+@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()  # LoginFormのインスタンスを作成
     if form.validate_on_submit():  # フォームが送信され、バリデーションが成功した場合
@@ -53,35 +43,16 @@ def login():
             # 引数として渡されたuserオブジェクトを使用して、ユーザーをログイン状態にする
             login_user(user)
             # 画面遷移
-            return redirect(url_for("shop"))
+            return redirect(url_for("shop.shop"))  # shopルートのshop関数？
         # 失敗
         flash("認証不備です")
     # GET時
     # 画面遷移
-    return render_template('pages/shop.html', form=form)  # ログインページをレンダリング
+    return render_template('pages/login.html', form=form)  # ログインページをレンダリング
 
-# /signupルート
-@auth.route('/signup', methods=['GET', 'POST'])
-def signup():
-    form = SignUpForm()  # SignUpFormのインスタンスを作成
-    if form.validate_on_submit():  # フォームが送信され、バリデーションが成功した場合
-        # データ入力取得
-        username = form.username.data
-        password = form.password.data
-        # モデルを生成
-        user = User(username=username)  # 新しいユーザーを作成
-        # パスワードハッシュ化
-        user.set_password(password)  # パスワードを設定
-        # 登録処理
-        db.session.add(user)  # ユーザーをデータベースに追加
-        db.session.commit()  # 変更をコミット
-        # フラッシュメッセージ
-        flash('アカウントが作成されました。', 'success')  # 成功メッセージを表示
-        return redirect(url_for('auth.login'))  # ログインページにリダイレクト
-    return render_template('pages/sign_up.html', form=form)  # サインアップページをレンダリング
 
 # /logoutルート
-@auth.route('/logout')
+@auth_bp.route('/logout')
 @login_required  # このルートはログインが必要
 def logout():
     logout_user()  # ユーザーをログアウト

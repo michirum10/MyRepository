@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- HTMLドキュメントの文字エンコーディングをUTF-8に設定 -->
     <meta charset="UTF-8">
+    <!-- ビューポートの設定。画面幅に合わせてスケーリング -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ページタイトルの設定。modeの値に応じてタイトルが変わる -->
     {% if mode == 1 %}
         <title>社員管理システム -- 新規登録 --</title>
     {% elif mode == 2 %}
@@ -12,59 +16,78 @@
     {% endif %}
 </head>
 <body>
+    <!-- 'data'オブジェクトが存在するかどうかで処理を分岐 -->
     {% if data %}
+        <!-- dataから値を取得し、対応する変数にセット -->
         {% set name = data.name %}
         {% set age = data.age %}
         {% set genderSelect = data.genderSelect %}
         {% set deptSelect = data.deptSelect %}
         {% set btnName = '更新' %}
     {% else %}
+        <!-- 新規登録モードのため、変数を空や初期値に設定 -->
         {% set name = '' %}
         {% set age = '' %}
         {% set genderSelect = ['','',''] %}
         {# deptSelectはmain.pyから送られてくる。 #}
         {% set btnName = '新規登録' %}
     {% endif %}
+
+    <!-- modeに応じてフォームの状態を設定 -->
     {% if mode == 1 %}
+        <!-- 新規登録モード -->
         {% set readonly = ''%}
         {% set disabled = ''%}
         <form action="" method="post">
     {% elif mode == 2 %}
+        <!-- 詳細表示モード（読み取り専用） -->
         {% set readonly = 'readonly'%}
         {% set disabled = 'disabled'%}
         <form>
     {% elif mode == 3 %}
+        <!-- 更新モード -->
         {% set readonly = ''%}
         {% set disabled = ''%}
         <form action="" method="post">
     {% endif %}
-        <label for="name">氏名：</label>
-        <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
-        <label for="age">年齢：</label>
-        <input type="number" name="age" id="age" value="{{age}}" {{readonly}}>
-        <label for="gender">性別：</label>
-        <!-- 性別選択分岐 -->
-        <select name="gender"{{disabled}}>
-            <!-- selectがreadonly使えないのでdisabledする -->
-            <option value="0" {{genderSelect[0]}}></option>
-            <option value="1" {{genderSelect[1]}}>男</option>
-            <option value="2" {{genderSelect[2]}}>女</option>
-        </select>
-        <label for="dept_id">部署ID：</label>
-        <select name="dept_id"{{disabled}}>
-            {% for key in deptSelect.keys() %}
-                <option value="{{key}}" {{deptSelect[key]['selected']}}>{{deptSelect[key]['name']}}</option>
-            {% endfor %}
-        </select>
 
-        {# <input type="number" name="dept_id" id="dept_id" value="{{dept_id}}" {{readonly}}> #}
-        {% if mode == 2 %}
-            <a href="{{url_for('eUpdate', id=data.id)}}">更新</a>
-        {% else %}
-            <button type="submit">{{btnName}}</button>
-        {% endif %}
+    <!-- 入力フォームの表示 -->
+    <label for="name">氏名：</label>
+    <!-- 名前の入力欄。modeが2（詳細モード）の場合、readonly属性が追加される -->
+    <input type="text" name="name" id="name" value="{{name}}" {{readonly}}>
+
+    <label for="age">年齢：</label>
+    <!-- 年齢の入力欄 -->
+    <input type="number" name="age" id="age" value="{{age}}" {{readonly}}>
+
+    <label for="gender">性別：</label>
+    <!-- 性別選択のドロップダウン。modeが2の場合、disabled属性が追加され選択不可になる -->
+    <select name="gender"{{disabled}}>
+        <!-- select要素にはreadonly属性がないため、disabled属性で対応 -->
+        <option value="0" {{genderSelect[0]}}></option>
+        <option value="1" {{genderSelect[1]}}>男</option>
+        <option value="2" {{genderSelect[2]}}>女</option>
+    </select>
+
+    <label for="dept_id">部署ID：</label>
+    <!-- 部署IDの選択ドロップダウン -->
+    <select name="dept_id"{{disabled}}>
+        {% for key in deptSelect.keys() %}
+            <!-- 選択された部署があれば、その部署をselected状態にする -->
+            <option value="{{key}}" {{deptSelect[key]['selected']}}>{{deptSelect[key]['name']}}</option>
+        {% endfor %}
+    </select>
+
+    <!-- 詳細表示モードの場合のみ、更新リンクを表示 -->
+    {% if mode == 2 %}
+        <a href="{{url_for('eUpdate', id=data.id)}}">更新</a>
+    {% else %}
+        <!-- 新規登録または更新ボタン -->
+        <button type="submit">{{btnName}}</button>
+    {% endif %}
     </form>
-    <!-- もどるボタン -->
+
+    <!-- 戻るボタン -->
     <a href="{{url_for('index')}}">戻る</a>
 </body>
 </html>

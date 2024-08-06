@@ -36,6 +36,14 @@ document.getElementById('back-button').addEventListener('click', () => {
     window.location.href = 'index.html';
 });
 
+// カートに入れる処理
+function cartIn(index) {
+    console.log(window.opener)
+    // 親ウィンドウのcartIn関数を実行する。
+    window.opener.cartIn(index)
+    // ウィンドウを閉じる
+    window.close()
+}
 
 // displayItems.jsでまとめたので不要
 

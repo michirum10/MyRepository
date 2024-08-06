@@ -37,7 +37,7 @@ login_manager.login_view = 'auth.login'  # ログインページの設定
 from app.src.model import *
 
 # ユーザーローダー関数を定義（何？）
-# Flask-Loginがユーザーをロードするために使用する
+# Flask-Loginがユーザーをロードするために使用するらしい
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -47,19 +47,18 @@ def load_user(user_id):
 #     db.create_all()  # データベーステーブルを作成
 
 # Blueprintの登録
-# authブループリントを登録
-from app.src import Login
-app.register_blueprint(Login.auth, url_prefix='/auth')  # authブループリントを登録
+from app.src import Login,Account,Shop,CartManager
+app.register_blueprint(Login.auth_bp, url_prefix='/auth')  # auth(認証)
+app.register_blueprint(Account.account_bp, url_prefix='/account')
+app.register_blueprint(Shop.shop_bp, url_prefix='/shop')
+app.register_blueprint(CartManager.cart_bp, url_prefix='/cart')
 
-# shopBlueprintを登録
-from app.src import Shop
-app.register_blueprint(Shop.shop, url_prefix='/shop')
 
 
 # メインモジュールをインポート
 from app import main
 
-# コンテキストプロセッサを追加して、current_userを全テンプレートで利用可能にする（？）
+# コンテキストプロセッサを追加して、current_userを全テンプレートで利用可能にする（ha？）
 @app.context_processor
 def inject_user():
     return dict(current_user=current_user)

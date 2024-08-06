@@ -13,12 +13,24 @@
 
 {% block contents %}
 <h1 class="my-4">商品詳細</h1>
-<div class="product-detail" id="productDetail"></div>
-<a href="{{ url_for('cart') }}" class="btn btn-primary mt-4" id="add-to-cart-button">カートに入れる</a>
-<a href="{{ url_for('index') }}" class="btn btn-secondary mt-4">戻る</a>
+<div class="product-detail" id="productDetail">
+    <!-- 商品名 -->
+    <h1>{{ product.name }}</h1>
+    <!-- 商品画像 -->
+    <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}" style="width: 300px;">
+    <!-- 商品価格 -->
+    <p>{{ product.price }}円</p>
+    <!-- カートに追加ボタン -->
+    <form action="{{ url_for('shop.add_to_cart', product_id=product.id) }}" method="post">
+        <button type="submit" class="btn btn-primary">カートに追加</button>
+    </form>
+    <!-- 戻るボタン -->
+    <a href="{{ url_for('shop.shop') }}" class="btn btn-secondary mt-4">戻る</a>
+</div>
 {% endblock %}
 
 <!-- footerファイルを呼び出す -->
 {% block footer %}
 {% include 'Blocks/footer.html'   %}
 {% endblock %}
+

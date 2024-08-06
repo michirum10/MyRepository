@@ -10,7 +10,7 @@
 
 {% block contents %}
 <h1 class="my-4">新規会員登録</h1>
-<form method="POST" action="{{ url_for('auth.signup') }}">
+<form method="POST" action="{{ url_for('account.signup') }}">
     {{ form.hidden_tag() }}
     <div class="mb-3">
         {{ form.username.label }}

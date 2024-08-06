@@ -113,8 +113,8 @@ function displayItems(items) {
     });
 }
 
-// // 詳細ページに遷移
-// function goToDetailPage(item) {
-//     sessionStorage.setItem('selectedItem', JSON.stringify(item));
-//     window.location.href = '../html/detail.html';
-// }
+// 詳細ページに遷移
+function goToDetailPage(item) {
+    sessionStorage.setItem('selectedItem', JSON.stringify(item));
+    window.location.href = '../html/detail.html';
+}
