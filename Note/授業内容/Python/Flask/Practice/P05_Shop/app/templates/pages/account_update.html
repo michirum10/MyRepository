@@ -1,0 +1,30 @@
+{% set title = "アカウント設定変更" %}  <!-- ページタイトルを設定 -->
+
+{% extends 'layout/layout_login.html' %}  <!-- layout_login.htmlテンプレートを継承 -->
+
+{% block head %}{% endblock %}  <!-- headブロック：ページごとに追加のヘッダー情報を挿入するためのブロック -->
+
+{% block contents %}
+<h1 class="my-4">アカウント設定変更</h1>
+<form method="POST" action="{{ url_for('account_update') }}">  <!-- フォームの送信先を設定 -->
+    {{ form.hidden_tag() }}  <!-- CSRFトークンを含む隠しフィールド(何のため？) -->
+    <div class="mb-3">
+        <!-- ユーザー名入力フィールド -->
+        {{ form.username.label }}
+        {{ form.username(class="form-control", size=32) }}
+        {% for error in form.username.errors %}
+            <div class="text-danger">{{ error }}</div>  <!-- ユーザー名のバリデーションエラーメッセージを表示 -->
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        <!-- パスワード入力フィールド -->
+        {{ form.password.label }}
+        {{ form.password(class="form-control", size=32) }}
+        {% for error in form.password.errors %}
+            <div class="text-danger">{{ error }}</div>  <!-- パスワードのバリデーションエラーメッセージを表示 -->
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>  <!-- 更新ボタン -->
+</form>
+{% endblock %}
+

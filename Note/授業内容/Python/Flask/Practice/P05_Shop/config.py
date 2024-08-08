@@ -1,4 +1,6 @@
 # config.py
+# 設定ファイル
+
 # SECRET_KEYの設定
 # データベースURIを取得
 

@@ -2,30 +2,15 @@
 
 <!-- extends拡張機能 -->
 <!-- layoutファイルを反映 -->
-{% extends 'layout/layout.html' %}
+{% extends 'layout/layout_login.html' %}
 
 {% block head %}{% endblock %}
 
-<!-- headerファイルを呼び出す -->
-{% block header %}
-{% include 'Blocks/header.html'   %}
-{% endblock %}
 
 {% block contents %}
 <!-- 商品一覧画面へ遷移 -->
 <a href="{{ url_for('shop.shop') }}">商品一覧へ</a>
 {% endblock %}
 
-<!-- footerファイルを呼び出す -->
-{% block footer %}
-{% include 'Blocks/footer.html'   %}
-{% endblock %}
 
-<!-- index -->
-<!-- 商品名と値段、画像を表示(ローカルのdata.jsonからデータを取得する)
-    それらをクリックすると商品詳細画面へ遷移(新しくウィンドウを開く)
-    購入ボタン⇛購入確認画面へ遷移 -->
-
-<!-- 商品をカートに保存したら閉じる -->
-<!-- オープナーモジュール -->
-<!-- window.opener関数名。関数名 -->
+<!-- Blockは書き換えたいときだけ -->

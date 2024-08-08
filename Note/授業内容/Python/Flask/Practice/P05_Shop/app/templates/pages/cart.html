@@ -1,38 +1,37 @@
-{% set title = "カート" %}
+{% set title = "カート" %}  <!-- ページタイトルを設定 -->
 
-<!-- extends拡張機能 -->
-<!-- layoutファイルを反映 -->
-{% extends 'layout/layout.html' %}
+{% extends 'layout/layout.html' %}  <!-- layout.htmlテンプレートを継承 -->
 
-{% block head %}{% endblock %}
-
-<!-- headerファイルを呼び出す -->
-{% block header %}
-{% include 'Blocks/header.html'   %}
-{% endblock %}
+{% block head %}{% endblock %}  <!-- headブロック：ページごとに追加のヘッダー情報を挿入するためのブロック -->
 
 {% block contents %}
-<h1 class="my-4">カートの中身</h1>
-<div class="cart-items" id="cartItems">
-
-</div>
-<p>合計個数: <span id="totalQuantity"></span></p>
-<p>合計金額: <span id="totalAmount"></span></p>
-<!-- 購入完了画面へ遷移 -->
-<a href="{{ url_for('cart.complete') }}" class="btn btn-primary mt-4" id="checkout-button">購入する</a>
-<!-- Bootstrap戻るボタン -->
-<a href="/" class="btn btn-secondary mt-4">戻る</a>
+<h1 class="my-4">カート</h1>
+<table class="table">
+    <!-- テーブルヘッダー -->
+    <thead>
+        <tr>
+            <th>商品名</th>
+            <th>価格</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}  <!-- 各カートアイテムをループで表示 -->
+            <tr>
+                <td>{{ item.product.name }}</td>  <!-- 商品名を表示 -->
+                <td>{{ item.product.price }}円</td>  <!-- 価格を表示 -->
+                <td>
+                    <form action="{{ url_for('cart.delete_item', item_id=item.id) }}" method="post">
+                        <button type="submit" class="btn btn-danger">削除</button>  <!-- 削除ボタン -->
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>合計金額: {{ total_amount }}円</p>  <!-- 合計金額を表示 -->
+<form action="{{ url_for('cart.checkout') }}" method="post">
+    <button type="submit" class="btn btn-primary">購入する</button>  <!-- 購入ボタン -->
+</form>
 {% endblock %}
 
-
-<!-- footerファイルを呼び出す -->
-{% block footer %}
-{% include 'Blocks/footer.html'   %}
-{% endblock %}
-
-    <!-- 商品名 -->
-    <!-- <h1>{{ product.name }}</h1> -->
-    <!-- 商品画像 -->
-    <!-- <img src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}" style="width: 300px;"> -->
-    <!-- 商品価格 -->
-    <!-- <p>{{ product.price }}円</p> -->

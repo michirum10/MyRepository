@@ -1,0 +1,34 @@
+{% set title = "購入履歴" %}  <!-- ページタイトルを設定 -->
+
+{% extends 'layout/layout_login.html' %}  <!-- layout_login.htmlテンプレートを継承 -->
+
+{% block head %}{% endblock %}  <!-- headブロック：ページごとに追加のヘッダー情報を挿入するためのブロック -->
+
+{% block contents %}
+<h1 class="my-4">購入履歴</h1>
+<table class="table">
+    <!-- テーブルヘッダー -->
+    <thead>
+        <tr>
+            <th>取引ID</th>  
+            <th>カートID</th>
+            <th>届け先</th>  
+            <th>状況</th>
+            <th>作成時間</th>
+            <th>更新時間</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}  <!-- 各取引をループで表示 -->
+            <tr>
+                <td>{{ transaction.id }}</td>  <!-- 取引IDを表示 -->
+                <td>{{ transaction.cart_id }}</td>  <!-- カートIDを表示 -->
+                <td>{{ transaction.delivery_address }}</td>  <!-- 届け先を表示 -->
+                <td>{{ transaction.status }}</td>  <!-- 状況を表示 -->
+                <td>{{ transaction.created_at }}</td>  <!-- 作成時間を表示 -->
+                <td>{{ transaction.updated_at }}</td>  <!-- 更新時間を表示 -->
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

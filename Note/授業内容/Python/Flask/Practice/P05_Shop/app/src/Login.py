@@ -35,13 +35,12 @@ def login():
         # データ入力取得
         username = form.username.data
         password = form.password.data
-        
-        user = User.query.filter_by(username=username).first()  # 入力されたユーザー名でユーザーを検索
+        # 入力されたユーザー名でユーザーを検索
+        user = User.query.filter_by(username=username).first()
         # 認証判定
         if user is not None and user.check_password(password):  # ユーザーが存在し、パスワードが一致する場合
             # 成功
-            # 引数として渡されたuserオブジェクトを使用して、ユーザーをログイン状態にする
-            login_user(user)
+            login_user(user)  # 引数として渡されたuserオブジェクトを使用して、ユーザーをログイン状態にする
             # 画面遷移
             return redirect(url_for("shop.shop"))  # shopルートのshop関数？
         # 失敗

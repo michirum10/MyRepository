@@ -12,6 +12,7 @@
 <h1 class="my-4">新規会員登録</h1>
 <form method="POST" action="{{ url_for('account.signup') }}">
     {{ form.hidden_tag() }}
+    <!-- ユーザー名入力 -->
     <div class="mb-3">
         {{ form.username.label }}
         {{ form.username(class="form-control", size=32) }}
@@ -19,6 +20,7 @@
             <div class="text-danger">{{ error }}</div>
         {% endfor %}
     </div>
+    <!-- パスワード入力 -->
     <div class="mb-3">
         {{ form.password.label }}
         {{ form.password(class="form-control", size=32) }}
@@ -26,10 +28,32 @@
             <div class="text-danger">{{ error }}</div>
         {% endfor %}
     </div>
+    <!-- 氏名入力 -->
+    <div class="mb-3">
+        {{ form.last_name.label }}
+        {{ form.last_name(class="form-control", size=32) }}
+        {% for error in form.last_name.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <!-- 名前入力 -->
+    <div class="mb-3">
+        {{ form.first_name.label }}
+        {{ form.first_name(class="form-control", size=32) }}
+        {% for error in form.first_name.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    <!-- 住所入力 -->
+    <div class="mb-3">
+        {{ form.address.label }}
+        {{ form.address(class="form-control", size=32) }}
+        {% for error in form.address.errors %}
+            <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
     <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
 </form>
-    <!-- Bootstrap戻るボタン -->
-    <a href="/" class="btn btn-secondary mt-4">戻る</a>
 {% endblock %}
 
 {% block footer %}

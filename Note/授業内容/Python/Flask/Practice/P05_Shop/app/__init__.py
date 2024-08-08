@@ -7,15 +7,13 @@
 
 print("initファイルの実行")  # 初期化ファイルが実行されたことを示すメッセージを表示
 
-# Flaskモジュールをインポート
+# インポート
 from flask import Flask, render_template
-# SQLAlchemyモジュールをインポート
 from flask_sqlalchemy import SQLAlchemy
-# Flask-Loginモジュールをインポート
 from flask_login import LoginManager, current_user
-# Flask-Migrateをインポート
+# migrateをインポートしてDB操作できるように
 from flask_migrate import Migrate
-# Configクラスをインポート
+# Configクラス（設定）をインポート
 from config import Config 
 
 # Flaskアプリケーションのインスタンスを生成
@@ -31,13 +29,15 @@ migrate = Migrate(app, db)  # Flask-Migrateのインスタンスを作成
 login_manager = LoginManager()
 login_manager.init_app(app)  # Flaskアプリケーションにログインマネージャを設定
 login_manager.login_view = 'auth.login'  # ログインページの設定
+login_manager.login_message = "ログインが必要です。"  # フラッシュメッセージをカスタマイズ
+login_manager.login_message_category = "warning"  # フラッシュメッセージのカテゴリを設定
 
-# モデルクラスをインポート
+# モデルクラスをインポート（*で省略可能）
 # from app.src.model import User, PersonalInfo, Product, Cart, TransactionStatus
 from app.src.model import *
 
 # ユーザーローダー関数を定義（何？）
-# Flask-Loginがユーザーをロードするために使用するらしい
+# Flask-Loginがユーザーをロードするために使用する
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -52,8 +52,6 @@ app.register_blueprint(Login.auth_bp, url_prefix='/auth')  # auth(認証)
 app.register_blueprint(Account.account_bp, url_prefix='/account')
 app.register_blueprint(Shop.shop_bp, url_prefix='/shop')
 app.register_blueprint(CartManager.cart_bp, url_prefix='/cart')
-
-
 
 # メインモジュールをインポート
 from app import main

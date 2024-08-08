@@ -1,0 +1,21 @@
+<!-- マイページ -->
+{% set title = "マイページ" %}
+
+<!-- extends拡張機能 -->
+<!-- layoutファイルを反映 -->
+{% extends 'layout/layout_login.html' %}
+
+{% block head %}{% endblock %}
+
+
+{% block contents %}
+<div><!-- 情報更新 -->
+    <a href="{{ url_for('account_update') }}">アカウント情報</a>
+</div>
+<div><!-- historyへのリンク -->
+    <a href="{{ url_for('account.history') }}">購入履歴</a>
+</div>
+{% endblock %}
+
+
+<!-- Blockは書き換えたいときだけ -->

@@ -1,4 +1,6 @@
 # __init__.py model
+# モデルのインポート関係をまとめる
+
 from app import db
 from .user import User
 from .personal_info import PersonalInfo

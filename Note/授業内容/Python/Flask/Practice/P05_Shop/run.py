@@ -9,6 +9,7 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0",port=5002,debug=True)
 
 
+# 実行ショートカット設定
 # ctrl+shift+Bで実行
 
 # ターミナル＞タスクの構成＞tasks.json＞other
