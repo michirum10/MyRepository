@@ -52,8 +52,13 @@
             <div class="text-danger">{{ error }}</div>
         {% endfor %}
     </div>
+    <!-- 送信ボタン -->
     <button type="submit" class="btn btn-primary">{{ form.submit.label }}</button>
+    <!-- Bootstrap戻るボタン -->
+    <a href="/" class="btn btn-secondary">戻る</a>
 </form>
+<br>
+<div><a href="{{ url_for('auth.login') }}">ログインはこちら</a></div>
 {% endblock %}
 
 {% block footer %}

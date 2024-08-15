@@ -12,7 +12,8 @@
         <tr>
             <th>商品名</th>
             <th>価格</th>
-            <th>操作</th>
+            <th>数量</th>  <!-- 数量のヘッダー -->
+            <th></th>  <!-- 操作のヘッダー -->
         </tr>
     </thead>
     <tbody>
@@ -20,6 +21,8 @@
             <tr>
                 <td>{{ item.product.name }}</td>  <!-- 商品名を表示 -->
                 <td>{{ item.product.price }}円</td>  <!-- 価格を表示 -->
+                <td>{{ item.quantity }}</td>  <!-- 数量を表示 -->
+                <td>
                 <td>
                     <form action="{{ url_for('cart.delete_item', item_id=item.id) }}" method="post">
                         <button type="submit" class="btn btn-danger">削除</button>  <!-- 削除ボタン -->

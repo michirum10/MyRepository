@@ -39,6 +39,7 @@ def delete_item(item_id):
         flash("商品が見つかりませんでした。", "danger")
     return redirect(url_for('cart.view_cart'))
 
+
 # 購入手続き
 @cart_bp.route("/cart/checkout", methods=["POST"])
 @login_required  # ログインが必要

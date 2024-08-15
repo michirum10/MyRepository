@@ -1,0 +1,25 @@
+#!/bin/bash
+mkdir Flask
+mkdir Flask/app
+mkdir Flask/app/static
+touch Flask/app/static/a.png
+touch Flask/app/static/b.png
+touch Flask/app/static/c.png
+mkdir Flask/app/src
+mkdir Flask/app/src/model
+touch Flask/app/src/model/a.py
+touch Flask/app/src/model/b.py
+touch Flask/app/src/model/c.py
+touch Flask/app/src/Account.py
+touch Flask/app/src/CartManager.py
+touch Flask/app/src/Login.py
+touch Flask/app/src/Shop.py
+mkdir Flask/app/templates
+touch Flask/app/templates/a.html
+touch Flask/app/templates/b.html
+touch Flask/app/templates/c.html
+touch Flask/app/main.py
+mkdir Flask/instance
+touch Flask/instance/DB.db
+touch run.py
+tree

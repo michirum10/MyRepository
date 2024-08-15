@@ -33,10 +33,10 @@ def detail(id):
 #     return render_template("pages/cart.html",cart_items=cart_items)
 
 # カートに追加する処理
-@shop_bp.route("/add_to_cart/<product_id>", methods=["POST"])
+@shop_bp.route("/add_to_cart/<int:product_id>", methods=["POST"])
 @login_required  # このルートはログインが必要
-def add_to_cart(product_id):        
-# userがログアウト状態の場合、ログイン画面にリダイレクト
+def add_to_cart(product_id):
+    # userがログアウト状態の場合、ログイン画面にリダイレクト
     if not current_user.is_authenticated:
         flash('ログインして下さい')
         return redirect(url_for('auth.login'))
@@ -45,14 +45,16 @@ def add_to_cart(product_id):
         # 商品idを1件取得
         product = Product.query.get(product_id)
         if product:
-            # カートに商品を追加
-            # ユーザーごとのカートIDを使用する
-            cart_item = Cart(cart_id='cart1',product_id=product.id)
-            # セッションに追加
-            db.session.add(cart_item)
-            # コミット
+            # カートIDと商品IDの組み合わせが重複しないようにチェック
+            existing_item = Cart.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+            if existing_item:
+                existing_item.quantity += 1
+                flash("カート内の商品の数量を更新しました。", "success")
+            else:
+                cart_item = Cart(user_id=current_user.id, product_id=product.id, quantity=1)
+                db.session.add(cart_item)
+                flash("商品をカートに追加しました。", "success")
             db.session.commit()
-            flash("商品をカートに追加しました")
         else:
             flash('商品が見つかりませんでした。')
         return redirect(url_for('shop.shop'))
