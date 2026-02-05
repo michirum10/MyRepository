@@ -1,4 +1,4 @@
-name: Sync to Google Drive
+name: Google Driveへ同期
 
 on:
   push:
@@ -9,17 +9,16 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: リポジトリのチェックアウト
         uses: actions/checkout@v4
 
-      - name: Zip Repository
+      - name: 圧縮ファイル作成
         run: zip -r repository.zip . -x "*.git*"
 
-      # JSONを生データのまま受け取れるロボットに変更
-      - name: Upload to Google Drive
-        uses: Tofunmi-f/google-drive-upload-action@v1
+      - name: Google Driveへアップロード
+        uses: adityak74/google-drive-upload-git-action@v0.3
         with:
           credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
-          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
           filename: repository.zip
+          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
           overwrite: true
