@@ -1,0 +1,26 @@
+name: Sync to Google Drive
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Zip Repository
+        run: zip -r repository.zip . -x "*.git*"
+
+      # 信頼性の高い別のアクションに差し替えました
+      - name: Upload to Google Drive
+        uses: adityak74/google-drive-upload-git-action@main
+        with:
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
+          filename: repository.zip
+          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
+          overwrite: "true"
