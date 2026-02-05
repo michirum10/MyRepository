@@ -8,7 +8,6 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -16,11 +15,11 @@ jobs:
       - name: Zip Repository
         run: zip -r repository.zip . -x "*.git*"
 
-      # 信頼性の高い別のアクションに差し替えました
+      # JSONを生データのまま受け取れるロボットに変更
       - name: Upload to Google Drive
-        uses: adityak74/google-drive-upload-git-action@main
+        uses: Tofunmi-f/google-drive-upload-action@v1
         with:
           credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
-          filename: repository.zip
           folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
-          overwrite: "true"
+          filename: repository.zip
+          overwrite: true
